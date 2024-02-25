@@ -1,9 +1,20 @@
+
 <script setup lang="ts">
+
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import Navigation from "./components/Navigation.vue";
+
+
 </script>
 
+
 <template>
+  <div class="app">
+    <Navigation/>
+    <router-view/>
+  </div>
+
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
@@ -20,7 +31,10 @@ import HelloWorld from './components/HelloWorld.vue'
   <RouterView />
 </template>
 
-<style scoped>
+
+
+
+<!-- <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -83,3 +97,4 @@ nav a:first-of-type {
   }
 }
 </style>
+-->
