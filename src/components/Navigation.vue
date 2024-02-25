@@ -7,10 +7,10 @@
                 <img src="../assets/logo.jpg" alt="" />
             </div>
            <ul v-show="!mobile" class="navigation">
-            <li><router-link class="link" :to="{ name: 'home' }"> Strona główna </router-link></li>
-            <li><router-link class="link" :to="{ name: '' }"> Konto </router-link></li>
-            <li><router-link class="link" :to="{ name: '' }"> Tutoriale </router-link></li>
-            <li><router-link class="link" :to="{ name: '' }"> Podopieczni </router-link></li>
+            <li><router-link to="/profil" style="color: #fff"> Konto </router-link></li>
+            <li><router-link to="/podopieczni" style="color: #fff"> Podopieczni </router-link></li>
+            <li><router-link to="/tutorial" style="color: #fff"> Tutoriale </router-link></li>
+            <li><router-link to="/ustawienia" style="color: #fff"> Ustawienia </router-link></li>
            </ul>
            <div class="icon">
             <i @click="toggleMobileNav" v-show="mobile" class="fa fa-bars" :class="{'icon-active' :mobileNav}"></i>
@@ -18,10 +18,10 @@
 
            <transition name="mobile-nav"> 
             <ul v-show="mobileNav" class="dropdown-nav">
-                <li><router-link class="link" :to="{ name: 'home' }"> Strona główna </router-link></li>
-                <li><router-link class="link" :to="{ name: '' }"> Konto </router-link></li>
-                <li><router-link class="link" :to="{ name: '' }"> Tutoriale </router-link></li>
-                <li><router-link class="link" :to="{ name: '' }"> Podopieczni </router-link></li>
+                <li><router-link to="/profil" style="color: #000"> Konto </router-link></li>
+                <li><router-link to="/podopieczni" style="color: #000"> Podopieczni </router-link></li>
+                <li><router-link to="/tutorial" style="color: #000"> Tutoriale </router-link></li>
+                <li><router-link to="/ustawienia" style="color: #000"> Strona główna </router-link></li>
            </ul>
            </transition>
         </nav>
@@ -113,6 +113,7 @@ header {
             text-transform: uppercase;
             padding: 16px;
             margin-left: 16px;
+            
         }
 
         .link{
