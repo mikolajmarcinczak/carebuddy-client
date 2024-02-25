@@ -1,4 +1,5 @@
 import './assets/main.css'
+import './utility/error.guard'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

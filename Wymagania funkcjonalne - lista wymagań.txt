@@ -1,0 +1,923 @@
+﻿Wymagania funkcjonalne:
+1. Zarejestruj użytkownika systemu - O
+2. Zaakceptuj zgody - polityka prywatności - O
+3. Zarejestruj hasło użytkownika systemu - M.R
+4. Edytuj dane użytkownika - O
+5. Zapisz zmiany - O
+6. Usuń konto - O
+7. Zaloguj użytkownika do systemu - O
+8. Nadaj rolę użytkownikowi systemu - O
+9. Dodaj podopiecznego do konta - M.M
+10. Wyświetl historię czynności - O
+11. Zamów pomoc - O
+12. Dodaj upoważnienie do bycia opiekunem - O
+13. Dodaj notatkę - M.M
+14. Zapisz notatke synchronizacyjnie - O
+15. Dodaj do systemu historię chorób - M.M
+16. Dodaj do systemu zażywane leki - M.M
+17. Dodaj wydarzenie do kalendarza - M.R
+18. Dodaj wydarzenie cykliczne do kalendarza - M.M
+19. Dodaj do systemu przypomnienia o wzięciu leków - M.M
+20. Wywołuj wystąpienia przypomnienia o wzięciu leku - O
+21. Dodaj do systemu przypomnienie o wizycie lekarskiej - M.R
+22. Wywołuj wystąpienia przypomnienia o wizycie lekarskiej - M.R
+23. Dodaj do systemu wizytę u podopiecznego - O
+24. Wywołuj wystąpienie przypomnienia o wizycie u podopiecznego - O
+25. Wyszukaj w bazie wiedzy potrzebnej informacji - M.R
+26. Otwórz artykuł - O
+27. Wyświetl instruktaż w bazie wiedzy
+28. Sprawdź informacje w bazie wiedzy
+29. Skorzystaj z czytnika ekranu
+30. Włącz tryb kontrastu
+31. Edytuj wielkość fontu - O
+
+
+
+
+
+
+
+
+
+
+1.Zarejestruj użytkownika systemu
+
+
+Nazwa funkcji
+	Zarejestruj użytkownika systemu
+	Opis funkcji
+	Zarejestrowanie nowego użytkownika w systemie
+	Dane wejściowe
+	Imię, Nazwisko, e-mail, nr tel, adres, hasło
+	Źródło danych wejściowych
+	Klawiatura 
+	Wynik
+	Zarejestrowane konto użytkownika w systemie
+	Wymagania
+	Dane podane są prawidlowo i adres e-mail nie był wcześniej wykorzystany w aplikacji
+	Przeznaczenie
+	Zarejestrowanie użytkowników w aplikacji
+	Warunek wstępny
+	Użytkownik bez konta przechodzi do panelu rejestracji
+	Warunek końcowy
+	Zarejestrowane konto użytkownika
+	Efekty uboczne
+	
+
+	Powód wywołania funkcji
+	Chęć zarejestrowania użytkownika w aplikacji
+	2. Zaakceptuj zgody - polityka prywatności
+Nazwa funkcji
+	Zaakceptuj zgody - polityka prywatności
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi zaakceptowanie zgód dotyczących polityki prywatności serwisu lub aplikacji.
+	Dane wejściowe
+	Zgody użytkownika (np. marketing, analityka, udostępnianie danych stronom trzecim).
+	Źródło danych wejściowych
+	Interakcja użytkownika poprzez interfejs użytkownika aplikacji lub serwisu.
+	Wynik
+	Potwierdzenie zaakceptowania zgód.
+	Wymagania
+	Interfejs użytkownika powinien zawierać czytelny formularz lub przycisk umożliwiający użytkownikowi wyrażenie zgody.
+System powinien przechowywać informacje o udzielonych zgodach w bezpieczny sposób.
+Powinna istnieć możliwość wycofania zgód w każdym momencie.
+System powinien informować użytkownika o konsekwencjach nieudzielenia zgody (jeśli istnieją).
+Zgodność z obowiązującymi przepisami dotyczącymi ochrony danych osobowych.
+	Przeznaczenie
+	Umożliwienie użytkownikowi aktywnego uczestnictwa w procesie zarządzania swoimi danymi osobowymi poprzez akceptację zgód.
+	Warunek wstępny
+	Użytkownik jest zalogowany do aplikacji lub serwisu.
+	Warunek końcowy
+	Zgody zostały zaakceptowane i zapisane w systemie.
+	Efekty uboczne
+	Aktualizacja danych użytkownika w systemie z uwzględnieniem udzielonych zgód.
+	Powód wywołania funkcji
+	Użytkownik chce skorzystać z usług aplikacji lub serwisu, a akceptacja zgód na politykę prywatności jest wymagana.
+	
+
+3. Zarejestruj hasło użytkownika systemu
+Nazwa funkcji
+	Zarejestruj hasło użytkownika systemu
+	Opis funkcji
+	Funkcja umożliwia użytkownikowi zarejestrowanie nowego hasła w systemie.
+	Dane wejściowe
+	Nowe hasło użytkownika (ciąg znaków)
+	Źródło danych wejściowych
+	Użytkownik wprowadza nowe hasło podczas procesu rejestracji.
+	Wynik
+	Potwierdzenie zarejestrowania hasła.
+	Wymagania
+	Nowe hasło musi spełniać określone kryteria bezpieczeństwa (np. długość, obecność dużych i małych liter, cyfr, znaków specjalnych).
+	Przeznaczenie
+	Rejestracja nowego hasła użytkownika w systemie.
+	Warunek wstępny
+	Użytkownik musi być zarejestrowany w systemie i być w trybie rejestracji nowego hasła
+	Warunek końcowy
+	Hasło użytkownika zostaje zarejestrowane w systemie.
+	Efekty uboczne
+	Brak dostępu do konta użytkownika bez zarejestrowanego hasła
+	Powód wywołania funkcji
+	Użytkownik chce zmienić lub zarejestrować nowe hasło do swojego konta w systemie.
+	
+
+4.Edytuj dane użytkownika
+Nazwa funkcji
+	Edytuj dane użytkownika
+	Opis funkcji
+	Edytowanie danych użytkownika w systemie
+	Dane wejściowe
+	Nowe dane personalne
+	Źródło danych wejściowych
+	Klawiatura
+	Wynik
+	Zmienione dane użytkownika w systemie
+	Wymagania
+	Dane inne od podanych wcześniej
+	Przeznaczenie
+	Zmienianie danych użytkownika jak hasło, mai. adres
+	Warunek wstępny
+	Użytkownika zalogowany do aplikacji przechodzi do ustawień konta
+	Warunek końcowy
+	Zapisane nowe dane użytkownika
+	Efekty uboczne
+	Użytkownik musi pamiętać o zmienionych danych
+	Powód wywołania funkcji
+	Potrzeba zaktualizowania bądź zmienienia danych
+	5. Zapisz zmiany
+Nazwa funkcji
+	Zapisz zmiany
+	Opis funkcji
+	Funkcja umożliwiająca zapisanie dokonanych zmian w danych użytkownika lub innych informacjach w systemie.
+	Dane wejściowe
+	Zmienione dane użytkownika lub inne informacje wymagające zapisu.
+	Źródło danych wejściowych
+	Interakcja użytkownika poprzez interfejs aplikacji lub serwisu.
+Informacje zewnętrzne, które zostały zmienione i wymagają aktualizacji w systemie.
+	Wynik
+	Potwierdzenie zapisania zmian w systemie.
+	Wymagania
+	System powinien umożliwiać zapisywanie zmian w różnych częściach danych, takich jak profil użytkownika, ustawienia, preferencje, itp.
+Zmiany powinny być zapisywane w sposób trwały i nieodwracalny.
+W przypadku błędnych danych wejściowych lub problemów zapisu, użytkownik powinien otrzymać odpowiednie komunikaty błędów.
+	Przeznaczenie
+	Utrzymywanie aktualności danych w systemie poprzez zapisywanie wszelkich zmian wprowadzonych przez użytkownika lub system.
+	Warunek wstępny
+	Użytkownik ma dostęp do funkcji edycji danych lub innych informacji.
+	Warunek końcowy
+	Zmiany zostały pomyślnie zapisane w systemie.
+	Efekty uboczne
+	Aktualizacja danych w bazie danych lub innych miejscach przechowywania informacji.
+Powiadomienie użytkownika o sukcesie lub ewentualnych problemach podczas zapisywania.
+	Powód wywołania funkcji
+	Użytkownik dokonał zmian w swoim profilu lub innych danych, a te zmiany muszą być zapisane w systemie.
+	6.Usuń konto
+Nazwa funkcji
+	Usuń konto
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi usunięcie swojego konta w systemie, co skutkuje trwałym usunięciem wszystkich związanych z nim danych i informacji.
+	Dane wejściowe
+	Potwierdzenie usunięcia konta.
+Ewentualne dodatkowe informacje potwierdzające tożsamość użytkownika.
+	Źródło danych wejściowych
+	Interakcja użytkownika poprzez interfejs aplikacji lub serwisu.
+Ewentualne dodatkowe potwierdzenia tożsamości, takie jak hasło użytkownika.
+	Wynik
+	Potwierdzenie trwałego usunięcia konta w systemie.
+	Wymagania
+	Funkcja powinna być łatwo dostępna dla użytkownika.
+Przed usunięciem konta użytkownik powinien być poinformowany o konsekwencjach, takich jak utrata dostępu do usług, danych i innych związanych informacji.
+W celu zabezpieczenia przed przypadkowym usunięciem konta, może być wymagane potwierdzenie operacji, na przykład poprzez wpisanie hasła.
+	Przeznaczenie
+	Umożliwienie użytkownikowi swobodnego zakończenia korzystania z usług aplikacji lub serwisu poprzez usunięcie konta.
+	Warunek wstępny
+	Użytkownik musi być zalogowany do swojego konta.
+	Warunek końcowy
+	Konto zostało pomyślnie usunięte, a związane z nim dane zostały trwale usunięte z systemu.
+	Efekty uboczne
+	Trwała utrata dostępu do konta i wszelkich związanych z nim informacji.
+Aktualizacja baz danych i innych miejsc przechowywania danych, aby usunąć powiązane z kontem informacje.
+	Powód wywołania funkcji
+	Użytkownik zdecydował się zakończyć korzystanie z usług aplikacji lub serwisu i chce trwale usunąć swoje konto.
+	
+
+
+
+7. Zaloguj użytkownika do systemu
+Nazwa funkcji
+	Zaloguj użytkownika do systemu
+	Opis funkcji
+	Logowanie użytkownika do aplikacji
+	Dane wejściowe
+	Nazwa użytkownika, hasło
+	Źródło danych wejściowych
+	Klawiatura
+	Wynik
+	Zalogowany użytkownik do systemu
+	Wymagania
+	Zarejestrowane konto w systemie
+	Przeznaczenie
+	Dostęp do spersonalizowanych ustawień konta
+	Warunek wstępny
+	Posiadane konto w systemie
+	Warunek końcowy
+	Zalogowany użytkownik do system
+	Efekty uboczne
+	Brak
+	Powód wywołania funkcji
+	Włączenie aplikacji
+	
+
+8. Nadaj rolę użytkownikowi systemu 
+Nazwa funkcji
+	Nadaj rolę użytkownikowi systemu
+	Opis funkcji
+	Nadanie roli opiekuna lub zwykłego użytkownika w systemie
+	Dane wejściowe
+	Dane do konta
+	Źródło danych wejściowych
+	Formularz
+	Wynik
+	Przypisana rola do konta
+	Wymagania
+	Posiadane konto
+	Przeznaczenie
+	Określenie roli użytkownika w aplikacji
+	Warunek wstępny
+	Posiadane konto
+	Warunek końcowy
+	Przypisana rola do konta
+	Efekty uboczne
+	Do konta jest przypisana rola użytkownika do konta, może wpływać na możliwości w aplikacji
+	Powód wywołania funkcji
+	Określenie w jaki sposób użytkownik chce korzystać z aplikacji
+	
+
+9. Dodaj podopiecznego do konta
+Nazwa funkcji
+	Dodaj podopiecznego do konta
+	Opis funkcji
+	Dodanie nowego podopiecznego do bazy podopiecznych
+	Dane wejściowe
+	Imię, nazwisko, data urodzenia, adres, kontakt, konto podopiecznego
+	Źródło danych wejściowych
+	Klawiatura poprzez Interfejs użytkownika
+	Wynik
+	Nowy podopieczny widoczny w bazie podopiecznych
+	Wymagania
+	Poprawne wprowadzenie danych do podopiecznego
+	Przeznaczenie
+	Przechowywanie informacji przez opiekuna
+	Warunek wstępny
+	Użytkownik zalogowany z rolą opiekun dodaje nowego podopiecznego do bazy podopiecznych
+	Warunek końcowy
+	Rekord nowego podopiecznego widoczny w bazie podopiecznych
+	Efekty uboczne
+	Podopieczny o danym identyfikatorze już widnieje w bazie podopiecznych
+	Powód wywołania funkcji
+	Ułatwienie opiekunowi organizacji informacji związanych z podopiecznym w systemie
+	
+
+10. Wyświetl historię czynności
+Nazwa funkcji
+	Wyświetl historię czynności
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi przeglądanie historii czynności związanych z jego kontem w aplikacji lub serwisie. Historia ta może zawierać logi logowania, zmiany danych, aktywność w aplikacji itp.
+	Dane wejściowe
+	Wybór okresu czasu lub konkretnych kategorii działań do przeglądania w historii.
+	Źródło danych wejściowych
+	Interakcja użytkownika poprzez interfejs aplikacji lub serwisu.
+Dane zapisane w systemie dotyczące działań związanych z kontem użytkownika.
+	Wynik
+	Wyświetlenie chronologicznej listy działań i zdarzeń związanych z kontem użytkownika.
+	Wymagania
+	System powinien przechowywać odpowiednie logi i informacje umożliwiające tworzenie historii czynności.
+Interfejs użytkownika powinien być czytelny i umożliwiać filtrowanie oraz sortowanie historii.
+	Przeznaczenie
+	Umożliwienie użytkownikowi śledzenia, monitorowania i analizy swojej aktywności w aplikacji lub serwisie.
+	Warunek wstępny
+	Użytkownik musi być zalogowany do swojego konta.
+	Warunek końcowy
+	Użytkownik ma dostęp do przejrzenia historii czynności związanych z jego kontem.
+	Efekty uboczne
+	Możliwość lepszego zrozumienia historii korzystania z aplikacji lub serwisu.
+Wsparcie dla użytkownika w przypadku sporów lub problemów związanych z kontem.
+	Powód wywołania funkcji
+	Użytkownik chce sprawdzić, co działo się w jego koncie w określonym okresie czasu lub zainteresowany jest szczegółami dotyczącymi pewnych działań.
+	11. Zamów pomoc
+Nazwa funkcji
+	Zamów pomoc
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi złożenie zamówienia pomocy lub wsparcia od obsługi klienta lub innych dostępnych źródeł pomocy.
+	Dane wejściowe
+	Opis problemu, pytania lub potrzeb użytkownika.
+Kontaktowe informacje, jeśli konieczne.
+	Źródło danych wejściowych
+	Interakcja użytkownika poprzez interfejs aplikacji lub serwisu.
+Ewentualne dodatkowe informacje przechowywane w profilu użytkownika.
+	Wynik
+	Potwierdzenie złożenia zamówienia pomocy.
+Przekierowanie do obsługi klienta lub innego źródła pomocy.
+	Wymagania
+	Interfejs użytkownika powinien być intuicyjny i umożliwiać łatwe złożenie zamówienia pomocy.
+System powinien umożliwiać śledzenie statusu zgłoszenia pomocy.
+Obsługa klienta lub inne źródła pomocy powinny być dostępne i gotowe do reagowania na zgłoszenia.
+	Przeznaczenie
+	Umożliwienie użytkownikowi zgłoszenia problemu, uzyskania wsparcia lub odpowiedzi na pytania dotyczące korzystania z aplikacji lub serwisu.
+	Warunek wstępny
+	Użytkownik musi być zalogowany do swojego konta lub dostępny jako gość.
+	Warunek końcowy
+	Zgłoszenie pomocy zostało złożone, a użytkownik otrzymuje potwierdzenie lub kontakt od obsługi klienta.
+	Efekty uboczne
+	Poprawa satysfakcji klienta poprzez szybką i efektywną pomoc.
+Zapisanie informacji dotyczących zgłoszenia w systemie do ewentualnego śledzenia historii obsługi klienta.
+	Powód wywołania funkcji
+	Użytkownik napotkał problem, pytanie lub potrzebuje wsparcia, i chce skorzystać z dostępnych źródeł pomocy oferowanych przez aplikację lub serwis.
+	14. Dodaj upoważnienie do bycia opiekunem
+Nazwa funkcji
+	Dodaj upoważnienie do bycia opiekunem
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi dodanie upoważnienia do bycia opiekunem, co może obejmować dostęp do określonych danych, funkcji lub zasobów w systemie.
+	Dane wejściowe
+	Informacje dotyczące opiekuna, takie jak identyfikator lub nazwa.
+Zakres uprawnień, które mają być udzielone opiekunowi.
+	Źródło danych wejściowych
+	Interakcja użytkownika poprzez interfejs aplikacji lub serwisu.
+Ewentualne potwierdzenie tożsamości opiekuna lub zgody użytkownika.
+	Wynik
+	Potwierdzenie dodania upoważnienia do bycia opiekunem.
+Przypisanie określonych uprawnień do opiekuna.
+	Wymagania
+	System powinien umożliwiać użytkownikowi zarządzanie uprawnieniami opiekunów.
+Procedura dodawania upoważnienia powinna być zabezpieczona i zgodna z zasadami prywatności.
+Uprawnienia opiekuna powinny być klarownie zdefiniowane i mogą obejmować dostęp do danych, funkcji lub innych zasobów.
+	Przeznaczenie
+	Umożliwienie użytkownikowi delegowania odpowiednich uprawnień do opieki nad swoim kontem lub danymi w systemie.
+	Warunek wstępny
+	Użytkownik musi być zalogowany do swojego konta.
+	Warunek końcowy
+	Opiekun został pomyślnie dodany, a przypisane mu uprawnienia są aktywne.
+	Efekty uboczne
+	Aktualizacja danych w systemie dotyczących uprawnień opiekuna.
+Możliwe powiadomienie użytkownika lub opiekuna o zmianach w uprawnieniach.
+	Powód wywołania funkcji
+	Użytkownik chce umożliwić innej osobie (opiekunowi) dostęp do określonych danych lub funkcji w systemie, na przykład w przypadku potrzeby wsparcia technicznego czy zarządzania kontem.
+	15. Oceń opiekuna
+Nazwa funkcji
+	Oceń opiekuna
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi wystawienie oceny opiekunowi, który posiada uprawnienia do zarządzania danymi, funkcjami lub zasobami w systemie.
+	Dane wejściowe
+	Ocena w formie liczbowej, np. skala od 1 do 5.
+Opcjonalnie: komentarz lub dodatkowe informacje dotyczące oceny.
+	Źródło danych wejściowych
+	Interakcja użytkownika poprzez interfejs aplikacji lub serwisu.
+	Wynik
+	Potwierdzenie przyjęcia oceny.
+Ewentualnie: aktualizacja statystyk lub informacji dotyczących opiekuna w systemie.
+	Wymagania
+	System powinien umożliwiać użytkownikowi ocenianie opiekunów, którzy posiadają uprawnienia do zarządzania danymi lub funkcjami.
+Procedura oceniania powinna być dostępna i łatwa w użyciu.
+	Przeznaczenie
+	Umożliwienie użytkownikowi wyrażenia swojej opinii na temat jakości opieki lub pomocy udzielanej przez osobę posiadającą uprawnienia opiekuńcze.
+	Warunek wstępny
+	Użytkownik musi mieć doświadczenia z opiekunem i uprawnieniami, które pozwalają na wystawienie oceny.
+	Warunek końcowy
+	Ocena została pomyślnie dodana do systemu.
+	Efekty uboczne
+	Aktualizacja statystyk lub informacji dotyczących opiekuna w systemie.
+Możliwe powiadomienie opiekuna o otrzymanej ocenie.
+	Powód wywołania funkcji
+	Użytkownik chce podzielić się swoją opinią na temat jakości opieki lub pomocy udzielanej przez opiekuna, co może być przydatne dla innych użytkowników lub administracji systemu
+	16. Dodaj notatkę
+Nazwa funkcji
+	Dodaj notatkę
+	Opis funkcji
+	Dodawanie notatek, komentarzy dotyczących podopiecznego
+	Dane wejściowe
+	Wybrany podopieczny, treść notatki, czas utworzenia notatki
+	Źródło danych wejściowych
+	Klawiatura poprzez Interfejs użytkownika
+	Wynik
+	Dodana notatka przypisana do panelu odpowiedniego podopiecznego
+	Wymagania
+	Wprowadzenie danych dotyczących podopiecznego i treści notatki
+	Przeznaczenie
+	Przechowywanie dodatkowych informacji przez opiekuna
+	Warunek wstępny
+	Użytkownik zalogowany z rolą opiekun dodaje informacje do bazy podopiecznych
+	Warunek końcowy
+	Dodana notatka widoczna w panelu odpowiedniego podopiecznego
+	Efekty uboczne
+	Wybrany podopieczny nie znajduje się w bazie podopiecznych
+	Powód wywołania funkcji
+	Ułatwienie gromadzenia informacji o podopiecznym w celu bardziej efektywnej opieki
+	
+
+17. Zapisz notatke synchronizacyjnie
+Nazwa funkcji
+	Zapisz notatke synchronizacyjnie
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi zapisanie notatki w sposób synchroniczny, co oznacza natychmiastową aktualizację notatki we wszystkich urządzeniach i lokalizacjach korzystających z tego samego konta.
+	Dane wejściowe
+	Treść notatki do zapisania.
+Ewentualne informacje dodatkowe, takie jak tytuł czy kategorie.
+	Źródło danych wejściowych
+	Interakcja użytkownika poprzez interfejs aplikacji notatnikowej lub systemu zarządzania notatkami.
+Ewentualne informacje przechowywane w profilu użytkownika.
+	Wynik
+	Potwierdzenie zapisania notatki synchronicznie.
+Natychmiastowa aktualizacja notatki we wszystkich urządzeniach podłączonych do tego samego konta.
+	Wymagania
+	System powinien obsługiwać synchroniczne zapisywanie notatek, zapewniając natychmiastową dostępność zaktualizowanej treści na różnych urządzeniach.
+Interfejs użytkownika powinien być intuicyjny i umożliwiać łatwe zapisywanie notatek.
+	Przeznaczenie
+	Ułatwienie użytkownikowi natychmiastowego dostępu do najnowszej wersji swoich notatek na różnych urządzeniach.
+	Warunek wstępny
+	Użytkownik musi być zalogowany do swojego konta w aplikacji notatnikowej.
+	Warunek końcowy
+	Notatka została pomyślnie zapisana synchronicznie i jest dostępna we wszystkich urządzeniach podłączonych do konta użytkownika.
+	Efekty uboczne
+	Aktualizacja informacji o notatce w systemie.
+Ewentualne powiadomienie użytkownika o udanym zapisaniu notatki.
+	Powód wywołania funkcji
+	Użytkownik chce zachować bieżącą wersję swojej notatki i mieć pewność, że jest ona natychmiast dostępna na wszystkich używanych urządzeniach.
+	18.Dodaj do systemu historię chorób
+Nazwa funkcji
+	Dodaj do systemu historię chorób
+	Opis funkcji
+	Dodawanie informacji na temat chorób przebytych przez podopiecznego
+	Dane wejściowe
+	Nazwa choroby, data diagnozy, sposób leczenia, informacje dodatkowe
+	Źródło danych wejściowych
+	Klawiatura poprzez Interfejs użytkownika
+	Wynik
+	Informacje o przebytej chorobie dodane do panelu podopiecznego
+	Wymagania
+	Poprawne wprowadzenie informacji dotyczących przebytej choroby
+	Przeznaczenie
+	Dodanie informacji dotyczących leczenia podopiecznego
+	Warunek wstępny
+	Zalogowany użytkownik dodaje informacje do panelu podopiecznego
+	Warunek końcowy
+	Dodane informacje na temat przebytej choroby dostępne dla opiekuna i dla podopiecznego
+	Efekty uboczne
+	Dodaj do systemu zażywane leki
+	Powód wywołania funkcji
+	Potrzeba monitorowania historii przebytych chorób w celu diagnozy stanu zdrowia podopiecznego
+	
+
+19. Dodaj do systemu zażywane leki
+Nazwa funkcji
+	Dodaj do systemu zażywane leki
+	Opis funkcji
+	Dodawanie informacji na temat zażywanych leków
+	Dane wejściowe
+	Nazwa leku, dawkowanie, godziny zażycia, informacje dodatkowe
+	Źródło danych wejściowych
+	Klawiatura poprzez Interfejs użytkownika
+	Wynik
+	Informacje o zażywanych lekach dodane do panelu podopiecznego
+	Wymagania
+	Poprawne wprowadzenie informacji dotyczących zażywanych leków
+	Przeznaczenie
+	Dodanie informacji wspierających opiekę
+	Warunek wstępny
+	Zalogowany użytkownik dodaje informacje do panelu podopiecznego
+	Warunek końcowy
+	Informacje dotyczące leków dostępne dla opiekuna i dla podopiecznego
+	Efekty uboczne
+	Dodanie przypomnienia o wzięciu leków do kalendarza
+	Powód wywołania funkcji
+	Ułatwienie przestrzegania planu zażycia leków przez osobę chorą
+	
+
+20. Dodaj wydarzenie do kalendarza
+Nazwa funkcji
+	Dodaj wydarzenie do kalendarza
+	Opis funkcji
+	Funkcja umożliwiająca dodanie nowego wydarzenia do kalendarza użytkownika.
+	Dane wejściowe
+	- Nazwa wydarzenia (tekstowy ciąg znaków)
+- Data i godzina rozpoczęcia wydarzenia
+- Data i godzina zakończenia wydarzenia (opcjonalne)
+- Lokalizacja wydarzenia (opcjonalne)
+	Źródło danych wejściowych
+	Użytkownik wprowadza dane dotyczące nowego wydarzenia podczas korzystania z funkcji.
+	Wynik
+	Potwierdzenie dodania nowego wydarzenia do kalendarza.
+	Wymagania
+	- Wprowadzenie obowiązkowej nazwy wydarzenia,
+- Wprowadzenie daty i godziny rozpoczęcia wydarzenia,
+- Opcjonalne wprowadzenie daty i godziny zakończenia wydarzenia,
+- Opcjonalne wprowadzenie lokalizacji wydarzenia,
+	Przeznaczenie
+	Dodanie planowanego wydarzenia do kalendarza w celu śledzenia i organizacji harmonogramu.
+	Warunek wstępny
+	Użytkownik musi być zalogowany w swoim profilu.
+	Warunek końcowy
+	Nowe wydarzenie zostaje dodane do kalendarza użytkownika.
+	Efekty uboczne
+	Aktualizacja widoku kalendarza.
+	Powód wywołania funkcji
+	Użytkownik potrzebuje dodać planowane wydarzenie do swojego kalendarza.
+	
+
+21. Dodaj wydarzenie cykliczne do kalendarza
+Nazwa funkcji
+	Dodaj wydarzenie cykliczne do kalendarza
+	Opis funkcji
+	Dodawanie cyklicznie powtarzających się wydarzeń do kalendarza
+	Dane wejściowe
+	Nazwa wydarzenia, data i godzina, częstotliwość, przypomnienie, opis wydarzenia
+	Źródło danych wejściowych
+	Klawiatura poprzez interfejs użytkownika
+	Wynik
+	Przypomnienie uwzględniające cykliczność dodane do kalendarza w odpowiednich terminach
+	Wymagania
+	Podanie nazwy wydarzenia, daty i godziny oraz określenie częstotliwości
+	Przeznaczenie
+	Dodawanie wydarzeń do kalendarza
+	Warunek wstępny
+	Zalogowany użytkownik dodaje wydarzenie w kalendarzu
+	Warunek końcowy
+	Wydarzenie widoczne w kalendarzu
+	Efekty uboczne
+	Brak
+	Powód wywołania funkcji
+	Umożliwienie użytkownikowi planowania powtarzających się regularnie wydarzeń oraz aktywowania dla nich przypomnień
+	
+
+22. Dodaj do systemu przypomnienia o wzięciu leków
+Nazwa funkcji
+	Dodaj przypomnienie o wzięciu leków do kalendarza
+	Opis funkcji
+	Dodawanie przypomnień o konieczności zażycia leków do kalendarza
+	Dane wejściowe
+	Nazwa leku, dawkowanie, data i godzina, powtarzalność
+	Źródło danych wejściowych
+	Dane zawarte w panelu podopiecznego
+	Wynik
+	Przypomnienie dodane w kalendarzu
+	Wymagania
+	Podanie nazwy leku, dawkowania i czasu
+	Przeznaczenie
+	Dodawanie przypomnień do kalendarza
+	Warunek wstępny
+	Zalogowany użytkownik dodaje wydarzenie w kalendarzu
+	Warunek końcowy
+	Przypomnienie widoczne w kalendarzu
+	Efekty uboczne
+	Brak
+	Powód wywołania funkcji
+	Ułatwienie przestrzegania planu zażycia leków przez osobę chorą
+	
+
+23. Wywołuj wystąpienia przypomnienia o wzięciu leku
+Nazwa funkcji
+	Wywołuj wystąpienia przypomnienia o wzięciu leku
+	Opis funkcji
+	Funkcja umożliwiająca systemowi generowanie przypomnień dla użytkownika o konieczności wzięcia określonego leku w określonym czasie.
+	Dane wejściowe
+	Informacje o leku, którym użytkownik musi się zaopiekować (np. nazwa, dawkowanie, godzina przyjęcia).
+Ustawienia dotyczące częstości przypomnień.
+	Źródło danych wejściowych
+	Dane wprowadzone przez użytkownika podczas konfiguracji przypomnień.
+Informacje związane z danymi leków, przechowywane w systemie.
+	Wynik
+	Wygenerowane przypomnienie o wzięciu leku w określonym czasie.
+Ewentualne powiadomienie użytkownika o zbliżającym się przypomnieniu.
+	Wymagania
+	System powinien umożliwiać konfigurację przypomnień dotyczących różnych leków.
+Interfejs użytkownika powinien być intuicyjny i umożliwiać łatwe dodawanie i zarządzanie przypomnieniami.
+Przypomnienia powinny być generowane zgodnie z ustawionymi preferencjami użytkownika.
+	Przeznaczenie
+	Pomoc użytkownikowi w pamiętaniu o regularnym przyjmowaniu leków zgodnie z zaleceniami lekarskimi.
+	Warunek wstępny
+	Użytkownik musi mieć skonfigurowane przypomnienia dotyczące danego leku.
+	Warunek końcowy
+	Wygenerowane przypomnienie o wzięciu leku zostało pomyślnie wywołane w określonym czasie.
+	Efekty uboczne
+	Aktualizacja danych o przypomnieniach w systemie.
+Ewentualne powiadomienie użytkownika o konieczności wzięcia leku.
+	Powód wywołania funkcji
+	System automatycznie generuje przypomnienie, aby pomóc użytkownikowi w pamiętaniu o konieczności wzięcia określonego leku w ustalonym czasie.
+	24. Dodaj do systemu przypomnienie o wizycie lekarskiej
+Nazwa funkcji
+	Dodaj do systemu przypomnienie o wizycie lekarskiej
+	Opis funkcji
+	Funkcja umożliwiająca dodanie przypomnienia o wizycie lekarskiej w ramach istniejącego wydarzenia w kalendarzu użytkownika.
+	Dane wejściowe
+	Termin przypomnienia o wizycie lekarskiej (data i godzina)
+	Źródło danych wejściowych
+	Użytkownik wprowadza termin przypomnienia podczas edycji szczegółów istniejącego wydarzenia
+	Wynik
+	Potwierdzenie dodania przypomnienia o wizycie lekarskiej do wydarzenia.
+	Wymagania
+	Wprowadzenie obowiązkowego terminu przypomnienia o wizycie lekarskiej.
+	Przeznaczenie
+	Dodanie przypomnienia o wizycie lekarskiej do konkretnego wydarzenia w kalendarzu w celu zabezpieczenia się przed zapomnieniem.
+	Warunek wstępny
+	Użytkownik musi być zalogowany do profilu i znajdować się w sekcji kalendarza oraz posiadać istniejące wydarzenie związanego z wizytą lekarską.
+	Warunek końcowy
+	Przypomnienie o wizycie lekarskiej zostaje dodane do szczegółów istniejącego wydarzenia.
+	Efekty uboczne
+	
+
+	Powód wywołania funkcji
+	Użytkownik chce dodać przypomnienie do istniejącego wydarzenia w kalendarzu.
+	
+
+
+
+25. Wywołuj przypomnienia o wizycie lekarskiej 
+Nazwa funkcji
+	Wywołuj przypomnienia o wizycie lekarskiej
+	Opis funkcji
+	Funkcja umożliwiająca wyświetlanie powiadomień o nadchodzących wizytach lekarskich na podstawie kalendarza użytkownika.
+	Dane wejściowe
+	Brak danych wejściowych, ponieważ funkcja jest odpowiedzialna za wyświetlanie powiadomień.
+	Źródło danych wejściowych
+	System kalendarza użytkownika, zawierający informacje o nadchodzących wizytach lekarskich.
+	Wynik
+	Wyświetlenie powiadomienia o nadchodzącej wizycie lekarskiej.
+	Wymagania
+	System powinien być w stanie identyfikować nadchodzące wizyty lekarskie na podstawie danych w kalendarzu.
+	Przeznaczenie
+	Informowanie użytkownika o zbliżających się wizytach lekarskich w celu umożliwienia odpowiedniego przygotowania się do nich.
+	Warunek wstępny
+	Użytkownik musi być zalogowany do swojego konta.
+	Warunek końcowy
+	Powiadomienie o nadchodzącej wizycie lekarskiej zostało wyświetlone.
+	Efekty uboczne
+	Brak istotnych efektów ubocznych, chyba że użytkownik zdecyduje się zignorować powiadomienie.
+	Powód wywołania funkcji
+	Ułatwienie użytkownikowi śledzenia nadchodzących wizyt lekarskich i odpowiedniego przygotowania się do nich.
+	
+
+26. Dodaj do systemu wizytę u podopiecznego
+Nazwa funkcji
+	Dodaj do systemu wizytę u podopiecznego
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi dodanie informacji o planowanej wizycie u podopiecznego do systemu. Może obejmować datę, czas, cel wizyty oraz ewentualne dodatkowe informacje.
+	Dane wejściowe
+	Informacje o planowanej wizycie, takie jak data, czas, cel, dodatkowe notatki.
+Ewentualnie: dane dotyczące podopiecznego (np. imię, nazwisko, adres).
+	Źródło danych wejściowych
+	Interakcja użytkownika poprzez interfejs aplikacji lub serwisu.
+Ewentualne informacje o podopiecznym przechowywane w systemie.
+	Wynik
+	Dodanie informacji o planowanej wizycie do systemu.
+	Wymagania
+	System powinien umożliwiać użytkownikowi dodawanie informacji o planowanych wizytach.
+Interfejs użytkownika powinien być intuicyjny i umożliwiać łatwe wprowadzanie danych dotyczących wizyt.
+	Przeznaczenie
+	Ułatwienie organizacji i planowania wizyt u podopiecznych w ramach opieki domowej, medycznej lub innej.
+	Warunek wstępny
+	Użytkownik musi być zalogowany do systemu.
+	Warunek końcowy
+	Informacje o planowanej wizycie zostały pomyślnie dodane do systemu
+	Efekty uboczne
+	Aktualizacja danych dotyczących planowanych wizyt w systemie.
+Ewentualne powiadomienie użytkownika o dodaniu nowej wizyty.
+	Powód wywołania funkcji
+	Użytkownik planuje wizytę u podopiecznego i chce uwzględnić tę informację w systemie w celu lepszego zarządzania harmonogramem i świadczenia usług opieki.
+	27. Wywołuj wystąpienie przypomnienia o wizycie u podopiecznego
+Nazwa funkcji
+	Wywołuj wystąpienie przypomnienia o wizycie u podopiecznego
+	Opis funkcji
+	Funkcja umożliwiająca systemowi generowanie przypomnień dla użytkownika o zbliżającej się wizycie u podopiecznego. Przypomnienie może zawierać informacje o dacie, godzinie, celu wizyty oraz ewentualnych dodatkowych notatkach.
+	Dane wejściowe
+	Informacje o planowanej wizycie u podopiecznego, takie jak data, godzina, cel, notatki.
+Ewentualne ustawienia dotyczące generowania przypomnień.
+	Źródło danych wejściowych
+	Dane o planowanych wizytach przechowywane w systemie.
+Ewentualne preferencje użytkownika dotyczące przypomnień.
+	Wynik
+	Wygenerowane przypomnienie o zbliżającej się wizycie u podopiecznego.
+Ewentualne powiadomienie użytkownika o zbliżającym się przypomnieniu.
+	Wymagania
+	System powinien umożliwiać konfigurację przypomnień dotyczących planowanych wizyt.
+Interfejs użytkownika powinien być intuicyjny i umożliwiać łatwe dodawanie oraz zarządzanie przypomnieniami.
+Przypomnienia powinny być generowane zgodnie z ustawionymi preferencjami użytkownika.
+	Przeznaczenie
+	Pomoc użytkownikowi w pamiętaniu o zbliżających się wizytach u podopiecznych.
+	Warunek wstępny
+	Użytkownik musi mieć skonfigurowane przypomnienia dotyczące planowanych wizyt.
+	Warunek końcowy
+	Wygenerowane przypomnienie o wizycie u podopiecznego zostało pomyślnie wywołane w określonym czasie.
+	Efekty uboczne
+	Aktualizacja danych o przypomnieniach w systemie.
+Ewentualne powiadomienie użytkownika o zbliżającym się przypomnieniu.
+	Powód wywołania funkcji
+	System automatycznie generuje przypomnienie, aby pomóc użytkownikowi w pamiętaniu o zbliżającej się wizycie u podopiecznego.
+	28. Wyszukaj w bazie wiedzy potrzebnej informacji
+Nazwa funkcji
+	Wyszukaj w bazie wiedzy potrzebnej informacji.
+	Opis funkcji
+	Funkcja umożliwiająca wyszukiwanie i uzyskiwanie potrzebnych informacji z bazy wiedzy.
+	Dane wejściowe
+	Zapytanie wyszukiwania (tekstowy ciąg znaków)
+	Źródło danych wejściowych
+	Użytkownik wprowadza zapytanie w odpowiednim polu wyszukiwania w sekcji baza wiedzy.
+	Wynik
+	Lista wyników odpowiadających zapytaniu wyszukiwania.
+	Wymagania
+	System powinien obsługiwać skomplikowane zapytania i zwracać trafne wyniki.
+	Przeznaczenie
+	Ułatwienie użytkownikowi dostępu do potrzebnych informacji.
+	Warunek wstępny
+	Użytkownik musi być zalogowany do swojego konta w aplikacji i znaleźć się w sekcji baza wiedzy.
+	Warunek końcowy
+	Użytkownik uzyskuje dostęp do listy wyników, które odpowiadają zapytaniu wyszukiwania.
+	Efekty uboczne
+	
+
+	Powód wywołania funkcji
+	Użytkownik poszukuje konkretnej informacji w bazie wiedzy i chce szybko i skutecznie uzyskać odpowiedzi na swoje pytania.
+	
+
+29. Otwórz artykuł
+Nazwa funkcji
+	Otwórz artykuł
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi otwarcie artykułu w aplikacji, przeglądarce internetowej lub innym narzędziu do czytania treści.
+	Dane wejściowe
+	Identyfikator artykułu lub link do artykułu.
+Ewentualne preferencje dotyczące sposobu otwarcia artykułu.
+	Źródło danych wejściowych
+	Interakcja użytkownika poprzez interfejs aplikacji lub serwisu.
+Link do artykułu lub identyfikator przekazywany z innego źródła.
+	Wynik
+	Otwarcie artykułu w określonym narzędziu do czytania treści.
+	Wymagania
+	System powinien umożliwiać otwieranie artykułów w różnych narzędziach lub aplikacjach.
+Interfejs użytkownika powinien być intuicyjny i umożliwiać łatwe otwieranie artykułów.
+	Przeznaczenie
+	Umożliwienie użytkownikowi dostępu do treści artykułu zgodnie z jego preferencjami.
+	Warunek wstępny
+	Użytkownik musi być zalogowany do aplikacji lub serwisu.
+	Warunek końcowy
+	Artykuł został pomyślnie otwarty zgodnie z preferencjami użytkownika.
+	Efekty uboczne
+	Ewentualne zapisanie informacji o otwarciu artykułu w historii czytania użytkownika.
+Ewentualne powiadomienie użytkownika o otwarciu artykułu.
+	Powód wywołania funkcji
+	Użytkownik chce przeczytać artykuł i używa funkcji otwierania artykułu, aby dostosować sposób czytania do swoich upodobań.
+	30. Wyświetl instruktaż w bazie wiedzy
+Nazwa funkcji
+	Wyświetl instruktaż w bazie wiedzy
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi dostęp do instruktażu znajdującego się w bazie wiedzy systemu.
+	Dane wejściowe
+	Brak specyficznych danych wejściowych, chyba że użytkownik wyszukuje konkretny temat w instruktażu.
+	Źródło danych wejściowych
+	Baza wiedzy zawierająca informacje, porady i instrukcje dotyczące obsługiwanych funkcji systemu.
+	Wynik
+	Wyświetlenie instrukcji lub porad dotyczących wybranego tematu w bazie wiedzy.
+	Wymagania
+	Struktura bazy wiedzy umożliwiająca łatwe wyszukiwanie i dostęp do instrukcji.
+Klarowna prezentacja informacji, zrozumiała dla użytkowników o różnym poziomie zaawansowania.
+	Przeznaczenie
+	Zapewnienie użytkownikom dostępu do szczegółowych informacji i instrukcji dotyczących obsługi systemu.
+	Warunek wstępny
+	Użytkownik musi mieć dostęp do funkcji przeglądania bazy wiedzy w systemie.
+	Warunek końcowy
+	Instrukcje dotyczące wybranego tematu zostały wyświetlone użytkownikowi.
+	Efekty uboczne
+	Zwiększone zrozumienie obsługi systemu przez użytkowników.
+Potencjalne odciążenie obsługi technicznej poprzez samodzielne rozwiązywanie problemów przez użytkowników.
+	Powód wywołania funkcji
+	Użytkownik poszukuje informacji lub instrukcji dotyczących konkretnej funkcji systemu w celu skorzystania z niej w optymalny sposób.
+	31. Sprawdź informacje w bazie wiedzy
+Nazwa funkcji
+	Sprawdź informacje w bazie wiedzy
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi wyszukanie i sprawdzenie informacji w bazie wiedzy systemu.
+	Dane wejściowe
+	Zapytanie lub słowa kluczowe, które użytkownik wprowadza w celu znalezienia odpowiednich informacji.
+	Źródło danych wejściowych
+	Baza wiedzy zawierająca informacje, porady i instrukcje dotyczące obsługiwanych funkcji systemu.
+	Wynik
+	Wyświetlenie wyników zgodnych z zapytaniem użytkownika.
+	Wymagania
+	Algorytm wyszukiwania umożliwiający efektywne i precyzyjne znalezienie informacji.
+Intuicyjny interfejs użytkownika ułatwiający wprowadzenie zapytania.
+	Przeznaczenie
+	Umożliwienie użytkownikowi szybkiego dostępu do informacji i rozwiązania problemów poprzez samodzielne korzystanie z bazy wiedzy.
+	Warunek wstępny
+	Użytkownik musi mieć dostęp do funkcji przeglądania bazy wiedzy w systemie.
+	Warunek końcowy
+	Informacje związane z zapytaniem użytkownika zostały wyświetlone.
+	Efekty uboczne
+	Zwiększenie efektywności użytkowników poprzez szybkie uzyskanie odpowiedzi na pytania.
+Potencjalne odciążenie obsługi technicznej poprzez samodzielne rozwiązywanie problemów przez użytkowników.
+	Powód wywołania funkcji
+	Użytkownik poszukuje konkretnych informacji lub rozwiązania problemu w bazie wiedzy systemu.
+	32. Skorzystaj z czytnika ekranu
+Nazwa funkcji
+	Skorzystaj z czytnika ekranu
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi skorzystanie z czytnika ekranu w celu uzyskania dostępu do treści widocznych na ekranie.
+	Dane wejściowe
+	Aktywacja czytnika ekranu przez użytkownika.
+	Źródło danych wejściowych
+	Czytnik ekranu, który jest zintegrowany z systemem operacyjnym lub oddzielnym narzędziem dostępnym dla użytkownika.
+	Wynik
+	Odczyt treści widocznych na ekranie przez czytnik ekranu.
+	Wymagania
+	Kompatybilność systemu z czytnikiem ekranu.
+Intuicyjny interfejs dostępu do czytnika ekranu.
+	Przeznaczenie
+	Umożliwienie osobom niewidomym lub niedowidzącym korzystanie z systemu komputerowego poprzez odczyt mówiony treści na ekranie.
+	Warunek wstępny
+	Czytnik ekranu musi być zainstalowany i skonfigurowany w systemie.
+	Warunek końcowy
+	Treści widoczne na ekranie zostały odczytane przez czytnik ekranu.
+	Efekty uboczne
+	Zwiększenie dostępności systemu dla osób niewidomych lub niedowidzących.
+Możliwość samodzielnego korzystania z komputera przez osoby z dysfunkcjami wzroku.
+	Powód wywołania funkcji
+	Osoba niewidoma lub niedowidząca chce korzystać z komputera poprzez odczyt mówiony treści widocznych na ekranie.
+	33. Włącz tryb kontrastu
+Nazwa funkcji
+	Włącz tryb kontrastu
+	Opis funkcji
+	Funkcja umożliwiająca użytkownikowi aktywację trybu kontrastowego w interfejsie systemu.
+	Dane wejściowe
+	Aktywacja trybu kontrastu przez użytkownika.
+	Źródło danych wejściowych
+	Ustawienia systemowe związane z trybem kontrastu.
+	Wynik
+	Zmiana wyglądu interfejsu w tryb kontrastu.
+	Wymagania
+	Interfejs systemowy musi obsługiwać funkcję trybu kontrastu.
+Możliwość dostosowania poziomu kontrastu przez użytkownika.
+	Przeznaczenie
+	Umożliwienie użytkownikowi dostępu do systemu w warunkach, które zwiększają czytelność treści poprzez zastosowanie kontrastu.
+	Warunek wstępny
+	Interfejs systemowy musi wspierać funkcję trybu kontrastu.
+	Warunek końcowy
+	Tryb kontrastu został aktywowany, co wpływa na wygląd interfejsu systemowego.
+	Efekty uboczne
+	Zwiększenie dostępności systemu dla użytkowników z trudnościami w odbiorze standardowych kolorów.
+Potencjalne zwiększenie wydajności pracy osób z deficytami wzrokowymi.
+	Powód wywołania funkcji
+	Osoba o trudnościach w odbiorze standardowych kolorów chce dostosować wygląd interfejsu systemowego, aby zwiększyć czytelność treści.
+	34. Edytuj wielkość fontu
+Nazwa funkcji
+	Edytuj wielkość fontu
+	Opis funkcji
+	Edytowanie wielkości fontu w aplikacji
+	Dane wejściowe
+	Wybór wielkości fontu
+	Źródło danych wejściowych
+	Informacje zawarte w ustawieniach aplikacji
+	Wynik
+	Wyświetlanie treści w ustawionej wielkości fontu
+	Wymagania
+	Wybór wielkości fontu
+	Przeznaczenie
+	Ułatwienie czytelności dla osób, które potrzebują większego fontu
+	Warunek wstępny
+	Zalogowany użytkownik zmienia wartości w aplikacji
+	Warunek końcowy
+	Zmieniona wielkość fontu
+	Efekty uboczne
+	Treści wyświetlają się w ustawionym foncie
+	Powód wywołania funkcji
+	Ułatwienie czytelności dla osób, które potrzebują większego fontu
+	
+
+
+
+Nazwa funkcji
+	
+
+	Opis funkcji
+	
+
+	Dane wejściowe
+	
+
+	Źródło danych wejściowych
+	
+
+	Wynik
+	
+
+	Wymagania
+	
+
+	Przeznaczenie
+	
+
+	Warunek wstępny
+	
+
+	Warunek końcowy
+	
+
+	Efekty uboczne
+	
+
+	Powód wywołania funkcji
