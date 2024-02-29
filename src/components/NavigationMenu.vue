@@ -1,16 +1,17 @@
 
 <template>
-    <header :class="{ 'scrolled-nav' : scrollNav }"> <!-- menu będzie się przemieszczać zruchem strony w doł-->
+    <header :class="{ 'scrolled-nav' : scrollNav }"> <!-- menu będzie się przemieszczać z ruchem strony w doł-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <nav> 
             <div class="branding">
-                <img src="../assets/logo.jpg" alt="" />
+                <img src="/src/assets/logo.jpg" alt="Logo CareBuddy">
             </div>
            <ul v-show="!mobile" class="navigation">
             <li><router-link to="/profil" style="color: #fff"> Konto </router-link></li>
             <li><router-link to="/podopieczni" style="color: #fff"> Podopieczni </router-link></li>
             <li><router-link to="/tutorial" style="color: #fff"> Tutoriale </router-link></li>
             <li><router-link to="/ustawienia" style="color: #fff"> Ustawienia </router-link></li>
+             <li><router-link to="/logowanie" style="color: #fff"> Zaloguj </router-link></li>
            </ul>
            <div class="icon">
             <i @click="toggleMobileNav" v-show="mobile" class="fa fa-bars" :class="{'icon-active' :mobileNav}"></i>
@@ -25,19 +26,18 @@
            </ul>
            </transition>
         </nav>
-
     </header>  
 </template>
 
 <script lang="ts">
 export default {
-    name: "navigation",
+    name: "navigation-menu",
     data() {
         return {
-            scrollNav: null,
-            mobile: null,
-            mobileNav: null,
-            windowWidth: null,
+            scrollNav: false,
+            mobile: false,
+            mobileNav: false,
+            windowWidth: false,
         };
 
     },
@@ -83,7 +83,7 @@ header {
     width: 100%;
     position: fixed;
     transition: .5s ease all;
-    color: #fff;
+    color: #020202;
     top: 0;
     left: 0;
     
@@ -117,7 +117,7 @@ header {
         }
 
         .link{
-            font-size: 14px;
+            font-size: 16px;
             transition: .5s ease all;
             padding-bottom: 4px;
             border-bottom: 1px solid transparent;

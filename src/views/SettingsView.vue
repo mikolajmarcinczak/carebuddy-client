@@ -11,7 +11,7 @@
 
 <style>
 body {
-  background-color: gray;
+  background-color: #6D7275;
 }
 header{
   top: 0;
@@ -19,7 +19,7 @@ header{
 }
 .Settings{
   width: 1140px;
-  background-color: #fff;
+  background-color: #C7D6D5;
   padding: 30px;
   top: 0;
   left: 0;

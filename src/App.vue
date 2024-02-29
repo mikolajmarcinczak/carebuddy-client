@@ -3,7 +3,7 @@
 
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import Navigation from "./components/Navigation.vue";
+import Navigation from "./components/NavigationMenu.vue";
 
 
 </script>
@@ -14,9 +14,6 @@ import Navigation from "./components/Navigation.vue";
     <Navigation/>
     <router-view/>
   </div>
-
-
-  <RouterView />
 </template>
 
 

@@ -24,7 +24,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/Settings.vue')
+      component: () => import('../views/SettingsView.vue')
     },
     {
     path: '/profil',
@@ -32,7 +32,7 @@ const router = createRouter({
     // route level code-splitting
     // this generates a separate chunk (About.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import('../views/Profil.vue')
+    component: () => import('../views/ProfilView.vue')
     },
     {
       path: '/podopieczni',
@@ -40,7 +40,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/Proteges.vue')
+      component: () => import('../views/ProtegesView.vue')
     },
     {
       path: '/tutorial',
@@ -48,9 +48,25 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/Tutorial.vue')
+      component: () => import('../views/TutorialsView.vue')
+    },
+    {
+      path: '/logowanie',
+      name: 'logowanie',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/LoginView.vue')
+    },
+    {
+      path: '/rejestracja-konta',
+      name: 'rejestracja konta',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/RegisterView.vue')
     }
-    
+
   ]
 })
 
