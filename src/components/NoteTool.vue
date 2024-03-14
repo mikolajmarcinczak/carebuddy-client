@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto container py20 px-2">
   <div class="flex items-center justify-between text-xl text-white">
-    <p class="text-xl ">Dodaj nową notatkę</p>
+    <p class="text-xl "><router-link to="/dodawanie-notatki"> Dodaj nową notatkę</router-link></p>
     <button class="w-10 h-10 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-black text-white flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-yellow-500" aria-label="edit note" role="button">
       <svg  xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z"></path>
