@@ -11,7 +11,7 @@
             <li><router-link to="/podopieczni" style="color: #fff"> Podopieczni </router-link></li>
             <li><router-link to="/tutorial" style="color: #fff"> Tutoriale </router-link></li>
             <li><router-link to="/ustawienia" style="color: #fff"> Ustawienia </router-link></li>
-             <li><router-link to="/logowanie" style="color: #fff"> Zaloguj </router-link></li>
+            <li><router-link to="/logowanie" style="color: #fff"> Zaloguj </router-link></li>
            </ul>
            <div class="icon">
             <i @click="toggleMobileNav" v-show="mobile" class="fa fa-bars" :class="{'icon-active' :mobileNav}"></i>
@@ -23,6 +23,7 @@
                 <li><router-link to="/podopieczni" style="color: #000"> Podopieczni </router-link></li>
                 <li><router-link to="/tutorial" style="color: #000"> Tutoriale </router-link></li>
                 <li><router-link to="/ustawienia" style="color: #000"> Strona główna </router-link></li>
+                <li><router-link to="/logowanie" style="color: #000"> Zaloguj </router-link></li>
            </ul>
            </transition>
         </nav>

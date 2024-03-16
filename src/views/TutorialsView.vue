@@ -1,15 +1,15 @@
-<template>
-    <header> Baza Wiedzy
+<script setup lang="ts">
+import Tutorial from '../components/TutorialPage.vue'
 
-    </header>
-        <div class="bg-gray-200 p-8">
-            <div class="bg-white p-16">
-                
-            </div>
-        </div>
+</script>
+<template>
+  <main>
+    <Tutorial />
+  </main>
 </template>
 
 <style>
-
-
+body {
+  background-color: gray;
+}
 </style>
