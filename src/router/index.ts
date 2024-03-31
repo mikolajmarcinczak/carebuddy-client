@@ -82,6 +82,22 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AddNewNoteView.vue')
+    },
+    {
+      path: '/kalendarz',
+      name: 'kalendarz',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../components/Calendar/CalendarPage.vue')
+    },
+    {
+    path: '/strona-glowna',
+    name: 'strona glowna',
+    // route level code-splitting
+    // this generates a separate chunk (About.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import('../views/HomeView.vue')
     }
   ]
 })

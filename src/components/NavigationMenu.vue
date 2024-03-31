@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <nav> 
             <div class="branding">
-                <img src="/src/assets/logo.jpg" alt="Logo CareBuddy">
+                <router-link to="/strona-glowna" style="color: #fff"><img src="/src/assets/logo.jpg" alt="Logo CareBuddy"></router-link>
             </div>
            <ul v-show="!mobile" class="navigation">
             <li><router-link to="/profil" style="color: #fff"> Konto </router-link></li>
@@ -92,6 +92,7 @@ header {
 
     nav {
         position: relative;
+        z-index: 10;
         display: flex;
         flex-direction: row;
         padding: 12px 0;

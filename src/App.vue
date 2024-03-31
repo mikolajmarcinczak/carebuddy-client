@@ -10,14 +10,18 @@ import Navigation from "./components/NavigationMenu.vue";
 
 
 <template>
-  <div class="app">
+  <main>
     <Navigation/>
     <router-view/>
-  </div>
+  </main>
 </template>
 
 
-
+<style scoped>
+body {
+  background-color: white;
+}
+</style>
 
 <!-- <style scoped>
 header {

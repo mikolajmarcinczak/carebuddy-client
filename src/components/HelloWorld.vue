@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!--<script setup lang="ts">
 
 defineProps<{
   msg: string
@@ -40,3 +40,4 @@ h3 {
   }
 }
 </style>
+-->
