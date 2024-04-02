@@ -10,6 +10,6 @@ import Podopieczni from '../components/ProtegesPage.vue'
 
 <style>
 body {
-  background-color: gray;
+  background-color: white;
 }
 </style>

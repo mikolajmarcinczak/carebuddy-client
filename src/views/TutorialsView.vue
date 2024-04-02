@@ -10,6 +10,6 @@ import Tutorial from '../components/TutorialPage.vue'
 
 <style>
 body {
-  background-color: gray;
+  background-color: white;
 }
 </style>

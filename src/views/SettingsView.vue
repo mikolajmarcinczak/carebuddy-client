@@ -11,7 +11,7 @@
 
 <style>
 body {
-  background-color: #6D7275;
+  background-color: white;
 }
 header{
   top: 0;
