@@ -68,21 +68,14 @@ const router = createRouter({
       component: () => import('../views/RegisterView.vue')
     },
     {
-      path: '/notatki-użytkownika',
+      path: '/notatki-uzytkownika',
       name: 'notatki użytkownika',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/NotesView.vue')
+      component: () => import('/Users/michasiowy/WebstormProjects/carebuddy-client/src/views/NotesView.vue')
     },
-    {
-      path: '/dodawanie-notatki',
-      name: 'nowa notatka',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AddNewNoteView.vue')
-    }
+
   ]
 })
 

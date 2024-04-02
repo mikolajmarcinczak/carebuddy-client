@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Note from '../components/NoteTool.vue'
+import NotesTool from '@/components/Notatnik/NotesTool.vue'
 </script>
 
 <template>
   <main>
-    <Note />
+   <NotesTool />
   </main>
 </template>
 
