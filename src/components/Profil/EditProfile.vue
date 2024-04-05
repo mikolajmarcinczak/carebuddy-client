@@ -34,6 +34,14 @@
                   <input v-model="city" type="text" name="city" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               </div>
               <div>
+                  <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wzrost</label>
+                  <input v-model="height" type="number" name="height" id="height" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              </div>
+              <div>
+                  <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waga</label>
+                  <input v-model="weight" type="number" name="weight" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              </div>
+              <div>
                   <label for="about_me" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opis użytkownika</label>
                   <textarea v-model="aboutMe" name="about_me" id="about_me" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
               </div>
@@ -63,7 +71,9 @@ export default {
       phoneNumber: '',
       address: '',
       city: '',
-      aboutMe: ''
+      aboutMe: '',
+      height: '',
+      weight: ''
     };
   },
   methods: {
@@ -79,6 +89,8 @@ export default {
           this.address = userData.address;
           this.city = userData.city;
           this.aboutMe = userData.about_me;
+          this.height = userData.height; // Dodajemy wysokość z danych użytkownika
+          this.weight = userData.weight; // Dodajemy wag
         })
         .catch(error => {
           console.error('Błąd:', error);
@@ -95,7 +107,9 @@ export default {
         phone_number: this.phoneNumber,
         address: this.address,
         city: this.city,
-        about_me: this.aboutMe
+        about_me: this.aboutMe,
+        height: this.height, // Dodajemy wysokość
+        weight: this.weight // Dodajemy wagę
       })
       .then(response => {
         // Obsłuż odpowiedź z serwera

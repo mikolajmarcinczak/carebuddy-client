@@ -19,10 +19,10 @@
         </div>
         <!-- Przycisk zamykający modal -->
         <div class="flex justify-end mt-6">
-          <button @click="addUser" class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+          <button @click="addUser" class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
             Dodaj podopiecznego
           </button>
-          <button @click="closeModal" class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+          <button @click="closeModal" class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 m-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
             Zamknij
           </button>
         </div>

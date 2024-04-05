@@ -92,6 +92,14 @@ const router = createRouter({
       component: () => import('../components/Calendar/CalendarPage.vue')
     },
     {
+      path: '/kalendarz1',
+      name: 'kalendarz1',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../components/Calendar/CalendarPage1.html')
+    },
+    {
     path: '/strona-glowna',
     name: 'strona glowna',
     // route level code-splitting
