@@ -33,13 +33,16 @@
                   <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Miasto</label>
                   <input v-model="city" type="text" name="city" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               </div>
-              <div>
-                  <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wzrost</label>
-                  <input v-model="height" type="number" name="height" id="height" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              </div>
-              <div>
-                  <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waga</label>
-                  <input v-model="weight" type="number" name="weight" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <!-- Warunek sprawdzający rolę użytkownika i wyświetlający odpowiednie pola -->
+              <div v-if="userRole === 'Podopieczny'">
+                  <div>
+                      <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wzrost</label>
+                      <input v-model="height" type="number" name="height" id="height" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  </div>
+                  <div>
+                      <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waga</label>
+                      <input v-model="weight" type="number" name="weight" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  </div>
               </div>
               <div>
                   <label for="about_me" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opis użytkownika</label>
@@ -73,14 +76,15 @@ export default {
       city: '',
       aboutMe: '',
       height: '',
-      weight: ''
+      weight: '',
+      userRole: '' // Dodaj zmienną przechowującą rolę użytkownika
     };
   },
   methods: {
     openModal() {
       this.modalOpen = true;
       // Pobierz dane użytkownika z serwera i wypełnij nimi pola formularza
-      axios.get('https://example.com/api/user')
+      axios.get('https://localhost:8081/api')
         .then(response => {
           const userData = response.data;
           this.username = userData.username;
@@ -90,7 +94,8 @@ export default {
           this.city = userData.city;
           this.aboutMe = userData.about_me;
           this.height = userData.height; // Dodajemy wysokość z danych użytkownika
-          this.weight = userData.weight; // Dodajemy wag
+          this.weight = userData.weight; // Dodajemy wagę
+          this.userRole = userData.role; // Przypisz rolę użytkownika do zmiennej userRole
         })
         .catch(error => {
           console.error('Błąd:', error);
@@ -101,7 +106,7 @@ export default {
     },
     editProfile() {
       // Wyślij żądanie POST do serwera z danymi do aktualizacji profilu
-      axios.post('https://example.com/api/user/update', {
+      axios.post('https://localhost:8081/api', {
         username: this.username,
         email: this.email,
         phone_number: this.phoneNumber,

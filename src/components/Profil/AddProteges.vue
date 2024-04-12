@@ -49,7 +49,7 @@ export default {
       this.modalOpen = false;
     },
     addUser() {
-      axios.post('https://example.com/api/addUser', { email: this.email })
+      axios.post('https://localhost:8081/api', { email: this.email })
         .then(response => {
           console.log('Użytkownik dodany pomyślnie');
           // Tutaj możesz dodać dodatkową logikę, np. odświeżenie listy użytkowników
