@@ -84,7 +84,7 @@ export default {
     openModal() {
       this.modalOpen = true;
       // Pobierz dane użytkownika z serwera i wypełnij nimi pola formularza
-      axios.get('https://localhost:8081/api')
+      axios.get('http://localhost:8081/api/user/?identifier=ce45d717-b071-4d18-913f-306ff85893d9')
         .then(response => {
           const userData = response.data;
           this.username = userData.username;
@@ -104,9 +104,9 @@ export default {
     closeModal() {
       this.modalOpen = false;
     },
-    editProfile() {
-      // Wyślij żądanie POST do serwera z danymi do aktualizacji profilu
-      axios.post('https://localhost:8081/api', {
+    editProfile() { 
+      // Wyślij żądanie POST do serwera z danymi do aktualizacji profilu ?identifier=ce45d717-b071-4d18-913f-306ff85893d9
+      axios.put('http://localhost:8081/api/user/?identifier=ce45d717-b071-4d18-913f-306ff85893d9', {
         username: this.username,
         email: this.email,
         phone_number: this.phoneNumber,

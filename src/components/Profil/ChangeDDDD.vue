@@ -56,8 +56,9 @@ export default {
       password: '',
       confirmPassword: ''
     };
+  
   },
-  methods: {
+   methods: {
     openModal() {
       this.modalOpen = true;
     },
@@ -73,7 +74,11 @@ export default {
       };
       
       // Przykładowe użycie Axios do wysłania żądania POST
-      axios.post('/reset-password', requestData)
+      axios.post('http:/localhost:8081/api/auth/resetPassword/:token') ,{
+        email: this.email,
+        password: this.password,
+        confirmPassword: this.confirmPassword
+      }
         .then(response => {
           // Obsłuż odpowiedź z serwera
           console.log('Odpowiedź z serwera:', response.data);
@@ -84,7 +89,8 @@ export default {
         });
     }
   }
-};
+}; 
+
 </script>
 
 <style>

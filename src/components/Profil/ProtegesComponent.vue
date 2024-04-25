@@ -28,26 +28,36 @@ export default {
 <!--
 <script>
 import axios from 'axios';
+import { onMounted, reactive } from 'vue';
 
 export default {
-  data() {
-    return {
-      userData: null
+  setup() {
+    const userData = reactive({
+      username: '',
+      email: ''
+    });
+    
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8081/api/user/elderly');
+        console.log('Dane pobrane:', response.data);
+        userData.username = response.data.username;
+        userData.email = response.data.email;
+        
+        console.log('Nazwa użytkownika:', userData.username);
+        console.log('Email:', userData.email);
+      } catch (error) {
+        console.error('Błąd podczas pobierania danych:', error);
+      }
     };
-  },
-  mounted() {
-    this.fetchUserData();
-  },
-  methods: {
-    fetchUserData() {
-      axios.get('https://example.com/api/userData')
-        .then(response => {
-          this.userData = response.data;
-        })
-        .catch(error => {
-          console.error('Błąd podczas pobierania danych:', error);
-        });
-    }
+
+    onMounted(() => {
+      fetchUserData();
+    });
+
+    return {
+      userData
+    };
   }
 };
 </script>

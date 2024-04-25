@@ -4,8 +4,9 @@
       <div class="bg-white n-1/3 mt-10 rounded-lg">
         <div class="flex items-center justify-center flex-col">
           <img src="/src/assets/logo.jpg" alt="Logo CareBuddy">
-          <h1 class="text-gray-800 mt-5"> Imię i nazwisko: {{ userData.username }} </h1>
-          <h1 class="text-gray-400 p-4" v-if="userData.role === 'Opiekun' || userData.role === 'Podopieczny'"> Rola: {{ userData.role }} </h1>
+          <h1 class="text-gray-800 mt-5"> Imię i nazwisko: {{userData.username}} </h1>
+          <h1 class="text-gray-400 p-4"> Rola: {{userData.role}} </h1>
+         <!-- <h1 class="text-gray-400 p-4" v-if="userData.role === 'Opiekun' || userData.role === 'Podopieczny'"> Rola: {{ userData.role }} </h1> -->
           <h1 class="text-gray-500 p-4 text-center" v-if="userData.role === 'Opiekun' || userData.role === 'Podopieczny'">
             O mnie: {{ userData.about_me }}
           </h1>
@@ -13,13 +14,14 @@
           <h1 class="text-gray-400 p-4"> Nr tel: {{ userData.phone_number }} </h1>
           <h1 class="text-gray-400 p-4" v-if="userData.role === 'Podopieczny'"> Wzrost: {{ userData.height }} </h1>
           <h1 class="text-gray-400 p-4" v-if="userData.role === 'Podopieczny'"> Waga: {{ userData.weight }} </h1>
+          <h1 class="text-gray-400 p-4"> e-mail: {{ userData.email }} </h1>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<!-- <script>
 export default {
   data() {
     return {
@@ -35,27 +37,100 @@ export default {
     };
   }
 };
-</script>
-<!-- <script>
+</script> -->
+<script>
+/*
 import axios from 'axios';
+import { onMounted, reactive } from 'vue';
 
-const userData = ref(null);
-
-onMounted(() => {
-  fetchUserData();
-});
-
-const fetchUserData = () => {
-  axios.get('https://localhost:8081/api')
-    .then(response => {
-      userData.value = response.data;
-    })
-    .catch(error => {
-      console.error('Błąd podczas pobierania danych:', error);
+export default {
+  setup() {
+    const userData = reactive({
+      username: '',
+      role: '',
+      about_me: '',
+      city: '',
+      phone_number: '',
+      height: '',
+      weight: '',
+      email: ''
     });
+    
+    const fetchUserData = async () => {
+      const response = await axios.get('http://localhost:8081/api/user/?identifier=ce45d717-b071-4d18-913f-306ff85893d9')
+        .then(response => {
+          console.log('Dane pobrane:', response.data);
+          const fetchedData = response.data;
+          userData.username = fetchedData.username;
+          userData.role = fetchedData.role;
+          userData.about_me = fetchedData.about_me;
+          userData.city = fetchedData.city;
+          userData.phone_number = fetchedData.phone_number;
+          userData.height = fetchedData.height;
+          userData.weight = fetchedData.weight;
+          userData.email = fetchedData.email;
+          
+        })
+        .catch(error => {
+          console.error('Błąd podczas pobierania danych:', error);
+        });
+        console.log('Nazwa użytkownika:', userData.username);
+        console.log('Nazwa maila:', userData.email);
+    };
+    console.log(userData)
+    onMounted(() => {
+      fetchUserData();
+    });
+
+    return {
+      userData
+    };
+  }
+}; 
+
+*/
+
+import axios from 'axios';
+import { onMounted, reactive } from 'vue';
+
+export default {
+  setup() {
+    const userData = reactive({
+      username: '',
+      role: '',
+      email: ''
+    });
+    
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8081/api/user/?identifier=ce45d717-b071-4d18-913f-306ff85893d9');
+        console.log('Dane pobrane:', response.data);
+        const fetchedData = response.data.data; // zmieniłem na response.data.data, aby uzyskać dostęp do właściwej struktury danych
+        userData.username = fetchedData.username;
+        userData.role = fetchedData.role;
+        userData.email = fetchedData.email;
+        
+        console.log('Nazwa użytkownika:', userData.username);
+        console.log('Rola:', userData.role);
+        console.log('Email:', userData.email);
+      } catch (error) {
+        console.error('Błąd podczas pobierania danych:', error);
+      }
+    };
+
+    onMounted(() => {
+      fetchUserData();
+    });
+
+    return {
+      userData
+    };
+  }
 };
+
+
 </script>
--->
+
 <style scoped>
 /* Dodaj stylizację według potrzeb */
 </style>
