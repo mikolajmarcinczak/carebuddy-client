@@ -47,7 +47,13 @@
   </div>
 </template>
 
+
+
 <script>
+/*
+import { onMounted, reactive } from 'vue';
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -71,25 +77,77 @@ export default {
         email: this.email,
         password: this.password,
         confirmPassword: this.confirmPassword
+        
+        
       };
       
+      
       // Przykładowe użycie Axios do wysłania żądania POST
-      axios.post('http:/localhost:8081/api/auth/resetPassword/:token') ,{
+      axios.post('http://localhost:8081/api/auth/resetPassword/:?identifier=ce45d717-b071-4d18-913f-306ff85893d9') ,{
+        
         email: this.email,
         password: this.password,
         confirmPassword: this.confirmPassword
+        
       }
         .then(response => {
           // Obsłuż odpowiedź z serwera
           console.log('Odpowiedź z serwera:', response.data);
+          console.log(resetPassword.password);
         })
         .catch(error => {
           // Obsłuż błąd
           console.error('Błąd podczas wysyłania żądania:', error);
+          console.log(resetPassword.password);
         });
+        
     }
   }
 }; 
+*/
+import { reactive } from 'vue';
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      modalOpen: false,
+      email: '',
+      password: '',
+      confirmPassword: ''
+    };
+  },
+  methods: {
+    openModal() {
+      this.modalOpen = true;
+    },
+    closeModal() {
+      this.modalOpen = false;
+    },
+    resetPassword() {
+      
+      const requestData = {
+        email: this.email,
+        password: this.password,
+        confirmPassword: this.confirmPassword
+      };
+      
+      
+      axios.post('http://localhost:8081/api/auth/resetPassword/:?identifier=ce45d717-b071-4d18-913f-306ff85893d9', requestData)
+        .then(response => {
+          
+          console.log('Odpowiedź z serwera:', response.data);
+          console.log(this.password); 
+        })
+        .catch(error => {
+          
+          console.error('Błąd podczas wysyłania żądania:', error);
+          console.log(this.password); 
+        });
+    }
+  }
+};
+
 
 </script>
 

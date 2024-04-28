@@ -126,6 +126,7 @@ export default {
         console.error('Błąd:', error);
         // Tutaj możesz dodać kod obsługi błędu, np. wyświetlenie komunikatu o błędzie
       });
+      
     }
   }
 };
