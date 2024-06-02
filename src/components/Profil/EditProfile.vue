@@ -64,6 +64,7 @@
 
 <script>
 import axios from 'axios';
+import {User} from "../../types/user.model.ts";
 
 export default {
   data() {
@@ -104,7 +105,7 @@ export default {
     closeModal() {
       this.modalOpen = false;
     },
-    editProfile() { 
+    editProfile() {
       // Wyślij żądanie POST do serwera z danymi do aktualizacji profilu ?identifier=ce45d717-b071-4d18-913f-306ff85893d9
       axios.put('http://localhost:8081/api/user/?identifier=ce45d717-b071-4d18-913f-306ff85893d9', {
         username: this.username,
@@ -126,7 +127,7 @@ export default {
         console.error('Błąd:', error);
         // Tutaj możesz dodać kod obsługi błędu, np. wyświetlenie komunikatu o błędzie
       });
-      
+
     }
   }
 };

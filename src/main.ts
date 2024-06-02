@@ -3,10 +3,12 @@ import './utility/error.guard'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
 import App from './App.vue'
+
+import FontAwesomeIcon from "./utility/font-awesome";
 import router from './router'
 import axios from 'axios'
+import store from './stores/index'
 
 import BaseButton from '@/components/UI/BaseButton.vue'
 import BaseCard from '@/components/UI/BaseCard.vue'
@@ -17,10 +19,12 @@ const app = createApp(App)
 //middleware
 app.use(createPinia())
 app.use(router)
+app.use(store)
 
 //global components
 app.component('base-button', BaseButton)
 app.component('base-card', BaseCard)
 app.component('base-dialog', BaseDialog)
+app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.mount('#app')
