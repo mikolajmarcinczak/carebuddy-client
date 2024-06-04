@@ -10,53 +10,52 @@ export const auth = defineStore({
   id: 'auth',
   state: () => ({...initialState}),
   actions: {
-    login({commit}: any, user: any) {
+    async login(user: any) {
       return AuthService.login(user).then(
           (user: any) => {
-            commit('loginSuccess', user);
+            loginSuccess(this.$state, user)
             return Promise.resolve(user);
           },
           (error: any) => {
-            commit('loginFailure');
+            loginFailure(this.$state)
             return Promise.reject(error);
           }
       );
     },
-    logout({commit}: any) {
-      AuthService.logout();
-      commit('logout');
+    async logout() {
+      await AuthService.logout();
+      logout(this.$state)
     },
-    register({commit}: any, user: any) {
+    async register(user: any) {
       return AuthService.register(user).then(
           (response: any) => {
-            commit('registerSuccess');
+            registerSuccess(this.$state)
             return Promise.resolve(response.data);
           },
           (error: any) => {
-            commit('registerFailure');
+            registerFailure(this.$state)
             return Promise.reject(error);
           }
       );
     },
-    mutations: {
-      loginSuccess(state: any, user: any) {
-        state.status.loggedIn = true;
-        state.user = user;
-      },
-      loginFailure(state: any) {
-        state.status.loggedIn = false;
-        state.user = null;
-      },
-      logout(state: any) {
-        state.status.loggedIn = false;
-        state.user = null;
-      },
-      registerSuccess(state: any) {
-        state.status.loggedIn = false;
-      },
-      registerFailure(state: any) {
-        state.status.loggedIn = false;
-      }
-    }
   }
 });
+
+function loginSuccess(state: any, user: any) {
+  state.status.loggedIn = true;
+  state.user = user;
+}
+function loginFailure(state: any) {
+  state.status.loggedIn = false;
+  state.user = null;
+}
+function logout(state: any) {
+  state.status.loggedIn = false;
+  state.user = null;
+}
+function registerSuccess(state: any) {
+  state.status.loggedIn = false;
+}
+function registerFailure(state: any) {
+  state.status.loggedIn = false;
+}
