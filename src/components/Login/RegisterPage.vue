@@ -190,7 +190,7 @@ export default {
 			this.loading = true;
 			this.successful = false;
 
-			authStore.register('auth/register', user)
+			authStore.register(user)
 				.then(() => {
 					this.message = 'Konto zostało utworzone pomyślnie!';
 					this.loading = false;
