@@ -1,5 +1,6 @@
 import './assets/main.css'
 import './utility/error.guard'
+import 'dotenv/config'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -14,10 +15,11 @@ import BaseButton from '@/components/UI/BaseButton.vue'
 import BaseCard from '@/components/UI/BaseCard.vue'
 import BaseDialog from '@/components/UI/BaseDialog.vue'
 
+const pinia = createPinia()
 const app = createApp(App)
 
 //middleware
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 app.use(store)
 
