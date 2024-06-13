@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import Profil from '../components/ProfilPageNieaktywne.vue'
-import Profile from '../components/Profil/ProfileComponent.vue'
-//import Profile from '/Users/michasiowy/WebstormProjects/carebuddy-client/src/components/Profil/ProfileComponent.vue'
+import Profile from '../components/Profil/ElderlyProfile.vue'
 import Notes from '../components/Profil/NotesComponent.vue'
 import Proteges from '../components/Profil/ProtegesComponent.vue'
 import CBTN from '../components/Profil/ChangePassword.vue'
-import EBTN from '../components/Profil/EditProfile.vue'
+import EBTN from '@/components/Profil/EditProfile.vue'
 import ABTN from '../components/Profil/AddProteges.vue'
 import Proba from '../components/Profil/ChangeDDDD.vue'
 import Calendar from '../components/Profil/CalendarComponent.vue'

@@ -4,17 +4,16 @@
       <div class="bg-white n-1/3 mt-10 rounded-lg">
         <div class="flex items-center justify-center flex-col">
           <img src="/src/assets/logo.jpg" alt="Logo CareBuddy">
-          <h1 class="text-gray-800 mt-5"> Imię i nazwisko: {{userData.username}} </h1>
-          <h1 class="text-gray-400 p-4"> Rola: {{userData.role}} </h1>
-         <!-- <h1 class="text-gray-400 p-4" v-if="userData.role === 'Opiekun' || userData.role === 'Podopieczny'"> Rola: {{ userData.role }} </h1> -->
-          <h1 class="text-gray-500 p-4 text-center" v-if="userData.role === 'Opiekun' || userData.role === 'Podopieczny'">
-            O mnie: {{ userData.about_me }}
-          </h1>
-          <h1 class="text-gray-400 p-4" v-if="userData.role === 'Opiekun' || userData.role === 'Podopieczny'"> Miasto: {{ userData.city }} </h1>
-          <h1 class="text-gray-400 p-4"> Nr tel: {{ userData.phone_number }} </h1>
-          <h1 class="text-gray-400 p-4" v-if="userData.role === 'Podopieczny'"> Wzrost: {{ userData.height }} </h1>
-          <h1 class="text-gray-400 p-4" v-if="userData.role === 'Podopieczny'"> Waga: {{ userData.weight }} </h1>
-          <h1 class="text-gray-400 p-4"> e-mail: {{ userData.email }} </h1>
+          <h1 class="text-gray-800 mt-5"> Imię i nazwisko: {{userData.user?.username}} </h1>
+					<h1 class="text-gray-400 p-4"> Rola: {{userData.user?.role}} </h1>
+					<h1 class="text-gray-500 p-4 text-center"> O mnie: {{ userData.about_me || 'Brak opisu'}} </h1>
+					<h1 class="text-gray-400 p-4"> e-mail: {{ userData.user?.email }} </h1>
+					<h1 class="text-gray-400 p-4"> Adres zamieszkania: {{ userData.address }}, {{ userData.city }} </h1>
+					<h1 class="text-gray-400 p-4"> Nr tel.: {{ userData.phone_number }} </h1>
+					<h1 class="text-gray-400 p-4"> Nr awaryjny: {{ userData.emergency_number }} </h1>
+					<h1 class="text-gray-400 p-4"> Wzrost: {{ userData.height }} </h1>
+					<h1 class="text-gray-400 p-4"> Waga: {{ userData.weight }} </h1>
+					<h1 class="text-gray-400 p-4">Data urodzenia: {{ Date.parse(userData.date_of_birth).valueOf() }}</h1>
         </div>
       </div>
     </div>
@@ -38,7 +37,7 @@ export default {
   }
 };
 </script> -->
-<script>
+<script lang="ts">
 /*
 import axios from 'axios';
 import { onMounted, reactive } from 'vue';
@@ -91,17 +90,31 @@ export default {
 */
 
 import axios from 'axios';
-import { onMounted, reactive } from 'vue';
+import { ElderlyProfile } from "@/types/elderly-profile.model";
+import {auth} from "@/stores/auth.module";
+
+const authStore = auth();
 
 export default {
-  setup() {
-    const userData = reactive({
-      username: '',
-      role: '',
-      email: ''
-    });
+	name: 'ElderlyProfile',
+	props: {
+		userData: {
+			type: ElderlyProfile,
+			required: true
+		}
+	},
+	computed: {
+		currentUser() {
+			return authStore.$state.user;
+		}
+	},
+	mounted() {
+		if (!this.currentUser) {
+			this.$router.push('/login');
+		}
+	}
     
-    const fetchUserData = async () => {
+    /*const fetchUserData = async () => {
       try {
         const response = await axios.get('http://localhost:8081/api/user/?identifier=ce45d717-b071-4d18-913f-306ff85893d9');
         console.log('Dane pobrane:', response.data);
@@ -125,7 +138,7 @@ export default {
     return {
       userData
     };
-  }
+  }*/
 };
 
 

@@ -25,7 +25,7 @@
 									 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
 									 dark:focus:border-blue-500" required>
 						</Field>
-						<ErrorMessage name="username" class="error-feedback" />
+						<ErrorMessage name="email" class="error-feedback" />
           </div>
 
           <div class="mb-4">
