@@ -1,15 +1,13 @@
 import './assets/main.css'
 import './utility/error.guard'
-import 'dotenv/config'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import App from './App.vue'
+import App from "./App.vue";
 
 import FontAwesomeIcon from "./utility/font-awesome";
 import router from './router'
-import axios from 'axios'
-import store from './stores/index'
+import httpCommon from "@/utility/http-common";
 
 import BaseButton from '@/components/UI/BaseButton.vue'
 import BaseCard from '@/components/UI/BaseCard.vue'
@@ -17,11 +15,12 @@ import BaseDialog from '@/components/UI/BaseDialog.vue'
 
 const pinia = createPinia()
 const app = createApp(App)
+const apiClient = httpCommon
 
 //middleware
 app.use(pinia)
 app.use(router)
-app.use(store)
+app.use(apiClient)
 
 //global components
 app.component('base-button', BaseButton)

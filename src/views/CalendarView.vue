@@ -1,5 +1,10 @@
-<script setup lang="ts">
-import Calendar from '../components/CalendarPage.vue'
+<script lang="ts">
+import Calendar from '../components/Calendar/CalendarPage.vue'
+export default {
+	components: {
+		Calendar
+	}
+}
 </script>
 
 <template>

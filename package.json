@@ -18,7 +18,6 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
     "axios": "^1.6.8",
-    "dotenv": "^16.4.5",
     "pinia": "^2.1.7",
     "vee-validate": "^4.12.8",
     "vue": "^3.4.18",

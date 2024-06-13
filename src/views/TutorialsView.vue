@@ -1,6 +1,11 @@
-<script setup lang="ts">
+<script lang="ts">
 import Tutorial from '../components/TutorialPage.vue'
 
+export default {
+	components: {
+		Tutorial
+	}
+}
 </script>
 <template>
   <main>

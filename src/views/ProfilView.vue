@@ -1,19 +1,9 @@
-<script setup lang="ts">
-import Profile from '../components/Profil/ElderlyProfile.vue'
-import Notes from '../components/Profil/NotesComponent.vue'
-import Proteges from '../components/Profil/ProtegesComponent.vue'
-import CBTN from '../components/Profil/ChangePassword.vue'
-import EBTN from '@/components/Profil/EditProfile.vue'
-import ABTN from '../components/Profil/AddProteges.vue'
-import Proba from '../components/Profil/ChangeDDDD.vue'
-import Calendar from '../components/Profil/CalendarComponent.vue'
-</script>
 <template>
   <div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="md:col-span-1">
         <div class="row-span-3">
-          <Profile />
+          <Profile :user-data="sampleUser"/>
           <div class="flex justify-center items-center py-2 px-2">
             
             <div><EBTN /></div>
@@ -38,7 +28,36 @@ import Calendar from '../components/Profil/CalendarComponent.vue'
   </div>
 </template>
 
+<script lang="ts">
+import Profile from '../components/Profil/ElderlyProfile.vue'
+import Notes from '../components/Profil/NotesComponent.vue'
+import Proteges from '../components/Profil/ProtegesComponent.vue'
+import CBTN from '../components/Profil/ChangePassword.vue'
+import EBTN from '../components/Profil/EditProfile.vue'
+import ABTN from '../components/Profil/AddProteges.vue'
+import Proba from '../components/Profil/ChangeDDDD.vue'
+import Calendar from '../components/Profil/CalendarComponent.vue'
+import {ElderlyProfile} from "@/types/elderly-profile.model";
+import {User} from "@/types/user.model";
 
+export default {
+	data() {
+		return {
+			sampleUser: ElderlyProfile
+		}
+	},
+	components: {
+		Profile,
+		Notes,
+		Proteges,
+		CBTN,
+		EBTN,
+		ABTN,
+		Proba,
+		Calendar
+	}
+}
+</script>
 
 <style>
 body {

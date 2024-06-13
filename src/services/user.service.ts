@@ -1,8 +1,7 @@
-import * as process from "process";
 import axios from "axios";
 import authHeader from "@/services/auth.header";
 
-const API_URL = process.env.VUE_APP_API_URL as string;
+const API_URL = import.meta.env.VUE_APP_API_URL as string;
 
 class UserService {
   async getPublic() {

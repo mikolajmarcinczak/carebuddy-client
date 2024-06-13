@@ -1,5 +1,10 @@
-<script setup lang="ts">
+<script lang="ts">
 import Login from '../components/Login/LoginPage.vue'
+export default {
+	components: {
+		Login
+	}
+}
 </script>
 
 <template>

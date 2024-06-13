@@ -1,6 +1,13 @@
-<script>
-import script from './script.js'; // Importowanie pliku script.js
+<script lang="ts">
+import script from './script'; // Importowanie pliku script.js
 import './style.css'; // Importowanie pliku style.css
+export default {
+	setup() {
+		return {
+			script
+		}
+	}
+}
 </script>
 
 <template>

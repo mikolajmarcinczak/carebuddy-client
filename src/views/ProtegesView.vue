@@ -1,6 +1,10 @@
-<script setup lang="ts">
+<script lang="ts">
 import Podopieczni from '../components/ProtegesPage.vue'
-
+export default {
+	components: {
+		Podopieczni
+	}
+}
 </script>
 <template>
   <main>

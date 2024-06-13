@@ -64,9 +64,3 @@
             </div>
         </div>
 </template>
-
-<script>
-export default {
-    name: "GreyTabsOnRight",
-};
-</script>

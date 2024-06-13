@@ -38,7 +38,7 @@ export default {
             scrollNav: false,
             mobile: false,
             mobileNav: false,
-            windowWidth: false,
+            windowWidth: 0,
         };
 
     },

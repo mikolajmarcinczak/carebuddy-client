@@ -2,7 +2,7 @@ import axios from "axios";
 import * as process from "process";
 import {User} from "@/types/user.model";
 
-const API_URL = process.env.VUE_APP_API_URL as string;
+const API_URL = import.meta.env.VUE_APP_API_URL as string;
 
 class AuthService {
   async login(user: User) {

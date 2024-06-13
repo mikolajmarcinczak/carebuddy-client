@@ -89,7 +89,6 @@ export default {
 
 */
 
-import axios from 'axios';
 import { ElderlyProfile } from "@/types/elderly-profile.model";
 import {auth} from "@/stores/auth.module";
 

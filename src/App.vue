@@ -1,18 +1,25 @@
 
-<script setup lang="ts">
+<script>
 
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import Navigation from "./components/NavigationMenu.vue";
+import { RouterView } from 'vue-router';
+import Navigation from "@/components/NavigationMenu.vue";
+import TheWelcome from "@/components/TheWelcome.vue";
 
-
+export default {
+	name: 'App',
+	components: {
+		Navigation,
+		TheWelcome,
+		RouterView
+	}
+}
 </script>
 
 
 <template>
   <main>
     <Navigation/>
-    <router-view/>
+		<router-view/>
   </main>
 </template>
 

@@ -62,9 +62,8 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from 'axios';
-import {User} from "../../types/user.model.ts";
 
 export default {
   data() {
