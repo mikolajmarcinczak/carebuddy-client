@@ -6,7 +6,7 @@
           <Profile :user-data="sampleUser"/>
           <div class="flex justify-center items-center py-2 px-2">
             
-            <div><EBTN /></div>
+            <div><EditBtn /></div>
             <div><Proba /></div>
             <div><Calendar /></div>
           </div>
@@ -33,12 +33,11 @@ import Profile from '../components/Profil/ElderlyProfile.vue'
 import Notes from '../components/Profil/NotesComponent.vue'
 import Proteges from '../components/Profil/ProtegesComponent.vue'
 import CBTN from '../components/Profil/ChangePassword.vue'
-import EBTN from '../components/Profil/EditProfile.vue'
+import EditBtn from '../components/Profil/EditProfile.vue'
 import ABTN from '../components/Profil/AddProteges.vue'
 import Proba from '../components/Profil/ChangeDDDD.vue'
 import Calendar from '../components/Profil/CalendarComponent.vue'
 import {ElderlyProfile} from "@/types/elderly-profile.model";
-import {User} from "@/types/user.model";
 
 export default {
 	data() {
@@ -51,7 +50,7 @@ export default {
 		Notes,
 		Proteges,
 		CBTN,
-		EBTN,
+		EditBtn,
 		ABTN,
 		Proba,
 		Calendar

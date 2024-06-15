@@ -7,7 +7,7 @@ const API_URL = import.meta.env.VUE_APP_API_URL as string;
 class AuthService {
   async login(user: User) {
     return axios
-        .post(API_URL+ '/login', {
+        .post(API_URL+ '/auth/login', {
           email: user.email,
           password: user.password
         })
@@ -22,13 +22,27 @@ class AuthService {
 
   async logout() {
     localStorage.removeItem('user');
+    return axios.post(API_URL + '/auth/logout');
   }
 
   async register(user: User) {
-    return axios.post(API_URL + '/register', {
+    return axios.post(API_URL + '/auth/register', {
       username: user.username,
       email: user.email,
-      password: user.password
+      password: user.password,
+      role: user.role
+    });
+  }
+
+  async forgotPassword(email: string) {
+    return axios.post(API_URL + '/auth/forgotPassword', {
+      email: email
+    });
+  }
+
+  async resetPassword(password: string, token: string) {
+    return axios.post(API_URL + `/auth/resetPassword/${token}`, {
+      password: password
     });
   }
 }
