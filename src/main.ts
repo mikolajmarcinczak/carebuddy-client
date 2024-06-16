@@ -15,12 +15,10 @@ import BaseDialog from '@/components/UI/BaseDialog.vue'
 
 const pinia = createPinia()
 const app = createApp(App)
-const apiClient = httpCommon
 
 //middleware
 app.use(pinia)
 app.use(router)
-app.use(apiClient)
 
 //global components
 app.component('base-button', BaseButton)

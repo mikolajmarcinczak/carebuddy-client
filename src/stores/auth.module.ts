@@ -6,28 +6,28 @@ const initialState = user
     ? { status: { loggedIn: true }, user }
     : { status: { loggedIn: false }, user: null };
 
-export const auth = defineStore({
-  id: 'auth',
-  state: () => ({...initialState}),
+export const useAuthStore = defineStore('auth',{
+  state: () => (initialState),
   actions: {
     async login(user: any) {
-      return AuthService.login(user).then(
+      await AuthService.login(user).then(
           (user: any) => {
-            loginSuccess(this.$state, user)
+            loginSuccess(this.$state, user);
+            console.log(JSON.parse(localStorage.getItem('user') as string));
             return Promise.resolve(user);
           },
           (error: any) => {
-            loginFailure(this.$state)
+            loginFailure(this.$state);
             return Promise.reject(error);
           }
       );
     },
     async logout() {
       await AuthService.logout();
-      logout(this.$state)
+      logout(this.$state);
     },
     async register(user: any) {
-      return AuthService.register(user).then(
+      await AuthService.register(user).then(
           (response: any) => {
             registerSuccess(this.$state)
             return Promise.resolve(response.data);
@@ -44,6 +44,8 @@ export const auth = defineStore({
 function loginSuccess(state: any, user: any) {
   state.status.loggedIn = true;
   state.user = user;
+
+  localStorage.setItem('user', JSON.stringify(user));
 }
 function loginFailure(state: any) {
   state.status.loggedIn = false;

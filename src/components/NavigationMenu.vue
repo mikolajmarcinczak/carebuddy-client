@@ -11,7 +11,7 @@
             <li><router-link to="/podopieczni" style="color: #fff"> Podopieczni </router-link></li>
             <li><router-link to="/tutorial" style="color: #fff"> Tutoriale </router-link></li>
             <li><router-link to="/ustawienia" style="color: #fff"> Ustawienia </router-link></li>
-            <li><router-link to="/logowanie" style="color: #fff"> Zaloguj </router-link></li>
+            <li><router-link :to="loggedIn ? '/logout' : '/login'" style="color: #fff"> {{ loggedIn ? 'Wyloguj' : 'Zaloguj'}} </router-link></li>
            </ul>
            <div class="icon">
             <i @click="toggleMobileNav" v-show="mobile" class="fa fa-bars" :class="{'icon-active' :mobileNav}"></i>
@@ -23,7 +23,7 @@
                 <li><router-link to="/podopieczni" style="color: #000"> Podopieczni </router-link></li>
                 <li><router-link to="/tutorial" style="color: #000"> Tutoriale </router-link></li>
                 <li><router-link to="/ustawienia" style="color: #000"> Strona główna </router-link></li>
-                <li><router-link to="/logowanie" style="color: #000"> Zaloguj </router-link></li>
+                <li><router-link :to="loggedIn ? '/logout' : '/login'" style="color: #000">  {{ loggedIn ? 'Wyloguj' : 'Zaloguj'}}  </router-link></li>
            </ul>
            </transition>
         </nav>
@@ -31,48 +31,55 @@
 </template>
 
 <script lang="ts">
+import {useAuthStore} from "@/stores/auth.module";
+
 export default {
-    name: "navigation-menu",
-    data() {
-        return {
-            scrollNav: false,
-            mobile: false,
-            mobileNav: false,
-            windowWidth: 0,
-        };
+	name: "navigation-menu",
+	data() {
+		return {
+			scrollNav: false,
+			mobile: false,
+			mobileNav: false,
+			authStore: {},
+			windowWidth: 0,
+		};
 
-    },
-    created() {
-        window.addEventListener("resize", this.checkScreen);
-        this.checkScreen();
-    },
-    mounted() {
-        window.addEventListener("scroll", this.updateScroll);
-    },
-    methods: {
-        toggleMobileNav() {
-            this.mobileNav = !this.mobileNav;
-        },
+	},
+	created() {
+		window.addEventListener("resize", this.checkScreen);
+		this.checkScreen();
+	},
+	mounted() {
+		window.addEventListener("scroll", this.updateScroll);
+	},
+	computed: {
+		loggedIn() {
+			return useAuthStore().status.loggedIn;
+		}
+	},
+	methods: {
+		toggleMobileNav() {
+			this.mobileNav = !this.mobileNav;
+		},
+		updateScroll() {
+			const scrollPosition = window.scrollY;
+			if (scrollPosition > 50) {
+				this.scrollNav = true;
+			}
+			this.scrollNav = false;
+		},
+		checkScreen() {
+			this.windowWidth = window.innerWidth;
+			if (this.windowWidth <= 750) {
+				this.mobile = true;
+				return;
+			}
+			this.mobile = false;
+			this.mobileNav = false;
+			return;
 
-        updateScroll() {
-            const scrollPosition = window.scrollY;
-            if (scrollPosition > 50) {
-                this.scrollNav = true;
-            }
-            this.scrollNav = false;
-        },
-        checkScreen() {
-            this.windowWidth = window.innerWidth;
-            if(this.windowWidth <= 750) {
-                this.mobile = true;
-                return;
-            }
-            this.mobile = false;
-            this.mobileNav = false;
-            return;
-
-        },
-    },
+		},
+	},
 };
 </script>
 

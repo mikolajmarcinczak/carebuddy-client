@@ -3,7 +3,7 @@ import {User} from "@/types/user.model";
 import {ElderlyProfile} from "@/types/elderly-profile.model";
 import {CaregiverProfile} from "@/types/caregiver-profile.model";
 
-const API_URL = import.meta.env.VUE_APP_API_URL as string;
+const API_URL = import.meta.env.VITE_API_URL as string;
 
 class UserDataService {
   async getElderlyData(identifier: string) {

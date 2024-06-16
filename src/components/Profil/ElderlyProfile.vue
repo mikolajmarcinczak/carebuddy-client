@@ -90,9 +90,9 @@ export default {
 */
 
 import { ElderlyProfile } from "@/types/elderly-profile.model";
-import {auth} from "@/stores/auth.module";
+import {useAuthStore} from "@/stores/auth.module";
 
-const authStore = auth();
+const authStore = useAuthStore();
 
 export default {
 	name: 'ElderlyProfile',

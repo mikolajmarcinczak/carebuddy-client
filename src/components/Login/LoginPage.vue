@@ -12,7 +12,7 @@
           Zaloguj się do swojego konta
         </h1>
 
-        <Form @submit.prevent="handleLogin" class="space-y-4 md:space-y-6" :validation-schema="schema">
+        <Form @submit="handleLogin" class="space-y-4 md:space-y-6" :validation-schema="schema">
 
           <div class="mb-4">
             <label for="email"
@@ -112,9 +112,9 @@
 <script lang="ts">
 import  { Form, ErrorMessage, Field } from "vee-validate";
 import * as yup from "yup";
-import {auth} from "@/stores/auth.module"
+import {useAuthStore} from "@/stores/auth.module"
 
-const authStore = auth();
+const authStore = useAuthStore();
 
 export default {
 	name: "LoginComponent",
@@ -161,7 +161,8 @@ export default {
 						this.$router.push("/profil");
 					})
 					.catch((error: any) => {
-						this.message = 'Błąd logowania: ' + error.response.data.message.toString();
+						console.log(error);
+						this.message = 'Błąd logowania: ' + error.toString();
 						this.loading = false;
 					});
 		}
