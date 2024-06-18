@@ -50,13 +50,13 @@
 										 class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">
 								Potwierdź hasło
 							</label>
-							<Field type="password" name="confirm-password" id="confirm-password" placeholder="••••••••"
+							<Field type="password" name="confirmPassword" id="confirmPassword" placeholder="••••••••"
 										 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-m rounded-lg
 										 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
 										 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
 										 dark:focus:border-blue-500" required>
 							</Field>
-							<ErrorMessage name="confirm-Password" class="error-feedback" />
+							<ErrorMessage name="confirmPassword" class="error-feedback" />
 						</div>
 
 						<p class="text-xl font-light text-white- dark:text-white">
@@ -82,6 +82,20 @@
 										 dark:focus:border-blue-500" required>
 							</Field>
 							<ErrorMessage name="image_url" class="error-feedback" />
+						</div>
+
+						<div class="mb-4">
+							<label for="username"
+										 class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">
+								Imię i nazwisko
+							</label>
+							<Field type="text" name="username" id="username" placeholder="Janusz Kowalski"
+										 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-m rounded-lg
+										 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
+										 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
+										 dark:focus:border-blue-500" required>
+							</Field>
+							<ErrorMessage name="username" class="error-feedback" />
 						</div>
 
 						<div class="mb-4">
@@ -169,7 +183,7 @@
 
 
 <script lang="ts">
-import {Form, ErrorMessage, Field, FormContext, SubmissionHandler} from "vee-validate";
+import {Form, ErrorMessage, Field, FormContext} from "vee-validate";
 import * as yup from 'yup';
 import {useAuthStore} from "@/stores/auth.module";
 import BaseCard from "@/components/UI/BaseCard.vue";
@@ -214,6 +228,10 @@ export default {
 						.string()
 						.oneOf(['caregiver', 'elderly'])
 						.required('Wybierz rolę użytkownika.'),
+				username: yup
+						.string()
+						.required('Podaj swoje imię i nazwisko.')
+						.max(50, 'Imię i nazwisko jest zbyt długie!'),
 			})
 		];
 
@@ -235,22 +253,22 @@ export default {
 	},
 	mounted() {
 		if (this.loggedIn) {
-			this.$router.push('/profil');
+			this.$router.push('/login');
 		}
 	},
 	methods: {
 		prevStep() {
 			this.step = 1;
 		},
-		submitForm(formContext: any) {
-			console.log('submitForm called' + formContext.values);
+		submitForm(values: any, { resetForm } : any) {
+			console.log('submitForm called' + JSON.stringify(values));
 			if (this.step === 1) {
 				this.step++;
 			} else if (this.step === 2) {
-				const {confirmPassword, ...user} = formContext.values;
+				const {confirmPassword, ...user} = JSON.parse(JSON.stringify(values));
 				this.handleRegister(user);
 			} else {
-				formContext.resetForm();
+				resetForm();
 				this.step = 1;
 			}
 		},

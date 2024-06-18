@@ -38,8 +38,8 @@ const router = createRouter({
     {
       path: '/logout',
       name: 'logout',
-      component: () => {
-        useAuthStore().logout()
+      component: async () => {
+        await useAuthStore().logout()
         return import('../views/HomeView.vue')
       }
     },

@@ -54,6 +54,8 @@ function loginFailure(state: any) {
 function logout(state: any) {
   state.status.loggedIn = false;
   state.user = null;
+
+  localStorage.removeItem('user');
 }
 function registerSuccess(state: any) {
   state.status.loggedIn = false;
