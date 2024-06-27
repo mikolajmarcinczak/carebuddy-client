@@ -13,13 +13,30 @@ class AuthService {
         .then(response => {
           if (response.data.token) {
             response.data.data['accessToken'] = response.data.token
+            return response.data.data;
           }
-          return response.data.data;
+          else {
+            throw new Error(response.data.message)
+          }
+        })
+        .catch(error => {
+          console.log('Error during login:', error);
+          throw error;
         });
   }
 
   async logout() {
-    return axios.post(API_URL + '/auth/logout');
+    return axios.post(API_URL + '/auth/logout')
+        .then(response => {
+          if (response.data.message) {
+            console.log(response.data.message);
+            return response.data.message;
+          }
+          return response.data;
+        })
+        .catch(error => {
+          console.error('Error during logout:', error);
+        });
   }
 
   async register(user: User) {

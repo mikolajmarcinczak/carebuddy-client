@@ -13,7 +13,7 @@
         </h1>
 
         <Form @submit="submitForm" keep-values
-							class="space-y-4 md:space-y-6" v-slot="{ handleSubmit, values }" >
+							class="space-y-4 md:space-y-6" v-slot="{ handleReset, handleSubmit, values }" >
 
 					<template v-if="step === 1">
 
@@ -183,7 +183,7 @@
 
 
 <script lang="ts">
-import {Form, ErrorMessage, Field, FormContext} from "vee-validate";
+import {Form, ErrorMessage, Field, FormContext, FormActions} from "vee-validate";
 import * as yup from 'yup';
 import {useAuthStore} from "@/stores/auth.module";
 import BaseCard from "@/components/UI/BaseCard.vue";
@@ -260,7 +260,7 @@ export default {
 		prevStep() {
 			this.step = 1;
 		},
-		submitForm(values: any, { resetForm } : any) {
+		submitForm(values: any, { resetForm } : FormActions<FormContext>) {
 			console.log('submitForm called' + JSON.stringify(values));
 			if (this.step === 1) {
 				this.step++;

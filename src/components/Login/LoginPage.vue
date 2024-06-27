@@ -14,6 +14,8 @@
 
         <Form @submit="handleLogin" class="space-y-4 md:space-y-6" :validation-schema="schema">
 
+					<div>{{ message }}</div>
+
           <div class="mb-4">
             <label for="email"
 									 class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">
@@ -110,7 +112,7 @@
 
 
 <script lang="ts">
-import  { Form, ErrorMessage, Field } from "vee-validate";
+import {Form, ErrorMessage, Field, FieldArray} from "vee-validate";
 import * as yup from "yup";
 import {useAuthStore} from "@/stores/auth.module"
 
@@ -119,6 +121,7 @@ const authStore = useAuthStore();
 export default {
 	name: "LoginComponent",
 	components: {
+		FieldArray,
 		Form,
 		Field,
 		ErrorMessage
@@ -161,8 +164,7 @@ export default {
 						this.$router.push("/profil");
 					})
 					.catch((error: any) => {
-						console.log(error);
-						this.message = 'Błąd logowania: ' + error.toString();
+						this.message = 'Błąd logowania: ' + error.message.toString();
 						this.loading = false;
 					});
 		}

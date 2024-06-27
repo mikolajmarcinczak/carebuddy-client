@@ -15,16 +15,24 @@ export const useAuthStore = defineStore('auth',{
             loginSuccess(this.$state, user);
             console.log(JSON.parse(localStorage.getItem('user') as string));
             return Promise.resolve(user);
-          },
-          (error: any) => {
+          })
+          .catch((error: any) => {
             loginFailure(this.$state);
             return Promise.reject(error);
           }
       );
     },
     async logout() {
-      await AuthService.logout();
-      logout(this.$state);
+      //logout(this.$state);
+      await AuthService.logout().then(
+          response => {
+            logout(this.$state);
+            return Promise.resolve(response);
+          },
+          (error: any) => {
+            return Promise.reject(error);
+          }
+      );
     },
     async register(user: any) {
       await AuthService.register(user).then(
@@ -58,7 +66,7 @@ function logout(state: any) {
   localStorage.removeItem('user');
 }
 function registerSuccess(state: any) {
-  state.status.loggedIn = false;
+  state.status.loggedIn = true;
 }
 function registerFailure(state: any) {
   state.status.loggedIn = false;

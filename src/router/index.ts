@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import {useAuthStore} from "@/stores/auth.module";
+import {assertIsError} from "@/utility/error.guard";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,7 +40,13 @@ const router = createRouter({
       path: '/logout',
       name: 'logout',
       component: async () => {
-        await useAuthStore().logout()
+        try {
+          const response = await useAuthStore().logout();
+          console.log(response);
+        } catch (error: any) {
+          assertIsError(error);
+          console.log(error);
+        }
         return import('../views/HomeView.vue')
       }
     },
