@@ -7,17 +7,22 @@ const initialState = user
     : { status: { loggedIn: false }, user: null };
 
 export const useAuthStore = defineStore('auth',{
-  state: () => (initialState),
+  state: () => ({
+    ...initialState,
+    errorMessage: ''
+  }),
   actions: {
     async login(user: any) {
       await AuthService.login(user).then(
           (user: any) => {
             loginSuccess(this.$state, user);
+            this.$state.errorMessage = '';
             console.log(JSON.parse(localStorage.getItem('user') as string));
             return Promise.resolve(user);
           })
           .catch((error: any) => {
             loginFailure(this.$state);
+            this.$state.errorMessage = error.response.data.message;
             return Promise.reject(error);
           }
       );
@@ -38,10 +43,12 @@ export const useAuthStore = defineStore('auth',{
       await AuthService.register(user).then(
           (response: any) => {
             registerSuccess(this.$state)
+            this.$state.errorMessage = '';
             return Promise.resolve(response.data);
-          },
-          (error: any) => {
+          })
+          .catch((error: any) => {
             registerFailure(this.$state)
+            this.$state.errorMessage = error.response;
             return Promise.reject(error);
           }
       );

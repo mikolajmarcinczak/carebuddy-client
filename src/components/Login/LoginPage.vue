@@ -156,6 +156,7 @@ export default {
 	methods: {
 		handleLogin(user: any) {
 			this.loading = true;
+			this.message = '';
 
 			authStore.login(user)
 					.then(() => {
@@ -164,7 +165,7 @@ export default {
 						this.$router.push("/profil");
 					})
 					.catch((error: any) => {
-						this.message = 'Błąd logowania: ' + error.message.toString();
+						this.message = 'Błąd logowania: ' + authStore.errorMessage;
 						this.loading = false;
 					});
 		}

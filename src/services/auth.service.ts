@@ -16,17 +16,18 @@ class AuthService {
             return response.data.data;
           }
           else {
-            throw new Error(response.data.message)
+            throw new Error(response.data)
           }
         })
         .catch(error => {
-          console.log('Error during login:', error);
+          console.log('Error during login:', JSON.stringify(error));
           throw error;
         });
   }
 
   async logout() {
-    return axios.post(API_URL + '/auth/logout')
+    return axios
+        .post(API_URL + '/auth/logout')
         .then(response => {
           if (response.data.message) {
             console.log(response.data.message);
@@ -40,12 +41,26 @@ class AuthService {
   }
 
   async register(user: User) {
-    return axios.post(API_URL + '/auth/register', {
-      username: user.username,
-      email: user.email,
-      password: user.password,
-      role: user.role
-    });
+    return axios
+        .post(API_URL + '/auth/register', {
+          username: user.username,
+          email: user.email,
+          password: user.password,
+          role: user.role
+        })
+        .then(response => {
+          if (response.data.token) {
+            response.data.data['accessToken'] = response.data.token
+            return response.data.data;
+          }
+          else {
+            throw new Error(response.data)
+          }
+        })
+        .catch(error => {
+          console.log('Error during registration:', JSON.stringify(error));
+          throw error;
+        });
   }
 
   async forgotPassword(email: string) {
