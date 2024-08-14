@@ -17,24 +17,19 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/ustawienia',
-      name: 'ustawienia',
+      path: '/settings',
+      name: 'settings',
       component: () => import('../views/SettingsView.vue')
     },
     {
-      path: '/profil',
-      name: 'profil',
+      path: '/profile',
+      name: 'profile',
       component: () => import('../views/ProfilView.vue')
     },
     {
-      path: '/podopieczni',
-      name: 'podopieczni',
+      path: '/proteges',
+      name: 'proteges',
       component: () => import('../views/ProtegesView.vue')
-    },
-    {
-      path: '/tutorial',
-      name: 'tutorial',
-      component: () => import('../views/TutorialsView.vue')
     },
     {
       path: '/logout',
@@ -56,19 +51,19 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue')
     },
     {
-      path: '/rejestracja-konta',
-      name: 'rejestracja konta',
+      path: '/register',
+      name: 'register',
       component: () => import('../views/RegisterView.vue')
     },
     {
-      path: '/notatki-użytkownika',
-      name: 'notatki użytkownika',
+      path: '/notes',
+      name: 'notes',
       component: () => import('../views/NotesView.vue')
     },
     {
-      path: '/strona-glowna',
-      name: 'strona glowna',
-      component: () => import('../views/HomeView.vue')
+      path: '/caregivers',
+      name: 'caregivers',
+      component: () => import('../views/CaregiversView.vue')
     }
   ]
 })

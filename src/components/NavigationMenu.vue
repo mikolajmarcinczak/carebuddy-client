@@ -4,13 +4,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <nav> 
             <div class="branding">
-                <router-link to="/strona-glowna" style="color: #fff"><img src="/src/assets/logo.jpg" alt="Logo CareBuddy"></router-link>
+                <router-link to="/" style="color: #fff"><img src="/src/assets/logo.jpg" alt="Logo CareBuddy"></router-link>
             </div>
            <ul v-show="!mobile" class="navigation">
-            <li><router-link to="/profil" style="color: #fff"> Konto </router-link></li>
-            <li><router-link to="/podopieczni" style="color: #fff"> Podopieczni </router-link></li>
-            <li><router-link to="/tutorial" style="color: #fff"> Tutoriale </router-link></li>
-            <li><router-link to="/ustawienia" style="color: #fff"> Ustawienia </router-link></li>
+            <li><router-link to="/profile" style="color: #fff"> Konto </router-link></li>
+            <li><router-link to="/proteges" style="color: #fff"> Podopieczni </router-link></li>
+            <li><router-link to="/caregivers" style="color: #fff"> Opiekunowie </router-link></li>
+            <li><router-link to="/settings" style="color: #fff"> Ustawienia </router-link></li>
             <li><router-link :to="loggedIn ? '/logout' : '/login'" style="color: #fff"> {{ loggedIn ? 'Wyloguj' : 'Zaloguj'}} </router-link></li>
            </ul>
            <div class="icon">
@@ -19,10 +19,10 @@
 
            <transition name="mobile-nav"> 
             <ul v-show="mobileNav" class="dropdown-nav">
-                <li><router-link to="/profil" style="color: #000"> Konto </router-link></li>
-                <li><router-link to="/podopieczni" style="color: #000"> Podopieczni </router-link></li>
-                <li><router-link to="/tutorial" style="color: #000"> Tutoriale </router-link></li>
-                <li><router-link to="/ustawienia" style="color: #000"> Strona główna </router-link></li>
+                <li><router-link to="/profile" style="color: #000"> Konto </router-link></li>
+                <li><router-link to="/proteges" style="color: #000"> Podopieczni </router-link></li>
+								<li><router-link to="/caregivers" style="color: #000"> Opiekunowie </router-link></li>
+                <li><router-link to="/settings" style="color: #000"> Ustawienia </router-link></li>
                 <li><router-link :to="loggedIn ? '/logout' : '/login'" style="color: #000">  {{ loggedIn ? 'Wyloguj' : 'Zaloguj'}}  </router-link></li>
            </ul>
            </transition>

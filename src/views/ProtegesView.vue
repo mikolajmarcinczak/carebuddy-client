@@ -1,14 +1,14 @@
 <script lang="ts">
-import Podopieczni from '../components/ProtegesPage.vue'
+import ProtegeList from "@/components/Search/ProtegesList.vue";
 export default {
 	components: {
-		Podopieczni
+		ProtegeList,
 	}
 }
 </script>
 <template>
   <main>
-    <Podopieczni />
+    <ProtegeList />
   </main>
 </template>
 
