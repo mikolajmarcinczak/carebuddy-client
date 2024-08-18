@@ -1,5 +1,5 @@
 <script lang="ts">
-import NotesTool from '@/components/Notatnik/NotesTool.vue'
+import NotesTool from '@/components/Notepad/NotesTool.vue'
 export default {
 	components: {
 		NotesTool

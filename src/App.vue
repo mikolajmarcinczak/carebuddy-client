@@ -24,7 +24,7 @@ export default {
 </template>
 
 
-<style scoped>
+<style>
 body {
   background-color: white;
 }

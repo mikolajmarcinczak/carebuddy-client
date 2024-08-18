@@ -29,14 +29,14 @@
 </template>
 
 <script lang="ts">
-import Profile from '../components/Profil/ElderlyProfile.vue'
-import Notes from '../components/Profil/NotesComponent.vue'
-import Proteges from '../components/Profil/ProtegesComponent.vue'
-import CBTN from '../components/Profil/ChangePassword.vue'
-import EditBtn from '../components/Profil/EditProfile.vue'
-import ABTN from '../components/Profil/AddProteges.vue'
-import Proba from '../components/Profil/ChangeDDDD.vue'
-import Calendar from '../components/Profil/CalendarComponent.vue'
+import Profile from '@/components/Profile/ElderlyProfile.vue'
+import Notes from '@/components/Profile/NotesComponent.vue'
+import Proteges from '@/components/Profile/ProtegesComponent.vue'
+import CBTN from '@/components/Profile/ChangePassword.vue'
+import EditBtn from '@/components/Profile/EditProfile.vue'
+import ABTN from '@/components/Profile/AddProteges.vue'
+import Proba from '@/components/Profile/ChangeDDDD.vue'
+import Calendar from '@/components/Profile/CalendarComponent.vue'
 import {ElderlyProfile} from "@/types/elderly-profile.model";
 
 export default {

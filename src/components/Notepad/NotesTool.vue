@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import AddNewNoteButton from "@/components/Notatnik/AddNewNoteButton.vue";
-import NotesList from "@/components/Notatnik/NotesList.vue";
-import SingleNote from "@/components/Notatnik/SingleNote.vue";
+import AddNewNoteButton from "@/components/Notepad/AddNewNoteButton.vue";
+import NotesList from "@/components/Notepad/NotesList.vue";
+import SingleNote from "@/components/Notepad/SingleNote.vue";
 
 export default {
 	name: 'NotesTool',
