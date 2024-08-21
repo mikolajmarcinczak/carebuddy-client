@@ -3,7 +3,7 @@ import authHeader from "@/services/auth.header";
 
 const API_URL = import.meta.env.VITE_API_URL as string;
 
-class UserService {
+class UserAccessService {
   async getPublic() {
     return axios.get(API_URL + '/all');
   }
@@ -25,4 +25,4 @@ class UserService {
   }
 }
 
-export default new UserService();
+export default new UserAccessService();

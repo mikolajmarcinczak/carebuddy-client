@@ -1,7 +1,7 @@
 import AuthService from "@/services/auth.service";
 import {defineStore} from "pinia";
 
-const user = JSON.parse(localStorage.getItem('user') as string);
+const user = JSON.parse(sessionStorage.getItem('user') as string);
 const initialState = user
     ? { status: { loggedIn: true }, user }
     : { status: { loggedIn: false }, user: null };
@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth',{
           (user: any) => {
             loginSuccess(this.$state, user);
             this.$state.errorMessage = '';
-            console.log(JSON.parse(localStorage.getItem('user') as string));
+            console.log(JSON.parse(sessionStorage.getItem('user') as string));
             return Promise.resolve(user);
           })
           .catch((error: any) => {
@@ -60,7 +60,7 @@ function loginSuccess(state: any, user: any) {
   state.status.loggedIn = true;
   state.user = user;
 
-  localStorage.setItem('user', JSON.stringify(user));
+  sessionStorage.setItem('user', JSON.stringify(user));
 }
 function loginFailure(state: any) {
   state.status.loggedIn = false;
@@ -70,7 +70,7 @@ function logout(state: any) {
   state.status.loggedIn = false;
   state.user = null;
 
-  localStorage.removeItem('user');
+  sessionStorage.removeItem('user');
 }
 function registerSuccess(state: any) {
   state.status.loggedIn = true;
