@@ -2,6 +2,7 @@ import {AxiosResponse} from "axios";
 
 //schema.prisma.event
 export class CalendarEvent {
+  id: string;
   user_ids: string[];
   time: Date;
   title: string;
@@ -11,6 +12,7 @@ export class CalendarEvent {
   constructor(data: AxiosResponse) {
     const responseData = data.data;
 
+    this.id = responseData.id;
     this.user_ids = responseData.user_ids;
     this.time = new Date(responseData.time);
     this.title = responseData.title;

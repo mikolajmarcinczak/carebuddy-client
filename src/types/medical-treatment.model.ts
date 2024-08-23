@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 
 //schema.prisma.medicaltreatmententity
 export class MedicalTreatment {
+  id: string;
   user_id: string;
   medicament_ids: string[];
   diagnosis: string;
@@ -13,6 +14,7 @@ export class MedicalTreatment {
   constructor(data: AxiosResponse) {
     const responseData = data.data;
 
+    this.id = responseData.id;
     this.user_id = responseData.user_id;
     this.medicament_ids = responseData.medicament_ids;
     this.diagnosis = responseData.diagnosis;
