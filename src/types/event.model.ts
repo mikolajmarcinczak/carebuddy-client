@@ -6,6 +6,7 @@ export class CalendarEvent {
   user_ids: string[];
   time: Date;
   title: string;
+  recurring: boolean;
   location?: string;
   description?: string;
 
@@ -16,6 +17,7 @@ export class CalendarEvent {
     this.user_ids = responseData.user_ids;
     this.time = new Date(responseData.time);
     this.title = responseData.title;
+    this.recurring = responseData.recurring || false;
 
     if (responseData.location !== undefined || responseData.location !== null) {
       this.location = responseData.location;

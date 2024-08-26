@@ -8,10 +8,10 @@ export const useEventStore = defineStore('calendar', {
     currentWeek: new Date()
   }),
   actions: {
-    async addEvent(eventData: { id: string, title: string, date: string, recurring: boolean }) {
+    async addEvent(eventData: CalendarEvent) {
       const event = await EventDataService.createEvent(eventData);
       this.events.push(event)
-      this.setNotification(event);
+      await this.setNotification(event);
     },
     async fetchEventById(eventId: string) {
       const event = await EventDataService.getEventById(eventId);
@@ -21,9 +21,9 @@ export const useEventStore = defineStore('calendar', {
       const events = await EventDataService.getEventsByUser(userId);
       this.events = events;
     },
-    async updateEvent(eventId: string, eventData: any) {
+    async updateEvent(eventId: string, eventData: CalendarEvent) {
       const updatedEvent = await EventDataService.updateEvent(eventId, eventData);
-      const index = this.events.findIndex(event => event. === eventId);
+      const index = this.events.findIndex(event => event.id === eventId);
       if (index !== -1) {
         this.events.splice(index, 1, updatedEvent);
       }
@@ -52,7 +52,7 @@ export const useEventStore = defineStore('calendar', {
       const weekEnd = new Date(weekStart);
       weekEnd.setDate(weekStart.getDate() + 7);
       return state.events.filter(event => {
-        const eventDate = new Date(event.date);
+        const eventDate = new Date(event.time);
         return event.recurring || (eventDate >= weekStart && eventDate < weekEnd);
       })
     },
