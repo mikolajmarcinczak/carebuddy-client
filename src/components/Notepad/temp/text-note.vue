@@ -8,7 +8,7 @@
 				{{ note.content }}
 			</div>
 			<div class="text-gray-500">
-				{{ note.user_id }}
+				{{ note.user_id + ', ' + note.related_user_ids }}
 			</div>
 			<div class="text-gray-500">
 				{{ note.updated_at }}
@@ -17,7 +17,7 @@
         <span class="cursor-pointer text-blue-500" @click="showEdit">
           <i class="fas fa-edit"></i>
         </span>
-				<span class="cursor-pointer text-red-500" @click="deleteNote(notesList)">
+				<span class="cursor-pointer text-red-500" @click="deleteNote">
           <i class="fas fa-trash"></i>
         </span>
 			</div>
@@ -32,6 +32,17 @@
 					<label for="content" class="block text-gray-700">Treść notatki</label>
 					<textarea id="content" v-model="noteContent" class="w-full px-3 py-2 border rounded"></textarea>
 				</div>
+				<div>
+					<label for="user_emails" class="block text-gray-700">Adresy email użytkowników</label>
+					<v-select
+							v-model="selectedUsers"
+							:options="userOptions"
+							label="email"
+							multiple
+							@search="searchUsers"
+							@input="addUser"
+					></v-select>
+				</div>
 				<div class="flex justify-end space-x-4">
 					<button class="bg-blue-500 text-white font-bold py-2 px-4 rounded" @click="saveEditedNote">Zapisz</button>
 				</div>
@@ -45,6 +56,8 @@
 import {Note} from "@/types/note.model";
 import {useNoteStore} from "@/stores/note.module";
 import {ref} from "vue";
+import {useUserDataStore} from "@/stores/user-data.module";
+import {SendNoteParameters} from "@/types/send-note.parameters.model";
 
 export default {
 	name: "text-note",
@@ -55,10 +68,14 @@ export default {
 		}
 	},
 	setup(props) {
+		const userStore = useUserDataStore();
 		const noteStore = useNoteStore();
 		const showModelEdit = ref(false);
 		const noteTitle = ref(props.note.title);
 		const noteContent = ref(props.note.content);
+		const userEmails = ref("");
+		const selectedUsers = ref([]);
+		const userOptions = ref([]);
 
 		const showEdit = () => {
 			showModelEdit.value = true;
@@ -69,9 +86,11 @@ export default {
 				...props.note,
 				title: noteTitle.value,
 				content: noteContent.value,
+				related_user_ids: selectedUsers.value.map((user: any) => user.id)
 			});
 
 			await noteStore.updateNote(props.note.id, updatedNote);
+			await sendNote();
 			showModelEdit.value = false;
 		};
 
@@ -79,19 +98,53 @@ export default {
 			await noteStore.deleteNote(props.note.id);
 		};
 
+		const searchUsers = async (searchTerm : any) => {
+			if (searchTerm.length < 3) return;
+			try {
+				const elderlyData = await userStor.getElderlyData(searchTerm);
+				const caregiverData = await UserDataService.getCaregiverData(searchTerm);
+				userOptions.value = [elderlyData.user, caregiverData.user];
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		const addUser = (selected) => {
+			if (!selectedUsers.value.includes(selected)) {
+				selectedUsers.value.push(selected);
+			}
+		};
+
+		const sendNote = async () => {
+			const sendNoteParams = new SendNoteParameters({
+				note_id: props.note.id,
+				user_ids: selectedUsers.value.map(user => user.id)
+			});
+
+			await noteStore.sendNote(sendNoteParams);
+		};
+
 		return {
 			showModelEdit,
 			noteTitle,
 			noteContent,
+			userEmails,
+			userOptions,
+			selectedUsers,
 			showEdit,
 			saveEditedNote,
-			deleteNote
+			deleteNote,
+			searchUsers,
+			addUser,
+			sendNote
 		};
 	}
 }
 </script>
 
 <style scoped>
+@import "vue-select/dist/vue-select.css";
+
 .italic {
 	font-style: italic;
 }
