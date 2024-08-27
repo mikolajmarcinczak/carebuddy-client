@@ -13,27 +13,26 @@ export class ElderlyProfile {
   emergency_number: string;
   user?: User;
 
-  constructor(data: AxiosResponse, user?: User) {
-    const responseData = data.data;
-
+  constructor(data: {
+    phone_number: string;
+    address: string;
+    city: string;
+    date_of_birth: string;
+    about_me?: string;
+    height: number;
+    weight: number;
+    emergency_number: string;
+  }, user?: User) {
+    this.phone_number = data.phone_number;
+    this.address = data.address;
+    this.city = data.city;
+    this.date_of_birth = data.date_of_birth.toString();
+    this.height = data.height;
+    this.weight = data.weight;
+    this.emergency_number = data.emergency_number;
+    this.about_me = data.about_me ?? "";
     if (user) {
       this.user = user;
     }
-
-    this.phone_number = responseData.phone_number;
-    this.address = responseData.address;
-    this.city = responseData.city;
-    this.date_of_birth = responseData.date_of_birth.toString();
-    this.height = responseData.height;
-    this.weight = responseData.weight;
-    this.emergency_number = responseData.emergency_number;
-
-    if (responseData.about_me !== undefined || responseData.about_me !== null) {
-      this.about_me = responseData.about_me;
-    }
-    else {
-      this.about_me = "";
-    }
   }
-
 }

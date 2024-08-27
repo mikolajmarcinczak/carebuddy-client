@@ -4,14 +4,14 @@ import {CalendarEvent} from "@/types/event.model";
 const API_URL = import.meta.env.VITE_API_URL as string;
 
 class EventDataService {
-  async createEvent(eventData: any) {
+  async createEvent(eventData: CalendarEvent) {
     const response = await axios.post(`${API_URL}/event`, eventData);
-    return new CalendarEvent(response);
+    return new CalendarEvent(response.data);
   }
 
   async getEventById(eventId: string) {
     const response = await axios.get(`${API_URL}/event/${eventId}`);
-    return new CalendarEvent(response);
+    return new CalendarEvent(response.data);
   }
 
   async getEventsByUser(userId: string) {
@@ -19,9 +19,9 @@ class EventDataService {
     return response.data.map((event: any) => new CalendarEvent(event));
   }
 
-  async updateEvent(eventId: string, eventData: any) {
+  async updateEvent(eventId: string, eventData: CalendarEvent) {
     const response = await axios.put(`${API_URL}/event/${eventId}`, eventData);
-    return new CalendarEvent(response);
+    return new CalendarEvent(response.data);
   }
 
   async deleteEvent(eventId: string) {

@@ -11,28 +11,24 @@ export class Note {
   created_at?: string;
   updated_at?: string;
 
-  constructor(data: AxiosResponse) {
-    const responseData = data.data;
+  constructor(data: {
+    id: string;
+    user_id: string;
+    related_user_ids: string[];
+    related_urls: string[];
+    title: string;
+    content: string;
+    created_at?: string;
+    updated_at?: string;
+  }) {
 
-    this.id = responseData.id;
-    this.user_id = responseData.user_id;
-    this.related_user_ids = responseData.related_user_ids;
-    this.related_urls = responseData.related_urls;
-    this.title = responseData.title;
-    this.content = responseData.content;
-
-    if (responseData.created_at !== undefined || responseData.created_at !== null) {
-      this.created_at = responseData.created_at?.toString();
-    }
-    else {
-      this.created_at = new Date().toLocaleString();
-    }
-
-    if (responseData.updated_at !== undefined || responseData.updated_at !== null) {
-      this.updated_at = responseData.updated_at?.toString();
-    }
-    else {
-      this.updated_at = new Date().toLocaleString();
-    }
+    this.id = data.id;
+    this.user_id = data.user_id;
+    this.related_user_ids = data.related_user_ids;
+    this.related_urls = data.related_urls;
+    this.title = data.title;
+    this.content = data.content;
+    this.created_at = data.created_at ? data.created_at.toString() : new Date().toLocaleString();
+    this.updated_at = data.updated_at ? data.updated_at.toString() : new Date().toLocaleString();
   }
 }
