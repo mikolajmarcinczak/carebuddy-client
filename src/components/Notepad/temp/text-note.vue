@@ -58,6 +58,7 @@ import {useNoteStore} from "@/stores/note.module";
 import {ref} from "vue";
 import {useUserDataStore} from "@/stores/user-data.module";
 import {SendNoteParameters} from "@/types/send-note.parameters.model";
+import {User} from "@/types/user.model";
 
 export default {
 	name: "text-note",
@@ -74,8 +75,8 @@ export default {
 		const noteTitle = ref(props.note.title);
 		const noteContent = ref(props.note.content);
 		const userEmails = ref("");
-		const selectedUsers = ref([]);
-		const userOptions = ref([]);
+		const selectedUsers = ref<User[]>([]);
+		const userOptions = ref<User[]>([]);
 
 		const showEdit = () => {
 			showModelEdit.value = true;
@@ -98,18 +99,17 @@ export default {
 			await noteStore.deleteNote(props.note.id);
 		};
 
-		const searchUsers = async (searchTerm : any) => {
+		const searchUsers = async (searchTerm : string) => {
 			if (searchTerm.length < 3) return;
 			try {
-				const elderlyData = await userStor.getElderlyData(searchTerm);
-				const caregiverData = await UserDataService.getCaregiverData(searchTerm);
-				userOptions.value = [elderlyData.user, caregiverData.user];
+				const allUsers = await userStore.getUsersByRole("0000") as User[];
+				userOptions.value = allUsers.filter(user => user.email.includes(searchTerm));
 			} catch (error) {
 				console.error(error);
 			}
 		};
 
-		const addUser = (selected) => {
+		const addUser = (selected: User) => {
 			if (!selectedUsers.value.includes(selected)) {
 				selectedUsers.value.push(selected);
 			}
@@ -118,7 +118,7 @@ export default {
 		const sendNote = async () => {
 			const sendNoteParams = new SendNoteParameters({
 				note_id: props.note.id,
-				user_ids: selectedUsers.value.map(user => user.id)
+				user_ids: selectedUsers.value.map(user => user.user_id)
 			});
 
 			await noteStore.sendNote(sendNoteParams);

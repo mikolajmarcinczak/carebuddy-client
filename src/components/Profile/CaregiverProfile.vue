@@ -20,13 +20,14 @@
 <script lang="ts">
 import {CaregiverProfile} from "@/types/caregiver-profile.model";
 import {useAuthStore} from "@/stores/auth.module";
+import {PropType} from "vue";
 
 const authStore = useAuthStore();
 export default {
 	name: "CaregiverProfile",
 	props: {
 		userData: {
-			type: CaregiverProfile,
+			type: Object as PropType<CaregiverProfile>,
 			required: true
 		}
 	},

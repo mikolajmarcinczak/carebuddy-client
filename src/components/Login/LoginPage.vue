@@ -95,7 +95,7 @@
 
           <p class="text-xl font-light text-gray-500 dark:text-gray-400">
             Nie posiadasz konta?
-						<router-link to="/rejestracja-konta"
+						<router-link to="/register"
 												 class="font-medium text-primary-600 hover:underline dark:text-primary-500">
 							Rejestracja
 						</router-link>

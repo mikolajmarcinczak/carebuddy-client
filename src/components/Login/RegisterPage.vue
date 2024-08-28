@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 md:mt-16 w-80 md:w-[100%]">
     <a href="#" class="flex items-center mb-6 text-3xl font-semibold text-gray-900 dark:text-white">
       Care Buddy
     </a>
 <!-- Formularz rejestracji -->
-    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-24 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 md:w-[540px]">
 
 			<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 
@@ -210,7 +210,6 @@ export default {
 							}),
 					image_url: yup
 							.string()
-							.required()
 							.url('Podaj adres URL obrazu.')
 							.max(2063, 'Adres URL jest zbyt długi!'),
 					role: yup
@@ -257,6 +256,7 @@ export default {
 						this.message = 'Konto zostało utworzone pomyślnie!';
 						this.loading = false;
 						this.successful = true;
+						this.$router.push({ path: '/profile', query: { edit: 'true' } });
 					})
 					.catch((error: any) => {
 						console.log(error);

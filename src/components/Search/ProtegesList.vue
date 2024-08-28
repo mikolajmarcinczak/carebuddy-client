@@ -34,7 +34,10 @@ export default {
 			{ id: 2, name: 'Anna Nowak', email: 'anna.nowak@example.com', city: 'Kraków' },
 		]);
 
-		const isCaregiver = computed(() => authStore.user?.type === 'caregiver');
+		const isCaregiver = computed(() => {
+			console.log(authStore.user);
+			return authStore.user?.role == 'caregiver';
+		});
 
 		return {
 			proteges,

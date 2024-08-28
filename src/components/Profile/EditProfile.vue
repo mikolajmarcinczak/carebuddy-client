@@ -1,7 +1,9 @@
 <template>
   <div>
     <!-- Przycisk otwierający modal -->
-    <button @click="openModal" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+    <button @click="openModal" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl
+    																	focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800
+    																	font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
       Edytuj profil
     </button>
 
@@ -34,7 +36,7 @@
                   <input v-model="city" type="text" name="city" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               </div>
               <!-- Warunek sprawdzający rolę użytkownika i wyświetlający odpowiednie pola -->
-              <div v-if="userRole === 'Podopieczny'">
+              <div v-if="userRole === 'elderly'">
                   <div>
                       <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wzrost</label>
                       <input v-model="height" type="number" name="height" id="height" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -77,13 +79,12 @@ export default {
       aboutMe: '',
       height: '',
       weight: '',
-      userRole: '' // Dodaj zmienną przechowującą rolę użytkownika
+      userRole: ''
     };
   },
   methods: {
     openModal() {
       this.modalOpen = true;
-      // Pobierz dane użytkownika z serwera i wypełnij nimi pola formularza
       axios.get('http://localhost:8081/api/user/?identifier=ce45d717-b071-4d18-913f-306ff85893d9')
         .then(response => {
           const userData = response.data;
@@ -105,7 +106,6 @@ export default {
       this.modalOpen = false;
     },
     editProfile() {
-      // Wyślij żądanie POST do serwera z danymi do aktualizacji profilu ?identifier=ce45d717-b071-4d18-913f-306ff85893d9
       axios.put('http://localhost:8081/api/user/?identifier=ce45d717-b071-4d18-913f-306ff85893d9', {
         username: this.username,
         email: this.email,
@@ -113,8 +113,8 @@ export default {
         address: this.address,
         city: this.city,
         about_me: this.aboutMe,
-        height: this.height, // Dodajemy wysokość
-        weight: this.weight // Dodajemy wagę
+        height: this.height,
+        weight: this.weight
       })
       .then(response => {
         // Obsłuż odpowiedź z serwera

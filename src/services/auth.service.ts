@@ -41,26 +41,13 @@ class AuthService {
   }
 
   async register(user: User) {
-    return axios
-        .post(API_URL + '/auth/register', {
-          username: user.username,
-          email: user.email,
-          password: user.password,
-          role: user.role
-        })
-        .then(response => {
-          if (response.data.token) {
-            response.data.data['accessToken'] = response.data.token
-            return response.data.data;
-          }
-          else {
-            throw new Error(response.data)
-          }
-        })
-        .catch(error => {
-          console.log('Error during registration:', JSON.stringify(error));
-          throw error;
-        });
+    try {
+      const response = await axios.post(API_URL + '/auth/register', user);
+      return response.data;
+    } catch (error: any) {
+      console.error('Error during registration:', error.response ? error.response.data : error.message);
+      throw error.response ? error.response.data : error;
+    }
   }
 
   async forgotPassword(email: string) {

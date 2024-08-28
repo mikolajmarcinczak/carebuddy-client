@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {Note} from "@/types/note.model";
 import NoteDataService from "@/services/note.service";
+import {SendNoteParameters} from "@/types/send-note.parameters.model";
 
 export const useNoteStore = defineStore('note', {
   state: () => ({
@@ -56,7 +57,7 @@ export const useNoteStore = defineStore('note', {
         this.errorMessage = error.response.data.message;
       }
     },
-    async sendNote(sendParameters: {noteId: string, userIds: Array<string>}) {
+    async sendNote(sendParameters: SendNoteParameters) {
       try {
         const response = await NoteDataService.sendNote(sendParameters);
         this.errorMessage = '';

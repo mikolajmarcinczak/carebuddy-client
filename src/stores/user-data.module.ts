@@ -3,6 +3,7 @@ import {ElderlyProfile} from "@/types/elderly-profile.model";
 import {CaregiverProfile} from "@/types/caregiver-profile.model";
 import {useAuthStore} from "@/stores/auth.module";
 import UserDataService from "@/services/user-data.service";
+import UserAccessService from "@/services/user.service";
 
 export const useUserDataStore = defineStore('user-data', {
   state: () => ({
@@ -61,6 +62,18 @@ export const useUserDataStore = defineStore('user-data', {
           await UserDataService.updateCaregiverData(userProfile.user?.email as string, userProfile);
         }
         this.errorMessage = '';
+      } catch (error: any) {
+        this.errorMessage = error.response.data.message;
+      }
+    },
+    async getUsersByRole(role: string) {
+      try {
+        if (role === "" || role === undefined || role === null) {
+          role = "0000";
+        }
+
+        const users = await UserAccessService.getUsersByRole(role);
+        return users;
       } catch (error: any) {
         this.errorMessage = error.response.data.message;
       }

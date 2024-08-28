@@ -1,9 +1,9 @@
 import AuthService from "@/services/auth.service";
 import {defineStore} from "pinia";
 
-const user = JSON.parse(sessionStorage.getItem('user') as string);
-const initialState = user
-    ? { status: { loggedIn: true }, user }
+let user = sessionStorage.getItem('user');
+let initialState = user
+    ? { status: { loggedIn: true }, user: JSON.parse(user) }
     : { status: { loggedIn: false }, user: null };
 
 export const useAuthStore = defineStore('auth',{
@@ -40,18 +40,14 @@ export const useAuthStore = defineStore('auth',{
       );
     },
     async register(user: any) {
-      await AuthService.register(user).then(
-          (response: any) => {
-            registerSuccess(this.$state)
-            this.$state.errorMessage = '';
-            return Promise.resolve(response.data);
-          })
-          .catch((error: any) => {
-            registerFailure(this.$state)
-            this.$state.errorMessage = error.response;
-            return Promise.reject(error);
-          }
-      );
+      try {
+        const response = await AuthService.register(user);
+        loginSuccess(this.$state, response.data);
+        return Promise.resolve(response);
+      } catch (error: any) {
+        this.errorMessage = error.message || 'Registration failed';
+        return Promise.reject(error);
+      }
     },
   }
 });

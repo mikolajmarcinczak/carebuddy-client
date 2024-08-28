@@ -4,9 +4,9 @@
       <div class="md:col-span-1">
         <div class="row-span-3">
           <Profile :user-data="sampleUser"/>
-          <div class="flex justify-center items-center py-2 px-2">
+          <div class="flex justify-center items-center py-3 px-3">
             
-            <div><EditBtn /></div>
+            <div><EditBtn ref="editBtn" /></div>
             <div><Proba /></div>
             <div><Calendar /></div>
           </div>
@@ -15,7 +15,7 @@
       <div class="md:col-span-1">
         <div class="row-span-3">
           <Proteges />
-          <div class="flex justify-center items-center py-2 px-2">
+          <div class="flex justify-center items-center py-3 px-3">
             <div><ABTN /></div>
           </div>
         </div>
@@ -38,6 +38,7 @@ import ABTN from '@/components/Profile/AddProteges.vue'
 import Proba from '@/components/Profile/ChangeDDDD.vue'
 import Calendar from '@/components/Profile/CalendarComponent.vue'
 import {ElderlyProfile} from "@/types/elderly-profile.model";
+import {getCurrentInstance, onMounted, ref} from "vue";
 
 export default {
 	data() {
@@ -54,13 +55,24 @@ export default {
 		ABTN,
 		Proba,
 		Calendar
+	},
+	setup() {
+		const editBtn = ref<InstanceType<typeof EditBtn> | null>(null);
+		const instance = getCurrentInstance();
+
+		onMounted(() => {
+			if (instance?.proxy?.$route.query.edit === 'true') {
+				editBtn.value?.openModal();
+			}
+		});
+
+		return {
+			editBtn
+		};
 	}
 }
 </script>
 
-<style>
-body {
-  background-color: white;
-}
+<style scoped>
 
 </style>

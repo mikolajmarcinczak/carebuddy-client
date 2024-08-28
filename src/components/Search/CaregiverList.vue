@@ -1,7 +1,7 @@
 <template>
   <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
 
-    <div class="p-6 space-y-4 md:space-y-6 sm:p-8"> <!-- isProtege? -->
+    <div v-if="isProtege" class="p-6 space-y-4 md:space-y-6 sm:p-8"> <!-- isProtege? -->
 
       <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
         Wyszukaj opiekuna
@@ -27,9 +27,9 @@
         </li>
       </ul>
     </div>
-<!--    <div v-else>-->
-<!--      <p class="text-lg font-medium"></p>-->
-<!--    </div>-->
+		<div v-else>
+			<p class="text-lg font-medium">Lista opiekunów jest dostępna tylko dla podopiecznych.</p>
+		</div>
   </div>
 </template>
 
@@ -49,7 +49,7 @@ export default {
 			{ id: 3, name: 'Krysia Walec', email: 'krysia.walec@example.com', city: 'Kraków' },
 		]);
 
-    //const isProtege = computed(() => authStore.user?.type === 'elderly')
+    const isProtege = computed(() => authStore.user?.role === 'elderly')
 
 		const cityFilter = ref('');
 		const searchQuery = ref('');
