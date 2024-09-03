@@ -150,7 +150,7 @@ export default {
 	},
 	created() {
 		if (this.loggedIn) {
-			this.$router.push("/profil");
+			this.$router.push("/profile");
 		}
 	},
 	methods: {
@@ -162,7 +162,7 @@ export default {
 					.then(() => {
 						this.message = 'Zalogowano pomyślnie!';
 						this.loading = false;
-						this.$router.push("/profil");
+						this.$router.push("/profile");
 					})
 					.catch((error: any) => {
 						this.message = 'Błąd logowania: ' + authStore.errorMessage;

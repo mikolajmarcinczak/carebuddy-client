@@ -13,7 +13,8 @@ export const useUserDataStore = defineStore('user-data', {
   actions: {
     async fetchUserProfile() {
       const authStore = useAuthStore();
-      const user = authStore.user;
+      const user = JSON.parse(JSON.stringify(authStore.user));
+      console.log(user);
 
       if (!user) {
         this.errorMessage = 'User not logged in';
@@ -29,7 +30,7 @@ export const useUserDataStore = defineStore('user-data', {
         }
         this.errorMessage = '';
       } catch (error: any) {
-        this.errorMessage = error.response.data.message;
+        this.errorMessage = error?.response?.data?.message;
       }
     },
     async addUserProfile(userProfile: ElderlyProfile | CaregiverProfile) {

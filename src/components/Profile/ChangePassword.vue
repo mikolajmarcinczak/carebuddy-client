@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Przycisk otwierający modal -->
     <button @click="openModal"
 						class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl
 						focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium
@@ -8,13 +7,10 @@
       Zmień hasło
     </button>
 
-    <!-- Modal -->
-    <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div class="bg-white p-8 rounded-lg">
-        <!-- Treść modala -->
+    <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+      <div class="bg-gray-800 p-8 rounded-lg overflow-y-auto max-h-[80vh]">
         <div>
           <h2 class="text-lg font-bold mb-4">Zmień hasło</h2>
-          
 					<div>
           <form class="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
               <div>
@@ -73,7 +69,7 @@
           </form>
       </div>
         </div>
-        <!-- Przycisk zamykający modal -->
+
         <div class="flex justify-end mt-6">
           <button @click="closeModal"
 									class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl
@@ -115,5 +111,4 @@ export default {
 </script>
 
 <style>
-/* Dostosuj stylizację modala według potrzeb */
 </style>

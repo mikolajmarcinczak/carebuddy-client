@@ -7,7 +7,7 @@
 
     <!-- Modal -->
     <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div class="bg-white p-8 rounded-lg">
+      <div class="bg-gray-900 p-8 rounded-lg">
         <!-- Treść modala -->
         <div>
           <h2 class="text-lg font-bold mb-4">Tytuł modala</h2>

@@ -9,6 +9,7 @@ class UserDataService {
   async getElderlyData(identifier: string) {
     const response = await axios.get(`${API_URL}/user/elderly/?identifier=${identifier}`);
     const user = new User(response.data.data);
+    console.log(response.data.data.elderlyaccountinfo)
     return new ElderlyProfile(response.data.data.elderlyaccountinfo, user);
   }
 

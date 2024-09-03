@@ -9,12 +9,11 @@
     </button>
 
     <!-- Modal -->
-    <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div class="bg-white p-8 rounded-lg">
+    <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+      <div class="bg-gray-800 p-8 rounded-lg overflow-y-auto max-h-[80vh]">
         <!-- Treść modala -->
         <div>
           <h2 class="text-lg font-bold mb-4">Dodaj podopiecznego</h2>
-          <p>Wyszukaj podopiecznego</p>
         </div>
         <div>
           <label for="email"
@@ -22,7 +21,7 @@
 						Adres e-mail podopiecznego
 					</label>
           <input v-model="email" type="email" name="email" id="email"
-								 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-l rounded-lg
+								 class="bg-white border border-gray-300 text-white sm:text-l rounded-lg
 								 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
 								 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
 								 dark:focus:border-blue-500" placeholder="twójadres@email.com" required>
