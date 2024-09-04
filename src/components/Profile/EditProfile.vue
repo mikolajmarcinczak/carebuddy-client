@@ -11,40 +11,44 @@
         <div>
           <h2 class="text-lg font-bold mb-4">Edytuj profil</h2>
           
-          <form @submit.prevent="editProfile" class="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
+          <form @submit.prevent="handleSubmit" class="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
               <div>
                   <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Imię i nazwisko</label>
                   <input v-model="username" type="text" name="username" id="username" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
               </div>
               <div>
-                  <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adres e-mail</label>
-                  <input v-model="email" type="email" name="email" id="email" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-              </div>
-              <div>
                   <label for="phone_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numer telefonu</label>
-                  <input v-model="phoneNumber" type="tel" name="phone_number" id="phone_number" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              </div>
-              <div>
-                  <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adres zamieszkania</label>
-                  <input v-model="address" type="text" name="address" id="address" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <input v-model="profileData.phone_number" type="tel" name="phone_number" id="phone_number" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               </div>
               <div>
                   <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Miasto</label>
-                  <input v-model="city" type="text" name="city" id="city" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <input v-model="profileData.city" type="text" name="city" id="city" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              </div>
+              <div>
+                  <label for="date_of_birth" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data urodzenia</label>
+                  <input v-model="profileData.date_of_birth" type="date" name="date_of_birth" id="date_of_birth" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               </div>
               <div v-if="userRole === 'elderly'">
                   <div>
+                   <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adres zamieszkania</label>
+                    <input v-model="(profileData as ElderlyProfile).address" type="text" name="address" id="address" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  </div>
+                  <div>
                       <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wzrost</label>
-                      <input v-model="height" type="number" name="height" id="height" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <input v-model="(profileData as ElderlyProfile).height" type="number" name="height" id="height" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   </div>
                   <div>
                       <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waga</label>
-                      <input v-model="weight" type="number" name="weight" id="weight" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <input v-model="(profileData as ElderlyProfile).weight" type="number" name="weight" id="weight" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  </div>
+                  <div>
+                      <label for="emergency_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Numer telefonu do kontaktu w nagłych wypadkach</label>
+                      <input v-model="(profileData as ElderlyProfile).emergency_number" type="tel" name="emergency_number" id="emergency_number" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                   </div>
               </div>
               <div>
                   <label for="about_me" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opis użytkownika</label>
-                  <textarea v-model="aboutMe" name="about_me" id="about_me" rows="3" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                  <textarea v-model="profileData.about_me" name="about_me" id="about_me" rows="3" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
               </div>
               <button type="submit" class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Zapisz zmiany</button>
           </form>
@@ -61,69 +65,95 @@
 </template>
 
 <script lang="ts">
-import axios from 'axios';
+
+import {useUserDataStore} from "@/stores/user-data.module";
+import {useAuthStore} from "@/stores/auth.module";
+import {computed, onMounted, ref} from "vue";
+import {ElderlyProfile} from "@/types/elderly-profile.model";
+import {CaregiverProfile} from "@/types/caregiver-profile.model";
 
 export default {
-  data() {
-    return {
-      modalOpen: false,
-      username: '',
-      email: '',
-      phoneNumber: '',
+  setup() {
+    const userDataStore = useUserDataStore();
+    const authStore = useAuthStore();
+    const modalOpen = ref(false);
+    const profileData = ref<ElderlyProfile | CaregiverProfile>({
+      phone_number: '',
       address: '',
+      date_of_birth: '',
       city: '',
-      aboutMe: '',
-      height: '',
-      weight: '',
-      userRole: ''
-    };
+      height: 0,
+      weight: 0,
+      about_me: '',
+      emergency_number: '',
+      user: {
+        user_id: '',
+        username: '',
+        password: '',
+        role: '',
+        email: '',
+        image_url: ''
+      }
+    });
+
+    const userRole = authStore.$state.user.role;
+
+    onMounted(async () => {
+      //await userDataStore.fetchUserProfile();
+      const userProfile = userDataStore.getUserProfile
+      if (userProfile) {
+        profileData.value = userProfile as ElderlyProfile | CaregiverProfile;
+      }
+    })
+
+    const username = computed({
+      get: () => profileData.value.user?.username || '',
+      set: (value: string) => {
+        if (profileData.value.user) {
+          profileData.value.user.username = value;
+        }
+      }
+    });
+
+    const email = computed({
+      get: () => profileData.value.user?.email || '',
+      set: (value: string) => {
+        if (profileData.value.user) {
+          profileData.value.user.email = value;
+        }
+      }
+    });
+
+
+    const handleSubmit = async () => {
+      const userProfile = userDataStore.getUserProfile;
+      console.log(profileData.value);
+      if (userProfile) {
+        await userDataStore.updateUserProfile(JSON.parse(JSON.stringify(profileData.value)));
+      }
+      else {
+        await userDataStore.addUserProfile(JSON.parse(JSON.stringify(profileData.value)));
+      }
+      console.log(userDataStore.getUserProfile);
+    }
+
+    return {
+      profileData,
+      userRole,
+      username,
+      email,
+      modalOpen,
+      handleSubmit,
+    }
   },
   methods: {
     openModal() {
       this.modalOpen = true;
-      axios.get('http://localhost:8081/api/user/?identifier=ce45d717-b071-4d18-913f-306ff85893d9')
-        .then(response => {
-          const userData = response.data;
-          this.username = userData.username;
-          this.email = userData.email;
-          this.phoneNumber = userData.phone_number;
-          this.address = userData.address;
-          this.city = userData.city;
-          this.aboutMe = userData.about_me;
-          this.height = userData.height; // Dodajemy wysokość z danych użytkownika
-          this.weight = userData.weight; // Dodajemy wagę
-          this.userRole = userData.role; // Przypisz rolę użytkownika do zmiennej userRole
-        })
-        .catch(error => {
-          console.error('Błąd:', error);
-        });
     },
     closeModal() {
       this.modalOpen = false;
     },
-    editProfile() {
-      axios.put('http://localhost:8081/api/user/?identifier=ce45d717-b071-4d18-913f-306ff85893d9', {
-        username: this.username,
-        email: this.email,
-        phone_number: this.phoneNumber,
-        address: this.address,
-        city: this.city,
-        about_me: this.aboutMe,
-        height: this.height,
-        weight: this.weight
-      })
-      .then(response => {
-        // Obsłuż odpowiedź z serwera
-        console.log('Odpowiedź z serwera:', response.data);
-        // Tutaj możesz dodać kod obsługi sukcesu, np. wyświetlenie komunikatu o sukcesie
-      })
-      .catch(error => {
-        // Obsłuż błąd
-        console.error('Błąd:', error);
-        // Tutaj możesz dodać kod obsługi błędu, np. wyświetlenie komunikatu o błędzie
-      });
 
-    }
   }
 };
 </script>

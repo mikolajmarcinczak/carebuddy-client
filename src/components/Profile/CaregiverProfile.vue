@@ -4,13 +4,13 @@
 			<div class="bg-white n-1/3 mt-10 rounded-lg">
 				<div class="flex items-center justify-center flex-col">
 					<img src="/src/assets/logo.jpg" alt="Logo CareBuddy">
-					<h1 class="text-gray-800 mt-5"> Imię i nazwisko: {{userData.user?.username}} </h1>
-					<h1 class="text-gray-400 p-4"> Rola: {{userData.user?.role}} </h1>
-					<h1 class="text-gray-500 p-4 text-center"> O mnie: {{ userData.about_me || 'Brak opisu'}} </h1>
-					<h1 class="text-gray-400 p-4"> e-mail: {{ userData.user?.email }} </h1>
-					<h1 class="text-gray-400 p-4"> Miasto: {{ userData.city }} </h1>
-					<h1 class="text-gray-400 p-4"> Nr tel.: {{ userData.phone_number }} </h1>
-					<h1 class="text-gray-400 p-4"> Ocena: {{ userData.rating }} </h1>
+					<h1 class="text-gray-800 mt-5"> Imię i nazwisko: {{userObject.user?.username}} </h1>
+					<h1 class="text-gray-400 p-4"> Rola: {{userObject.user?.role}} </h1>
+					<h1 class="text-gray-500 p-4 text-center"> O mnie: {{ userObject.about_me || 'Brak opisu'}} </h1>
+					<h1 class="text-gray-400 p-4"> e-mail: {{ userObject.user?.email }} </h1>
+					<h1 class="text-gray-400 p-4"> Miasto: {{ userObject.city }} </h1>
+					<h1 class="text-gray-400 p-4"> Nr tel.: {{ userObject.phone_number }} </h1>
+					<h1 class="text-gray-400 p-4"> Ocena: {{ userObject.rating }} </h1>
 				</div>
 			</div>
 		</div>
@@ -20,21 +20,24 @@
 <script lang="ts">
 import {CaregiverProfile} from "@/types/caregiver-profile.model";
 import {useAuthStore} from "@/stores/auth.module";
-import {PropType} from "vue";
 
 const authStore = useAuthStore();
 export default {
 	name: "CaregiverProfile",
-	props: {
-		userData: {
-			type: Object as PropType<CaregiverProfile>,
-			required: true
-		}
-	},
+  props: {
+    userData: {
+      type: Object as () => CaregiverProfile,
+      required: true,
+      default: null
+    }
+  },
 	computed: {
 		currentUser() {
 			return authStore.$state.user;
-		}
+		},
+    userObject() {
+      return this.userData;
+    }
 	},
 	mounted() {
 		if (!this.currentUser) {

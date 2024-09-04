@@ -12,9 +12,10 @@ export const useUserDataStore = defineStore('user-data', {
   }),
   actions: {
     async fetchUserProfile() {
-      const authStore = useAuthStore();
+      const authStore= useAuthStore();
       const user = JSON.parse(JSON.stringify(authStore.user));
       console.log(user);
+      console.log(user.role);
 
       if (!user) {
         this.errorMessage = 'User not logged in';
@@ -22,28 +23,34 @@ export const useUserDataStore = defineStore('user-data', {
       }
 
       try {
-        if (user.role.toLowerCase() === 'elderly') {
-          this.userProfile = await UserDataService.getElderlyData(user.email);
+        let userData;
+        if (String(user.role) === "elderly") {
+          userData = await UserDataService.getElderlyData(user.email);
+          this.userProfile = userData;
         }
-        else if (user.role.toLowerCase() === 'caregiver') {
-          this.userProfile = await UserDataService.getCaregiverData(user.email);
+        else if (String(user.role) === "caregiver") {
+          userData = await UserDataService.getCaregiverData(user.email);
+          this.userProfile = userData;
+          console.log(userData);
+          console.log(this.userProfile);
         }
         this.errorMessage = '';
       } catch (error: any) {
-        this.errorMessage = error?.response?.data?.message;
+        this.errorMessage = error?.response?.data?.message || 'Failed to fetch user profile';
       }
     },
     async addUserProfile(userProfile: ElderlyProfile | CaregiverProfile) {
       try {
-        if (userProfile instanceof ElderlyProfile) {
-          await UserDataService.addElderlyData(userProfile);
+        if (userProfile.user?.role === "elderly") {
+          await UserDataService.addElderlyData(userProfile as ElderlyProfile);
         }
-        else if (userProfile instanceof CaregiverProfile) {
-          await UserDataService.addCaregiverData(userProfile);
+        else if (userProfile.user?.role === "caregiver") {
+          await UserDataService.addCaregiverData(userProfile as CaregiverProfile);
         }
+        await this.fetchUserProfile();
         this.errorMessage = '';
       } catch (error: any) {
-        this.errorMessage = error.response.data.message;
+        this.errorMessage = error?.response?.data?.message || 'Failed to create user profile';
       }
     },
     async updateUserProfile(userProfile: ElderlyProfile | CaregiverProfile) {
@@ -56,11 +63,11 @@ export const useUserDataStore = defineStore('user-data', {
       }
 
       try {
-        if (userProfile instanceof ElderlyProfile) {
-          await UserDataService.updateElderlyData(userProfile.user?.email as string, userProfile);
+        if (userProfile.user?.role === "elderly") {
+          await UserDataService.updateElderlyData(userProfile.user?.email as string, userProfile as ElderlyProfile);
         }
-        else if (userProfile instanceof CaregiverProfile) {
-          await UserDataService.updateCaregiverData(userProfile.user?.email as string, userProfile);
+        else if (userProfile.user?.role === "caregiver") {
+          await UserDataService.updateCaregiverData(userProfile.user?.email as string, userProfile as CaregiverProfile);
         }
         this.errorMessage = '';
       } catch (error: any) {

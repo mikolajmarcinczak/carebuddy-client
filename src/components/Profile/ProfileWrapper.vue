@@ -1,42 +1,51 @@
 <template>
   <div>
-    <CaregiverProfile v-if="currentUser.role === 'caregiver' && caregiverData" :userData="caregiverData" />
-    <ElderlyProfile v-else-if="elderlyData" :userData="elderlyData" />
+    <CaregiverProfile v-if="currentUser.role === 'caregiver' && caregiverProfile" :userData="caregiverProfile" />
+    <ElderlyProfile v-else-if="elderlyProfile" :userData="elderlyProfile" />
     <div v-else class="mt-8 ml-16 text-primary-900">No profile data available</div>
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType, ref} from 'vue';
-import {CaregiverProfile} from "@/types/caregiver-profile.model";
-import {ElderlyProfile} from "@/types/elderly-profile.model";
+import {defineComponent} from 'vue';
 import { ElderlyProfile as ElderlyProfileType } from '@/types/elderly-profile.model';
 import { CaregiverProfile as CaregiverProfileType } from '@/types/caregiver-profile.model';
 import {useAuthStore} from "@/stores/auth.module";
+import CaregiverProfile from "@/components/Profile/CaregiverProfile.vue";
+import ElderlyProfile from "@/components/Profile/ElderlyProfile.vue";
 
 export default defineComponent({
   name: 'Profile',
+  props: {
+    caregiverData: {
+      type: Object as () => CaregiverProfileType,
+      required: false,
+      default: null
+    },
+    elderlyData: {
+      type: Object as () => ElderlyProfileType,
+      required: false,
+      default: null
+    }
+  },
   components: {
     CaregiverProfile,
     ElderlyProfile
   },
-  props: {
-    caregiverData: {
-      type: Object as PropType<CaregiverProfileType | null>,
-      default: null
-    },
-    elderlyData: {
-      type: Object as PropType<ElderlyProfileType | null>,
-      default: null
-    }
-  },
   computed: {
     currentUser() {
       return this.authStore.$state.user;
+    },
+    caregiverProfile() {
+      return this.caregiverData as CaregiverProfileType;
+    },
+    elderlyProfile() {
+      return this.elderlyData as ElderlyProfileType;
     }
   },
   setup() {
     const authStore = useAuthStore();
+
     return {
       authStore,
     }

@@ -66,28 +66,28 @@ export default {
 		onMounted(async () => {
       await userDataStore.fetchUserProfile()
 
-      console.log(userElderlyProfile.value)
-      console.log(userCaregiverProfile.value)
-      console.log(userDataStore.getUserProfile)
-
 			if (instance?.proxy?.$route.query.edit === 'true') {
 				editBtn.value?.openModal();
 			}
 		});
 
     const userElderlyProfile = computed(() => {
-      if (authStore.user?.role === 'elderly') {
+      if (authStore.$state.user.role === 'elderly') {
         return userDataStore.getUserProfile as ElderlyProfile;
       }
-      return null;
+      return undefined;
     });
 
     const userCaregiverProfile = computed(() => {
-      if (authStore.user?.role === 'caregiver') {
+      if (authStore.$state.user.role === 'caregiver') {
         return userDataStore.getUserProfile as CaregiverProfile;
       }
-      return null;
+      return undefined;
     });
+
+    console.log(userElderlyProfile.value)
+    console.log(userCaregiverProfile.value)
+    console.log(userDataStore.getUserProfile)
 
 		return {
       userCaregiverProfile,
