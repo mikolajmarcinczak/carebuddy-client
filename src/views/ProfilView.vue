@@ -14,11 +14,14 @@
         </div>
       </div>
       <div class="md:col-span-1">
-        <div class="row-span-3">
+        <div v-if="currentUser.role === 'caregiver'" class="row-span-3">
           <Proteges />
           <div class="flex justify-center items-center py-3 px-3">
             <div><AddProtege /></div>
           </div>
+        </div>
+        <div v-if="currentUser.role === 'elderly'" class="row-span-3">
+          <Caregivers />
         </div>
       </div>
     </div>
@@ -31,14 +34,14 @@
 
 <script lang="ts">
 import Profile from '@/components/Profile/ProfileWrapper.vue'
-import Notes from '@/components/Profile/NotesComponent.vue'
-import Proteges from '@/components/Profile/ProtegesComponent.vue'
-import CBTN from '@/components/Profile/ChangePassword.vue'
-import EditBtn from '@/components/Profile/EditProfile.vue'
-import NotesBtn from "@/components/Profile/NotesButton.vue";
-import AddProtege from '@/components/Profile/AddProteges.vue'
-import Proba from '@/components/Profile/ChangeDDDD.vue'
-import Calendar from '@/components/Profile/CalendarComponent.vue'
+import Notes from '@/components/Notepad/NotesDummy.vue'
+import Proteges from '@/components/Profile/Subcomponents/UserProtegesList.vue'
+import Caregivers from '@/components/Profile/Subcomponents/UserCaregiversList.vue'
+import EditBtn from '@/components/Profile/ProfileButtons/EditProfile.vue'
+import NotesBtn from "@/components/Profile/ProfileButtons/NotesButton.vue";
+import AddProtege from '@/components/Profile/ProfileButtons/AddProteges.vue'
+import Proba from '@/components/Profile/ProfileButtons/ChangeDDDD.vue'
+import Calendar from '@/components/Profile/ProfileButtons/CalendarButton.vue'
 import {ElderlyProfile} from "@/types/elderly-profile.model";
 import {CaregiverProfile} from "@/types/caregiver-profile.model";
 import {computed, getCurrentInstance, onMounted, ref} from "vue";
@@ -51,17 +54,18 @@ export default {
 		Profile,
 		Notes,
 		Proteges,
-		CBTN,
 		EditBtn,
 		AddProtege,
 		Proba,
-		Calendar
+		Calendar,
+    Caregivers
 	},
 	setup() {
     const authStore = useAuthStore();
     const userDataStore = useUserDataStore();
     const editBtn = ref<InstanceType<typeof EditBtn> | null>(null);
 		const instance = getCurrentInstance();
+    const currentUser = computed(() => authStore.$state.user);
 
 		onMounted(async () => {
       await userDataStore.fetchUserProfile()
@@ -92,6 +96,7 @@ export default {
 		return {
       userCaregiverProfile,
       userElderlyProfile,
+      currentUser,
 			editBtn
 		};
 	}

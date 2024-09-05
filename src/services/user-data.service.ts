@@ -34,6 +34,28 @@ class UserDataService {
   async updateCaregiverData(identifier: string, caregiverProfile: CaregiverProfile) {
     return await axios.put(`${API_URL}/user/caregiver/?identifier=${identifier}`, caregiverProfile);
   }
+
+  async assignCare(elderly: string, caregiver: string, documentUrl: string) {
+    return await axios.post(`${API_URL}/aoc-document/assign-care`, {elderly, caregiver, documentUrl});
+  }
+
+  async unassignCare(elderly: string, caregiver: string) {
+    return await axios.delete(`${API_URL}/aoc-document/unassign-care`, {data: {elderly, caregiver}});
+  }
+
+  async getAuthorizationDocument(elderly: string, caregiver: string) {
+    return await axios.get(`${API_URL}/aoc-document/get-document`, {data: {elderly, caregiver}});
+  }
+
+  async getProteges(caregiver: string) {
+    const response = await axios.get(`${API_URL}/aoc-document/proteges/${caregiver}`);
+    return response.data.data as ElderlyProfile[];
+  }
+
+  async getCaregivers(elderly: string) {
+    const response = await axios.get(`${API_URL}/aoc-document/caregivers/${elderly}`);
+    return response.data.data as CaregiverProfile[];
+  }
 }
 
 export default new UserDataService();

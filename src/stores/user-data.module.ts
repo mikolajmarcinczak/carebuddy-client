@@ -5,14 +5,17 @@ import {useAuthStore} from "@/stores/auth.module";
 import UserDataService from "@/services/user-data.service";
 import UserAccessService from "@/services/user.service";
 
+const authStore= useAuthStore();
+
 export const useUserDataStore = defineStore('user-data', {
   state: () => ({
     userProfile: null as ElderlyProfile | CaregiverProfile | null,
-    errorMessage: ''
+    errorMessage: '',
+    proteges: [] as ElderlyProfile[],
+    caregivers: [] as CaregiverProfile[]
   }),
   actions: {
     async fetchUserProfile() {
-      const authStore= useAuthStore();
       const user = JSON.parse(JSON.stringify(authStore.user));
       console.log(user);
       console.log(user.role);
@@ -85,6 +88,85 @@ export const useUserDataStore = defineStore('user-data', {
       } catch (error: any) {
         this.errorMessage = error.response.data.message;
       }
+    },
+    async fetchProteges() {
+      const caregiverId = this.userProfile?.user?.user_id;
+
+      if (!caregiverId) {
+        this.errorMessage = 'Caregiver not found';
+        return;
+      }
+
+      try {
+        const proteges = await UserDataService.getProteges(caregiverId);
+        this.proteges = proteges;
+        this.errorMessage = '';
+      } catch (error: any) {
+        this.errorMessage = error.response.data.message;
+      }
+
+      return this.proteges;
+    },
+    async fetchCaregivers(){
+      const elderlyId = this.userProfile?.user?.user_id;
+
+      if (!elderlyId) {
+        this.errorMessage = 'Elderly not found';
+        return;
+      }
+
+      try {
+        const caregivers = await UserDataService.getCaregivers(elderlyId);
+        this.caregivers = caregivers;
+        this.errorMessage = '';
+      } catch (error: any) {
+        this.errorMessage = error.response.data.message;
+      }
+
+      return this.caregivers;
+    },
+    async assignCare(elderly: string, documentUrl: string) {
+      const caregiverId = this.userProfile?.user?.user_id;
+
+      if (!caregiverId) {
+        this.errorMessage = 'Caregiver not found';
+        return;
+      }
+
+      try {
+        await UserDataService.assignCare(elderly, caregiverId, documentUrl);
+        this.errorMessage = '';
+      } catch (error: any) {
+        this.errorMessage = error.response.data.message;
+      }
+    },
+    async unassignCare(elderly: string) {
+      const caregiverId = this.userProfile?.user?.user_id;
+
+      if (!caregiverId) {
+        this.errorMessage = 'Caregiver not found';
+        return;
+      }
+
+      try {
+        await UserDataService.unassignCare(elderly, caregiverId);
+        this.errorMessage = '';
+      } catch (error: any) {
+        this.errorMessage = error.response.data.message;
+      }
+    },
+    async getUserData(identifier: string, role: string) {
+      try {
+        if (role === "elderly") {
+          return await UserDataService.getElderlyData(identifier);
+        }
+        else if (role === "caregiver") {
+          return await UserDataService.getCaregiverData(identifier);
+        }
+      } catch (error: any) {
+        this.errorMessage = error.response.data.message;
+      }
+
     }
   },
   getters: {

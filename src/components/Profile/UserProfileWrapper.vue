@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import CaregiverProfile from './CaregiverProfile.vue';
-import ElderlyProfile from './ElderlyProfile.vue';
+import CaregiverProfile from './Subcomponents/CaregiverProfile.vue';
+import ElderlyProfile from './Subcomponents/ElderlyProfile.vue';
 
 export default {
 	name: "UserProfileWrapper",

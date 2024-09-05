@@ -45,7 +45,7 @@ export default {
 			currentWeek,
 			previousWeek,
 			nextWeek,
-			store
+      store
 		};
 	},
 	methods: {
