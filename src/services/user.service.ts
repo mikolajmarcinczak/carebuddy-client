@@ -1,7 +1,8 @@
-import axios from "axios";
+import apiClient from "@/utility/http-common";
 import authHeader from "@/services/auth.header";
 import {User} from "@/types/user.model";
 
+const axios = apiClient;
 const API_URL = import.meta.env.VITE_API_URL as string;
 
 class UserAccessService {

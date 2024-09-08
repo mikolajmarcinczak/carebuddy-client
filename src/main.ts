@@ -8,7 +8,6 @@ import VueSelect from 'vue-select'
 
 import FontAwesomeIcon from "./utility/font-awesome";
 import router from './router'
-import httpCommon from "@/utility/http-common";
 
 import BaseButton from '@/components/UI/BaseButton.vue'
 import BaseCard from '@/components/UI/BaseCard.vue'
@@ -16,8 +15,6 @@ import BaseDialog from '@/components/UI/BaseDialog.vue'
 
 const pinia = createPinia()
 const app = createApp(App)
-
-app.config.globalProperties.$apiClient = httpCommon
 
 //middleware
 app.use(pinia)

@@ -88,7 +88,6 @@
 
 
 <script lang="ts">
-import axios from 'axios';
 
 export default {
   data() {
@@ -114,19 +113,7 @@ export default {
         confirmPassword: this.confirmPassword
       };
       
-      
-      axios.post('http://localhost:8081/api/auth/resetPassword/:?identifier=ce45d717-b071-4d18-913f-306ff85893d9', requestData)
-        .then(response => {
-          
-          console.log('Odpowiedź z serwera:', response.data);
-          console.log(this.password); 
-        })
-        .catch(error => {
-          
-          console.error('Błąd podczas wysyłania żądania:', error);
-          console.log(this.password); 
-        });
-    }
+
   }
 };
 

@@ -1,11 +1,13 @@
-const axios = this.$apiClient;
 import {User} from "@/types/user.model";
+import apiClient from "@/utility/http-common";
 
 const API_URL = import.meta.env.VITE_API_URL as string;
 
+const axios = apiClient;
+
 class AuthService {
   async login(user: User) {
-    return $apiClient
+    return axios
         .post(API_URL + '/auth/login', {
           email: user.email,
           password: user.password
