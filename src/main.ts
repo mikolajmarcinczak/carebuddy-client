@@ -17,6 +17,8 @@ import BaseDialog from '@/components/UI/BaseDialog.vue'
 const pinia = createPinia()
 const app = createApp(App)
 
+app.config.globalProperties.$apiClient = httpCommon
+
 //middleware
 app.use(pinia)
 app.use(router)

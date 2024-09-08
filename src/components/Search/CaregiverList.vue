@@ -49,7 +49,7 @@ export default {
 			{ id: 3, name: 'Krysia Walec', email: 'krysia.walec@example.com', city: 'Kraków' },
 		]);
 
-    const isProtege = computed(() => authStore.user?.role === 'elderly')
+    const isProtege = computed(() => authStore.$state.user?.role === 'elderly')
 
 		const cityFilter = ref('');
 		const searchQuery = ref('');

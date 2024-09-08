@@ -9,7 +9,8 @@ let initialState = user
 export const useAuthStore = defineStore('auth',{
   state: () => ({
     ...initialState,
-    errorMessage: ''
+    errorMessage: '',
+    token: initialState.user?.accessToken,
   }),
   actions: {
     async login(user: any) {
@@ -28,7 +29,6 @@ export const useAuthStore = defineStore('auth',{
       );
     },
     async logout() {
-      //logout(this.$state);
       await AuthService.logout().then(
           response => {
             logout(this.$state);
@@ -55,6 +55,7 @@ export const useAuthStore = defineStore('auth',{
 function loginSuccess(state: any, user: any) {
   state.status.loggedIn = true;
   state.user = user;
+  state.token = user.accessToken;
 
   sessionStorage.setItem('user', JSON.stringify(user));
 }
@@ -65,12 +66,7 @@ function loginFailure(state: any) {
 function logout(state: any) {
   state.status.loggedIn = false;
   state.user = null;
+  state.token = null;
 
   sessionStorage.removeItem('user');
-}
-function registerSuccess(state: any) {
-  state.status.loggedIn = true;
-}
-function registerFailure(state: any) {
-  state.status.loggedIn = false;
 }

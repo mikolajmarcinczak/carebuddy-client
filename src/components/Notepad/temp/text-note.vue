@@ -34,14 +34,11 @@
 				</div>
 				<div>
 					<label for="user_emails" class="block text-gray-700">Adresy email użytkowników</label>
-					<v-select
+					<multiselect-search id="user_emails"
 							v-model="selectedUsers"
 							:options="userOptions"
-							label="email"
-							multiple
-							@search="searchUsers"
-							@input="addUser"
-					></v-select>
+							@update:selected-users="handleSelectedUsers"
+					></multiselect-search>
 				</div>
 				<div class="flex justify-end space-x-4">
 					<button class="bg-blue-500 text-white font-bold py-2 px-4 rounded" @click="saveEditedNote">Zapisz</button>
@@ -55,13 +52,17 @@
 
 import {Note} from "@/types/note.model";
 import {useNoteStore} from "@/stores/note.module";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useUserDataStore} from "@/stores/user-data.module";
 import {SendNoteParameters} from "@/types/send-note.parameters.model";
 import {User} from "@/types/user.model";
+import MultiselectSearch from "@/components/Search/MultiselectSearch.vue";
 
 export default {
 	name: "text-note",
+  components: {
+    MultiselectSearch
+  },
 	props: {
 		note: {
 			type: Object as () => Note,
@@ -72,9 +73,9 @@ export default {
 		const userStore = useUserDataStore();
 		const noteStore = useNoteStore();
 		const showModelEdit = ref(false);
+
 		const noteTitle = ref(props.note.title);
 		const noteContent = ref(props.note.content);
-		const userEmails = ref("");
 		const selectedUsers = ref<User[]>([]);
 		const userOptions = ref<User[]>([]);
 
@@ -87,7 +88,7 @@ export default {
 				...props.note,
 				title: noteTitle.value,
 				content: noteContent.value,
-				related_user_ids: selectedUsers.value.map((user: any) => user.id)
+				related_user_ids: selectedUsers.value.map((user: any) => user.user_id)
 			});
 
 			await noteStore.updateNote(props.note.id, updatedNote);
@@ -99,15 +100,9 @@ export default {
 			await noteStore.deleteNote(props.note.id);
 		};
 
-		const searchUsers = async (searchTerm : string) => {
-			if (searchTerm.length < 3) return;
-			try {
-				const allUsers = await userStore.getUsersByRole("0000") as User[];
-				userOptions.value = allUsers.filter(user => user.email.includes(searchTerm));
-			} catch (error) {
-				console.error(error);
-			}
-		};
+		const handleSelectedUsers = (users: User[]) => {
+      selectedUsers.value = users;
+    };
 
 		const addUser = (selected: User) => {
 			if (!selectedUsers.value.includes(selected)) {
@@ -124,19 +119,27 @@ export default {
 			await noteStore.sendNote(sendNoteParams);
 		};
 
+    onMounted(async () => {
+      try {
+        const allUsers = await userStore.getUsersByRole("0000") as User[];
+        userOptions.value = allUsers;
+        selectedUsers.value = allUsers.filter(user => props.note.related_user_ids.includes(user.user_id));
+      } catch (error: any) {
+        console.error(error);
+      }
+    });
+
 		return {
 			showModelEdit,
 			noteTitle,
 			noteContent,
-			userEmails,
 			userOptions,
 			selectedUsers,
 			showEdit,
 			saveEditedNote,
 			deleteNote,
-			searchUsers,
-			addUser,
-			sendNote
+			handleSelectedUsers,
+			addUser
 		};
 	}
 }
