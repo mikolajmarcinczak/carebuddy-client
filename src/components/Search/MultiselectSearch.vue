@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label class="typo_label">Wyszukaj użytkownika</label>
+    <label for="search" class="typo_label">Wyszukaj użytkownika</label>
     <vue-multiselect v-model="selectedUsers" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false"
-                     :preserve-search="true" placeholder="wybierz użytkowników" label="name" track-by="name" @input="emitSelectedUsers">
+                     :preserve-search="true" placeholder="wybierz użytkowników" label="username" track-by="username" @input="emitSelectedUsers">
       <template #selection="{ values, search, isOpen }">
         <span class="multiselect__single" v-if="values.length" v-show="!isOpen">
           {{ values.length }} opcji wybranych

@@ -6,7 +6,7 @@
           <Profile :elderly-data="userElderlyProfile" :caregiver-data="userCaregiverProfile"/>
           <div class="flex justify-center items-center py-3 px-3">
             
-            <div><EditBtn ref="editBtn" /></div>
+            <div><EditBtn ref="editBtn" :disable-close="disableClose" :initial-data="initialProfileData" /></div>
             <div><Proba /></div>
             <div><Calendar /></div>
             <div><NotesBtn /></div>
@@ -66,13 +66,25 @@ export default {
     const editBtn = ref<InstanceType<typeof EditBtn> | null>(null);
 		const instance = getCurrentInstance();
     const currentUser = computed(() => authStore.$state.user);
+    const disableClose = ref(false);
+    const initialProfileData = ref({});
 
 		onMounted(async () => {
       await userDataStore.fetchUserProfile()
 
 			if (instance?.proxy?.$route.query.edit === 'true') {
+        disableClose.value = true;
 				editBtn.value?.openModal();
 			}
+
+      const userProfile = userDataStore.getUserProfile;
+      if (currentUser.value.role === 'elderly') {
+        initialProfileData.value = userProfile as ElderlyProfile;
+      } else if (currentUser.value.role === 'caregiver') {
+        initialProfileData.value = userProfile as CaregiverProfile;
+      } else {
+        initialProfileData.value = { username: currentUser.value.username, image_url: currentUser.value.image_url };
+      }
 		});
 
     const userElderlyProfile = computed(() => {
@@ -97,6 +109,8 @@ export default {
       userCaregiverProfile,
       userElderlyProfile,
       currentUser,
+      disableClose,
+      initialProfileData,
 			editBtn
 		};
 	}

@@ -106,17 +106,17 @@ export default {
       this.modalOpen = false;
     },
     resetPassword() {
-      
+
       const requestData = {
         email: this.email,
         password: this.password,
         confirmPassword: this.confirmPassword
       };
-      
 
+
+    }
   }
-};
-
+}
 
 </script>
 
