@@ -180,6 +180,7 @@ export default {
         await userDataStore.updateUserProfile(JSON.parse(JSON.stringify(profileData.value)));
       }
       else {
+        console.log(JSON.parse(JSON.stringify(profileData.value)));
         await userDataStore.addUserProfile(JSON.parse(JSON.stringify(profileData.value)));
       }
       console.log(userDataStore.getUserProfile);
