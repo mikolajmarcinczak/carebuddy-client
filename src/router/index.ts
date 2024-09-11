@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import {useAuthStore} from "@/stores/auth.module";
+import {useUserDataStore} from "@/stores/user-data.module";
 import {assertIsError} from "@/utility/error.guard";
+import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,12 +25,12 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('../views/ProfilView.vue')
+      component: () => import('../views/ProfilView.vue'),
     },
     {
       path: '/proteges',
       name: 'proteges',
-      component: () => import('../views/ProtegesView.vue')
+      component: () => import('../views/ProtegesView.vue'),
     },
     {
       path: '/logout',
@@ -58,17 +59,17 @@ const router = createRouter({
     {
       path: '/notes',
       name: 'notes',
-      component: () => import('../views/NotesView.vue')
+      component: () => import('../views/NotesView.vue'),
     },
     {
       path: '/caregivers',
       name: 'caregivers',
-      component: () => import('../views/CaregiversView.vue')
+      component: () => import('../views/CaregiversView.vue'),
     },
     {
       path: '/calendar',
       name: 'calendar',
-      component: () => import('../views/CalendarView.vue')
+      component: () => import('../views/CalendarView.vue'),
     }
   ]
 })

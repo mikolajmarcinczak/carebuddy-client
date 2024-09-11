@@ -15,6 +15,7 @@ class UserDataService {
   }
 
   async addElderlyData(elderlyProfile: ElderlyProfile){
+    console.log('elderlyProfile: ' + elderlyProfile)
     return await axios.post(`${API_URL}/user/elderly/add`, elderlyProfile);
   }
 
@@ -29,6 +30,7 @@ class UserDataService {
   }
 
   async addCaregiverData(caregiverProfile: CaregiverProfile) {
+    console.log('caregiverProfile: ' + caregiverProfile)
     return await axios.post(`${API_URL}/user/caregiver/add`, caregiverProfile);
   }
 

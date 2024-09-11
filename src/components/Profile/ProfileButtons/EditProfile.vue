@@ -27,21 +27,21 @@
                   <input v-model="profileData.phone_number" type="tel" name="phone_number" id="phone_number"
                          class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600
                          focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                         dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                         dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
               </div>
               <div>
                   <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Miasto</label>
                   <input v-model="profileData.city" type="text" name="city" id="city"
                          class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600
                          focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                         dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                         dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
               </div>
               <div>
                   <label for="date_of_birth" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data urodzenia</label>
                   <input v-model="profileData.date_of_birth" type="date" name="date_of_birth" id="date_of_birth"
                          class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600
                           focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                          dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                          dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
               </div>
               <div v-if="userRole === 'elderly'" class="space-y-4">
                   <div>
@@ -49,21 +49,21 @@
                     <input v-model="(profileData as ElderlyProfile).address" type="text" name="address" id="address"
                            class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600
                            focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                           dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                           dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                   </div>
                   <div>
                       <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wzrost</label>
                       <input v-model="(profileData as ElderlyProfile).height" type="number" name="height" id="height"
                              class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600
                              focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                   </div>
                   <div>
                       <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waga</label>
                       <input v-model="(profileData as ElderlyProfile).weight" type="number" name="weight" id="weight"
                              class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600
                              focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-                             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                   </div>
                   <div>
                       <label for="emergency_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -72,7 +72,7 @@
                       <input v-model="(profileData as ElderlyProfile).emergency_number" type="tel" name="emergency_number"
                              id="emergency_number" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg
                              focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-                             dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                             dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                   </div>
               </div>
               <div>
@@ -158,6 +158,7 @@ export default {
         profileData.value = userProfile as ElderlyProfile | CaregiverProfile || props.initialData;
       } else {
         if (profileData.value.user) {
+          console.log(props.initialData);
           profileData.value.user.username = authStore.$state.user.username;
           profileData.value.user.email = authStore.$state.user.email;
         }
@@ -175,15 +176,21 @@ export default {
 
     const handleSubmit = async () => {
       const userProfile = userDataStore.getUserProfile;
-      console.log(profileData.value);
+      console.log(userProfile);
       if (userProfile) {
         await userDataStore.updateUserProfile(JSON.parse(JSON.stringify(profileData.value)));
       }
       else {
-        console.log(JSON.parse(JSON.stringify(profileData.value)));
         await userDataStore.addUserProfile(JSON.parse(JSON.stringify(profileData.value)));
       }
-      console.log(userDataStore.getUserProfile);
+
+      await userDataStore.fetchUserProfile();
+      profileData.value = userDataStore.getUserProfile as ElderlyProfile | CaregiverProfile;
+
+      const url = new URL(window.location.href);
+      url.searchParams.delete('edit');
+      window.history.replaceState({}, '', url.toString());
+
       modalOpen.value = false;
     }
 

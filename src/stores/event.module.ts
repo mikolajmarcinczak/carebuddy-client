@@ -1,6 +1,9 @@
 import EventDataService from "@/services/event.service"
 import {defineStore} from "pinia";
 import {CalendarEvent} from "@/types/event.model";
+import {useUserDataStore} from "@/stores/user-data.module";
+
+const userDataStore= useUserDataStore();
 
 export const useEventStore = defineStore('calendar', {
   state: () => ({
@@ -19,7 +22,18 @@ export const useEventStore = defineStore('calendar', {
     },
     async fetchEventsByUser(userId: string) {
       const events = await EventDataService.getEventsByUser(userId);
-      this.events = events;
+      return events;
+    },
+    async fetchEventsForCurrentUser() {
+      const userId = userDataStore.userProfile?.user?.user_id;
+      let events;
+      if (userId !== undefined) {
+        events = await this.fetchEventsByUser(userId);
+        console.log('Events:', events);
+        this.events = events;
+      } else {
+        return [];
+      }
     },
     async updateEvent(eventId: string, eventData: CalendarEvent) {
       const updatedEvent = await EventDataService.updateEvent(eventId, eventData);

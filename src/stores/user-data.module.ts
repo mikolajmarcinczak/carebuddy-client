@@ -5,8 +5,6 @@ import {useAuthStore} from "@/stores/auth.module";
 import UserDataService from "@/services/user-data.service";
 import UserAccessService from "@/services/user.service";
 
-const authStore= useAuthStore();
-
 export const useUserDataStore = defineStore('user-data', {
   state: () => ({
     userProfile: null as ElderlyProfile | CaregiverProfile | null,
@@ -16,6 +14,7 @@ export const useUserDataStore = defineStore('user-data', {
   }),
   actions: {
     async fetchUserProfile() {
+      const authStore= useAuthStore();
       const user = JSON.parse(JSON.stringify(authStore.user));
       console.log(user);
       console.log(user.role);
@@ -46,12 +45,15 @@ export const useUserDataStore = defineStore('user-data', {
       }
     },
     async addUserProfile(userProfile: ElderlyProfile | CaregiverProfile) {
+      const authStore= useAuthStore();
+      const user = JSON.parse(JSON.stringify(authStore.user));
+
       try {
-        if (userProfile.user?.role === "elderly") {
-          await UserDataService.addElderlyData(userProfile as ElderlyProfile);
+        if (user.role === "elderly") {
+          return await UserDataService.addElderlyData(userProfile as ElderlyProfile);
         }
-        else if (userProfile.user?.role === "caregiver") {
-          await UserDataService.addCaregiverData(userProfile as CaregiverProfile);
+        else if (user.role === "caregiver") {
+          return await UserDataService.addCaregiverData(userProfile as CaregiverProfile);
         }
         await this.fetchUserProfile();
         this.errorMessage = '';
@@ -69,11 +71,11 @@ export const useUserDataStore = defineStore('user-data', {
       }
 
       try {
-        if (userProfile.user?.role === "elderly") {
-          await UserDataService.updateElderlyData(userProfile.user?.email as string, userProfile as ElderlyProfile);
+        if (user.role === "elderly") {
+          return await UserDataService.updateElderlyData(user.email as string, userProfile as ElderlyProfile);
         }
-        else if (userProfile.user?.role === "caregiver") {
-          await UserDataService.updateCaregiverData(userProfile.user?.email as string, userProfile as CaregiverProfile);
+        else if (user.role === "caregiver") {
+          return await UserDataService.updateCaregiverData(user.email as string, userProfile as CaregiverProfile);
         }
         this.errorMessage = '';
       } catch (error: any) {
@@ -170,6 +172,12 @@ export const useUserDataStore = defineStore('user-data', {
         this.errorMessage = error.response.data.message;
       }
 
+    },
+    async initStore() {
+      const authStore = useAuthStore();
+      if (authStore.$state.user) {
+        await this.fetchUserProfile();
+      }
     }
   },
   getters: {

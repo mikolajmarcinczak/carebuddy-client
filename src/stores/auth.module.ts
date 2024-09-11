@@ -49,6 +49,11 @@ export const useAuthStore = defineStore('auth',{
         return Promise.reject(error);
       }
     },
+    async initStore() {
+      if (JSON.parse(sessionStorage.getItem('user') as string) !== null) {
+        this.$state.status.loggedIn = true;
+      }
+    }
   }
 });
 

@@ -1,27 +1,41 @@
+<template>
+
+  <main>
+    <Suspense>
+      <StoreInit/>
+    </Suspense>
+    <Navigation/>
+    <router-view/>
+  </main>
+</template>
 
 <script lang="ts">
 
 import { RouterView } from 'vue-router';
 import Navigation from "@/components/NavigationMenu.vue";
 import TheWelcome from "@/components/TheWelcome.vue";
+import StoreInit from "@/components/UI/StoreInit.vue";
 
 export default {
-	name: 'App',
-	components: {
-		Navigation,
-		TheWelcome,
-		RouterView
-	}
+  name: 'App',
+  components: {
+    StoreInit,
+    Navigation,
+    TheWelcome,
+    RouterView
+  },
+  // setup() {
+  //   const authStore = useAuthStore();
+  //   const userDataStore = useUserDataStore();
+  //
+  //   onMounted(async () => {
+  //     if (authStore.$state.status.loggedIn) {
+  //       await userDataStore.fetchUserProfile();
+  //     }
+  //   });
+  // }
 }
 </script>
-
-
-<template>
-  <main>
-    <Navigation/>
-		<router-view/>
-  </main>
-</template>
 
 
 <style>

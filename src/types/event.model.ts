@@ -1,10 +1,8 @@
-import {AxiosResponse} from "axios";
-
 //schema.prisma.event
 export class CalendarEvent {
   id: string;
   user_ids: string[];
-  time: Date;
+  time: string;
   title: string;
   recurring: boolean;
   location?: string;
@@ -13,7 +11,7 @@ export class CalendarEvent {
   constructor(data: {
     id: string;
     user_ids: string[];
-    time: Date;
+    time: string;
     title: string;
     recurring: boolean;
     location?: string;
@@ -21,7 +19,7 @@ export class CalendarEvent {
   }) {
     this.id = data.id;
     this.user_ids = data.user_ids;
-    this.time = new Date(data.time);
+    this.time = data.time.toString();
     this.title = data.title;
     this.recurring = data.recurring;
     this.location = data.location ?? "";

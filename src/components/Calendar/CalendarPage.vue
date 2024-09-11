@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import {useEventStore} from "@/stores/event.module";
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import WeekView from "./WeekView.vue";
 import EventForm from "./EventForm.vue";
 import {CalendarEvent} from "@/types/event.model";
@@ -41,6 +41,11 @@ export default {
 			newDate.setDate(newDate.getDate() + 7);
 			store.setCurrentWeek(newDate);
 		};
+
+    onMounted(async () => {
+      await store.fetchEventsForCurrentUser();
+    });
+
 		return {
 			currentWeek,
 			previousWeek,

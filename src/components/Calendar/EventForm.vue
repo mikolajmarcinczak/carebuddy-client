@@ -13,7 +13,7 @@
 							<form @submit.prevent="submitForm" class="mt-4 space-y-4 lg:mt-5 md:space-y-5">
 								<input v-model="title" placeholder="Tytuł wydarzenia" required class="bg-white w-full p-2 border rounded" />
 								<input v-model="location" placeholder="Lokalizacja" required class="bg-white w-full p-2 border rounded" />
-								<input v-model="date" type="datetime-local" required class="bg-white w-full p-2 border rounded" />
+								<input v-model="time" type="datetime-local" required class="bg-white w-full p-2 border rounded" />
 
                 <div>
                   <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description:</label>
@@ -68,13 +68,14 @@
 import {useUserDataStore} from "@/stores/user-data.module";
 import {ref} from "vue";
 import {User} from "@/types/user.model";
+import {CalendarEvent} from "@/types/event.model";
 
 export default {
 	name: "EventForm",
 	data() {
 		return {
 			title: "",
-			date: "",
+			time: "",
       location: "",
       description: "",
 			showForm: false,
@@ -89,6 +90,10 @@ export default {
     const user_ids = ref<string[]>([]);
     const searchResults = ref<User[]>([]);
     const selectedUsers = ref<User[]>([]);
+
+    const currentUser = userDataStore.getUserProfile;
+    user_ids.value.push(currentUser?.user?.user_id as string);
+    console.log(currentUser?.user?.user_id);
 
     const searchUsers = async () => {
       if (searchQuery.value.length > 2) {
@@ -124,17 +129,16 @@ export default {
 			this.modalOpen = false;
 		},
 		submitForm() {
-			const formattedDate = new Date(this.date).toISOString();
 			this.$emit('add-event', {
 				user_ids: this.user_ids,
 				title: this.title,
-				date: formattedDate,
+				time: this.time,
         location: this.location,
         description: this.description,
 				recurring: this.isRecurring
 			});
 			this.title = "";
-			this.date = "";
+			this.time = "";
       this.location = "";
       this.description = "";
       this.user_ids = [];

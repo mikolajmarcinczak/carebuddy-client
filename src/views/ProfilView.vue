@@ -78,6 +78,7 @@ export default {
 			}
 
       const userProfile = userDataStore.getUserProfile;
+      console.log(userProfile);
       if (currentUser.value.role === 'elderly') {
         initialProfileData.value = userProfile as ElderlyProfile;
       } else if (currentUser.value.role === 'caregiver') {
