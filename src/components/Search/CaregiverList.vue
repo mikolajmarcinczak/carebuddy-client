@@ -52,7 +52,7 @@ export default {
     const authStore = useAuthStore();
     const userDataStore = useUserDataStore();
 
-    const isProtege = computed(() => authStore.$state.user?.role === 'elderly')
+    const isProtege = computed(() => authStore.$state.user?.role == 'elderly')
 
 		const caregivers = ref<CaregiverProfile[]>([]);
     const caregiverOptions = ref<User[]>([]);
@@ -79,7 +79,9 @@ export default {
     };
 
     onMounted(async () => {
-      await loadAllCaregivers();
+      if (isProtege.value) {
+        await loadAllCaregivers();
+      }
     });
 
 		return {

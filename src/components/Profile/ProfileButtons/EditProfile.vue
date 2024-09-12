@@ -150,7 +150,7 @@ export default {
           }
         });
 
-    const userRole = authStore.$state.user.role;
+    const userRole = authStore.$state.user?.role;
 
     onMounted(async () => {
       const userProfile = userDataStore.getUserProfile
@@ -159,8 +159,8 @@ export default {
       } else {
         if (profileData.value.user) {
           console.log(props.initialData);
-          profileData.value.user.username = authStore.$state.user.username;
-          profileData.value.user.email = authStore.$state.user.email;
+          profileData.value.user.username = authStore.$state.user?.username;
+          profileData.value.user.email = authStore.$state.user?.email;
         }
       }
     })

@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import {useAuthStore} from "@/stores/auth.module";
-import {useUserDataStore} from "@/stores/user-data.module";
 import {assertIsError} from "@/utility/error.guard";
 import HomeView from '../views/HomeView.vue'
 

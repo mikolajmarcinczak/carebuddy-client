@@ -14,13 +14,13 @@
         </div>
       </div>
       <div class="md:col-span-1">
-        <div v-if="currentUser.role === 'caregiver'" class="row-span-3">
+        <div v-if="currentUser?.role === 'caregiver'" class="row-span-3">
           <Proteges />
           <div class="flex justify-center items-center py-3 px-3">
             <div><AddProtege /></div>
           </div>
         </div>
-        <div v-if="currentUser.role === 'elderly'" class="row-span-3">
+        <div v-if="currentUser?.role === 'elderly'" class="row-span-3">
           <Caregivers />
         </div>
       </div>
@@ -47,6 +47,7 @@ import {CaregiverProfile} from "@/types/caregiver-profile.model";
 import {computed, getCurrentInstance, onMounted, ref} from "vue";
 import {useUserDataStore} from "@/stores/user-data.module";
 import {useAuthStore} from "@/stores/auth.module";
+import {useRouter} from "vue-router";
 
 export default {
 	components: {
@@ -61,42 +62,51 @@ export default {
     Caregivers
 	},
 	setup() {
+    const router = useRouter();
     const authStore = useAuthStore();
     const userDataStore = useUserDataStore();
     const editBtn = ref<InstanceType<typeof EditBtn> | null>(null);
 		const instance = getCurrentInstance();
-    const currentUser = computed(() => authStore.$state.user);
+    const currentUser = computed(() => authStore.$state.user || null);
     const disableClose = ref(false);
     const initialProfileData = ref({});
 
 		onMounted(async () => {
-      await userDataStore.fetchUserProfile()
+      try {
+        if (currentUser.value === null || currentUser.value === undefined) {
+          return router.push('/login');
+        }
 
-			if (instance?.proxy?.$route.query.edit === 'true') {
-        disableClose.value = true;
-				editBtn.value?.openModal();
-			}
+        await userDataStore.fetchUserProfile()
 
-      const userProfile = userDataStore.getUserProfile;
-      console.log(userProfile);
-      if (currentUser.value.role === 'elderly') {
-        initialProfileData.value = userProfile as ElderlyProfile;
-      } else if (currentUser.value.role === 'caregiver') {
-        initialProfileData.value = userProfile as CaregiverProfile;
-      } else {
-        initialProfileData.value = { username: currentUser.value.username, image_url: currentUser.value.image_url };
+        if (instance?.proxy?.$route.query.edit === 'true') {
+          disableClose.value = true;
+          editBtn.value?.openModal();
+        }
+
+        const userProfile = userDataStore.getUserProfile;
+        console.log(userProfile);
+        if (currentUser.value.role === 'elderly') {
+          initialProfileData.value = userProfile as ElderlyProfile;
+        } else if (currentUser.value.role === 'caregiver') {
+          initialProfileData.value = userProfile as CaregiverProfile;
+        } else {
+          initialProfileData.value = {username: currentUser.value?.username, image_url: currentUser.value?.image_url};
+        }
+      } catch (error) {
+        console.error(error);
       }
 		});
 
     const userElderlyProfile = computed(() => {
-      if (authStore.$state.user.role === 'elderly') {
+      if (authStore.$state.user?.role === 'elderly') {
         return userDataStore.getUserProfile as ElderlyProfile;
       }
       return undefined;
     });
 
     const userCaregiverProfile = computed(() => {
-      if (authStore.$state.user.role === 'caregiver') {
+      if (authStore.$state.user?.role === 'caregiver') {
         return userDataStore.getUserProfile as CaregiverProfile;
       }
       return undefined;
@@ -107,6 +117,7 @@ export default {
     console.log(userDataStore.getUserProfile)
 
 		return {
+      authStore,
       userCaregiverProfile,
       userElderlyProfile,
       currentUser,
@@ -114,7 +125,7 @@ export default {
       initialProfileData,
 			editBtn
 		};
-	}
+	},
 }
 </script>
 

@@ -23,30 +23,57 @@
 
 <script lang="ts">
 import { useAuthStore } from '@/stores/auth.module';
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
+import MultiselectSearch from "@/components/Search/MultiselectSearch.vue";
+import {ElderlyProfile} from "@/types/elderly-profile.model";
+import {useUserDataStore} from "@/stores/user-data.module";
+import {User} from "@/types/user.model";
 
 export default {
 	name: 'ProtegeList',
+  components: {
+    MultiselectSearch,
+  },
 	setup() {
 		const authStore = useAuthStore();
-		const proteges = ref([
-			{ id: 1, name: 'Jan Kowalski', email: 'jan.kowalski@example.com', city: 'Warszawa' },
-			{ id: 2, name: 'Anna Nowak', email: 'anna.nowak@example.com', city: 'Kraków' },
-		]);
+    const userDataStore = useUserDataStore();
 
-		const isCaregiver = computed(() => {
-			console.log(authStore.user);
-			return authStore.user?.role == 'caregiver';
-		});
+    const isCaregiver = computed(() =>  authStore.$state.user?.role == 'caregiver');
+
+		const proteges = ref<ElderlyProfile[]>([]);
+    const protegeOptions = ref<User[]>([]);
+    const selectedUsers = ref<User[]>([]);
+
+    const cityFilter = ref('');
+
+    const loadAllProteges = async () => {
+      const allProteges = await userDataStore.getUsersByRole('elderly') as User[];
+      proteges.value = await Promise.all(
+        allProteges.map(async protege => {
+          return await userDataStore.getUserData(protege.user_id, 'elderly');
+        }) as Promise<ElderlyProfile>[]
+      );
+      protegeOptions.value = allProteges as User[];
+    }
+
+    onMounted(async () => {
+      if (isCaregiver.value) {
+        await loadAllProteges();
+      }
+    });
 
 		return {
 			proteges,
 			isCaregiver
 		};
-	}
+	},
+  methods: {
+    viewProfile(caregiverId: string) {
+      this.$router.push(`/profile/${caregiverId}`);
+    }
+  }
 }
 </script>
 
 <style scoped>
-/* Add your styles here */
 </style>
