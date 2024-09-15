@@ -13,6 +13,22 @@ export const useAuthStore = defineStore('auth',{
     token: initialState.user?.accessToken,
   }),
   actions: {
+    async fetchUser() {
+      try {
+        const user = await AuthService.getUser(this.$state.user.email);
+        const miniUser = {
+          email: user.email,
+          role: user.role,
+          username: user.username,
+        };
+        loginSuccess(this.$state, miniUser);
+        return Promise.resolve(miniUser);
+      } catch (error: any) {
+        this.$state.errorMessage = error.message || 'Failed to fetch user';
+        console.log(this.$state.errorMessage);
+        return Promise.reject(error);
+      }
+    },
     async login(user: any) {
       await AuthService.login(user).then(
           (user: any) => {
@@ -60,7 +76,10 @@ export const useAuthStore = defineStore('auth',{
 function loginSuccess(state: any, user: any) {
   state.status.loggedIn = true;
   state.user = user;
-  state.token = user.accessToken;
+
+  if (user.accessToken) {
+    state.token = user.accessToken;
+  }
 
   sessionStorage.setItem('user', JSON.stringify(user));
 }

@@ -38,6 +38,9 @@ export const useUserDataStore = defineStore('user-data', {
           console.log(userData);
           console.log(this.userProfile);
         }
+
+        await authStore.fetchUser();
+
         this.errorMessage = '';
       } catch (error: any) {
         this.errorMessage = error?.response?.data?.message || 'Failed to fetch user profile';
@@ -162,14 +165,18 @@ export const useUserDataStore = defineStore('user-data', {
     },
     async getUserData(identifier: string, role: string) {
       try {
+        let userData;
         if (role === "elderly") {
-          return await UserDataService.getElderlyData(identifier);
+          userData = await UserDataService.getElderlyData(identifier);
+          return userData;
         }
         else if (role === "caregiver") {
-          return await UserDataService.getCaregiverData(identifier);
+          userData = await UserDataService.getCaregiverData(identifier);
+          return userData;
         }
       } catch (error: any) {
         this.errorMessage = error.response.data.message;
+        console.log(this.errorMessage);
       }
 
     },

@@ -92,7 +92,7 @@ export default {
 			if (titleText.value.length > 0 && contentText.value.length > 0) {
 				const newNote = new Note({
 					id: String(),
-					user_id: authStore.$state.user.user_id,
+					user_id: userDataStore.getUserProfile?.user?.user_id as string,
 					related_user_ids: selectedUsers.value.map(user => user.user_id),
 					related_urls: [],
 					title: titleText.value,
@@ -100,6 +100,7 @@ export default {
           updated_at: new Date().toISOString(),
 				});
 
+        console.log(newNote);
 				await noteStore.createNote(newNote);
 
 				titleText.value = "";

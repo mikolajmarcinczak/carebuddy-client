@@ -14,15 +14,11 @@
           <h2 class="text-lg font-bold mb-4">Dodaj podopiecznego</h2>
         </div>
         <div>
-          <label for="email"
-								 class="block mb-2  font-medium text-gray-900 dark:text-white">
+          <label for="search"
+								 class="block mb-2 font-medium text-gray-900 dark:text-white">
 						Adres e-mail podopiecznego
 					</label>
-          <input v-model="elderlyEmail" type="email" name="email" id="email"
-								 class="bg-white border border-gray-300 text-white sm:text-l rounded-lg
-								 focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
-								 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
-								 dark:focus:border-blue-500" placeholder="podopieczny@email.com" required>
+         <SingleselectSearch :options="allUsers" v-model:selected-user="selectedUser"/>
         </div>
         <div>
           <label for="documentUrl" class="block mb-2 font-medium text-gray-900 dark:text-white mt-5">
@@ -56,14 +52,19 @@
 <script lang="ts">
 
 import {useUserDataStore} from "@/stores/user-data.module";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import SingleselectSearch from "@/components/Search/SingleselectSearch.vue";
+import {User} from "@/types/user.model";
 
 export default {
+  components: {SingleselectSearch},
   setup() {
     const userDataStore = useUserDataStore();
     const modalOpen = ref(false);
     const documentUrl = ref('');
-    const elderlyEmail = ref('');
+
+    const allUsers = ref<User[]>([]);
+    const selectedUser = ref<User | null>(null);
 
     const openModal = () => {
       modalOpen.value = true;
@@ -73,11 +74,21 @@ export default {
       modalOpen.value = false;
     };
 
+    const loadAllUsers = async () => {
+      try {
+        const users = await userDataStore.getUsersByRole("elderly") as User[];
+        allUsers.value = users;
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     const addUser = async () => {
       try {
-        const elderlyData = await userDataStore.getUserData(elderlyEmail.value, "elderly");
-        const elderlyId = elderlyData?.user?.user_id as string;
-        await userDataStore.assignCare(elderlyId, documentUrl.value);
+        if (selectedUser.value) {
+          const elderlyId = selectedUser.value.user_id;
+          await userDataStore.assignCare(elderlyId, documentUrl.value);
+        }
       } catch (error) {
         console.error(error);
       } finally {
@@ -85,13 +96,18 @@ export default {
       }
     }
 
+    onMounted(async () => {
+      await loadAllUsers();
+    });
+
     return {
       modalOpen,
+      documentUrl,
+      allUsers,
+      selectedUser,
       openModal,
       closeModal,
       addUser,
-      documentUrl,
-      elderlyEmail
     }
   }
 };

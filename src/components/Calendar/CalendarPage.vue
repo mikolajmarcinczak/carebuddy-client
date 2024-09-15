@@ -55,6 +55,7 @@ export default {
 	},
 	methods: {
 		addEvent(event: CalendarEvent) {
+      console.log(event);
 			this.store.addEvent(event);
 		}
 	}

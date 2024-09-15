@@ -27,8 +27,9 @@ class UserAccessService {
   }
 
   async getUsersByRole(role : string) {
-    const response = await axios.get(API_URL + `/user/${role}/all`);
-    return response.data.data as User[];
+    const response = await axios.get(`${API_URL}/user/${role}/all`);
+    console.log(response.data.data);
+    return response.data.data.map((user: any) => new User(user)) as User[];
   }
 }
 

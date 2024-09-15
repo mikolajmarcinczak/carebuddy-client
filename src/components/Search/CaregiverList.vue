@@ -70,11 +70,12 @@ export default {
 
     const loadAllCaregivers = async () => {
       const allCaregivers = await userDataStore.getUsersByRole('caregiver') as User[];
-      caregivers.value = await Promise.all(
-          allCaregivers.map(async (user: any) => {
-            return await userDataStore.getUserData(user.user_id, 'caregiver');
-          }) as Promise<CaregiverProfile>[]
-      );
+      for (const caregiver of allCaregivers) {
+        const caregiverData = await userDataStore.getUserData(caregiver.email, 'caregiver') as CaregiverProfile;
+        if (caregiverData && caregiverData.user) {
+          caregivers.value.push(caregiverData);
+        }
+      }
       caregiverOptions.value = allCaregivers as User[];
     };
 

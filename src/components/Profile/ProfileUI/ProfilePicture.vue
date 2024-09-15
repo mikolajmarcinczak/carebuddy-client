@@ -28,7 +28,7 @@ export default {
     const imageUrl = ref(props.initialImageUrl);
     const imageUrlInput = ref(props.initialImageUrl);
 
-    const uploadImage = (event: Event) => {
+    const uploadImage = (event: any) => {
       const target = event.target as HTMLInputElement;
       if (target.files && target.files[0]) {
         const reader = new FileReader();

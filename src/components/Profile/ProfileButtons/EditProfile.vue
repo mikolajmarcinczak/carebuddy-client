@@ -13,7 +13,7 @@
           
           <form @submit.prevent="handleSubmit" class="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
               <div>
-                  <ProfilePicture :initialImageUrl="profileData.user?.image_url || '/src/assets/logo.jpg'" @update:imageUrl="updateImageUrl" />
+                  <ProfilePicture :initialImageUrl="imageUrl" @update:imageUrl="updateImageUrl" />
               </div>
               <div>
                   <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Imię i nazwisko</label>
@@ -38,7 +38,7 @@
               </div>
               <div>
                   <label for="date_of_birth" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data urodzenia</label>
-                  <input v-model="profileData.date_of_birth" type="date" name="date_of_birth" id="date_of_birth"
+                  <input v-model="profileData.date_of_birth" type="date" name="date_of_birth" id="date_of_birth" @update:modelValue="updateDateOfBirth"
                          class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600
                           focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                           dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
@@ -158,7 +158,6 @@ export default {
         profileData.value = userProfile as ElderlyProfile | CaregiverProfile || props.initialData;
       } else {
         if (profileData.value.user) {
-          console.log(props.initialData);
           profileData.value.user.username = authStore.$state.user?.username;
           profileData.value.user.email = authStore.$state.user?.email;
         }
@@ -174,9 +173,27 @@ export default {
       }
     });
 
+    const imageUrl = computed({
+      get: () => profileData.value.user?.image_url || '/src/assets/logo.jpg',
+      set: (value: string) => {
+        if (profileData.value.user) {
+          profileData.value.user.image_url = value;
+        }
+      }
+    });
+
+    const dateOfBirth = computed(
+        () => new Date(profileData.value.date_of_birth)
+    );
+
     const handleSubmit = async () => {
       const userProfile = userDataStore.getUserProfile;
       console.log(userProfile);
+
+      if (profileData.value.date_of_birth !== '') {
+        profileData.value.date_of_birth = new Date(profileData.value.date_of_birth).toISOString();
+      }
+
       if (userProfile) {
         await userDataStore.updateUserProfile(JSON.parse(JSON.stringify(profileData.value)));
       }
@@ -206,14 +223,21 @@ export default {
       }
     }
 
+    const updateDateOfBirth = (date: Date) => {
+      profileData.value.date_of_birth = date.toISOString();
+    }
+
     return {
       profileData,
       userRole,
       modalOpen,
       username,
+      imageUrl,
+      dateOfBirth,
       handleSubmit,
       updateUsername,
-      updateImageUrl
+      updateImageUrl,
+      updateDateOfBirth
     }
   },
   methods: {

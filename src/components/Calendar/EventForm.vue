@@ -27,29 +27,20 @@
 									<label for="recurring" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Powtarzające się</label>
 									<input v-model="isRecurring" id="recurring" type="checkbox" class="mr-2 ml-6 mb-2" />
 								</div>
+
+                <div>
+                  <label for="search" class="block tet-sm font-medium text-gray-900">Wybierz użytkowników</label>
+                  <MultiselectSearch :options="searchResults" v-model:selected-users="selectedUsers" />
+                </div>
+
 								<button type="submit"
                         class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl
                         focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium
                         rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700">Zapisz</button>
-                <div>
-                  <input v-model="searchQuery" @input="searchUsers" placeholder="Search by email" />
-                  <ul v-if="searchResults.length">
-                    <li v-for="user in searchResults" :key="user.user_id" @click="addUser(user)">
-                      {{ user.email }}
-                    </li>
-                  </ul>
-                  <div>
-                    <h3>Selected Users:</h3>
-                    <ul>
-                      <li v-for="user in selectedUsers" :key="user.user_id">
-                        {{ user.email }}
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- Other form fields -->
-                </div>
 							</form>
+
 					</div>
+
 						<!-- Button to close the modal -->
 					<div class="flex justify-end mt-6">
 							<button @click="closeModal"
@@ -66,12 +57,13 @@
 
 <script lang="ts">
 import {useUserDataStore} from "@/stores/user-data.module";
-import {ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 import {User} from "@/types/user.model";
-import {CalendarEvent} from "@/types/event.model";
+import MultiselectSearch from "@/components/Search/MultiselectSearch.vue";
 
 export default {
 	name: "EventForm",
+  components: {MultiselectSearch},
 	data() {
 		return {
 			title: "",
@@ -87,6 +79,7 @@ export default {
   setup(_, { emit }) {
     const userDataStore = useUserDataStore();
     const searchQuery = ref('');
+
     const user_ids = ref<string[]>([]);
     const searchResults = ref<User[]>([]);
     const selectedUsers = ref<User[]>([]);
@@ -95,57 +88,59 @@ export default {
     user_ids.value.push(currentUser?.user?.user_id as string);
     console.log(currentUser?.user?.user_id);
 
-    const searchUsers = async () => {
-      if (searchQuery.value.length > 2) {
-        let users = await userDataStore.getUsersByRole('0000')  || [];
-        console.log(users);
-        searchResults.value = users.filter(user => user.email.includes(searchQuery.value));
-      } else {
-        searchResults.value = [];
-      }
+    const loadAllUsers = async () => {
+      const allUsers = await userDataStore.getUsersByRole('0000') as User[];
+      searchResults.value = allUsers;
     };
 
-    const addUser = (user: User) => {
-      if (!user_ids.value.includes(user.user_id)) {
-        user_ids.value.push(user.user_id);
-        selectedUsers.value.push(user);
+    onMounted(async () => {
+      await loadAllUsers();
+    });
+
+    let instance = getCurrentInstance();
+
+    const submitForm = () => {
+      if (instance) {
+        const data = instance.data;
+        user_ids.value.push(...selectedUsers.value.map(user => user.user_id));
+        emit('add-event', {
+          user_ids: user_ids.value,
+          title: data.title,
+          time: data.time,
+          location: data.location,
+          description: data.description,
+          recurring: data.isRecurring
+        });
+        data.title = "";
+        data.time = "";
+        data.location = "";
+        data.description = "";
+        user_ids.value = [];
+        data.isRecurring = false;
+        closeModal();
       }
-    };
+    }
+
+    const openModal = () => {
+      if (instance)
+      instance.data.modalOpen = true;
+    }
+
+    const closeModal = () => {
+      if (instance)
+      instance.data.modalOpen = false;
+    }
 
     return {
       searchQuery,
       searchResults,
       selectedUsers,
       user_ids,
-      searchUsers,
-      addUser
+      openModal,
+      closeModal,
+      submitForm
     };
-  },
-	methods: {
-		openModal() {
-			this.modalOpen = true;
-		},
-		closeModal() {
-			this.modalOpen = false;
-		},
-		submitForm() {
-			this.$emit('add-event', {
-				user_ids: this.user_ids,
-				title: this.title,
-				time: this.time,
-        location: this.location,
-        description: this.description,
-				recurring: this.isRecurring
-			});
-			this.title = "";
-			this.time = "";
-      this.location = "";
-      this.description = "";
-      this.user_ids = [];
-			this.isRecurring = false;
-			this.closeModal();
-		}
-	}
+  }
 }
 </script>
 

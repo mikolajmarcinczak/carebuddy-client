@@ -10,8 +10,12 @@ class UserDataService {
   async getElderlyData(identifier: string) {
     const response= await axios.get(`${API_URL}/user/elderly/?identifier=${identifier}`);
     const user = new User(response.data.data);
-    console.log('user data: ' + response.data.data.elderlyaccountinfo)
-    return new ElderlyProfile(response.data.data.elderlyaccountinfo, user);
+    console.log('user: ', user, response.data.data.elderlyaccountinfo)
+    if (response.data.data.elderlyaccountinfo) {
+      return new ElderlyProfile(response.data.data.elderlyaccountinfo, user);
+    } else {
+      return null;
+    }
   }
 
   async addElderlyData(elderlyProfile: ElderlyProfile){
@@ -26,7 +30,14 @@ class UserDataService {
   async getCaregiverData(identifier: string) {
     const response = await axios.get(`${API_URL}/user/caregiver/?identifier=${identifier}`);
     const user = new User(response.data.data);
-    return new CaregiverProfile(response.data.data.caregiveraccountinfo, user);
+    console.log('API response data:', response.data.data);
+    console.log('user:', user);
+    console.log('caregiveraccountinfo:', response.data.data.caregiveraccountinfo);
+    if (response.data.data.caregiveraccountinfo) {
+      return new CaregiverProfile(response.data.data.caregiveraccountinfo, user);
+    } else {
+      return null;
+    }
   }
 
   async addCaregiverData(caregiverProfile: CaregiverProfile) {
@@ -52,12 +63,12 @@ class UserDataService {
 
   async getProteges(caregiver: string) {
     const response = await axios.get(`${API_URL}/aoc-document/proteges/${caregiver}`);
-    return response.data.data as ElderlyProfile[];
+    return response.data.data.map((user: any) => new ElderlyProfile(user)) as ElderlyProfile[];
   }
 
   async getCaregivers(elderly: string) {
     const response = await axios.get(`${API_URL}/aoc-document/caregivers/${elderly}`);
-    return response.data.data as CaregiverProfile[];
+    return response.data.data.map((user: any) => new CaregiverProfile(user)) as CaregiverProfile[];
   }
 }
 

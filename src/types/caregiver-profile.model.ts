@@ -13,7 +13,7 @@ export class CaregiverProfile {
   constructor(data: Partial<CaregiverProfile>, user?: User) {
     this.phone_number = data.phone_number ?? "";
     this.city = data.city ?? "";
-    this.date_of_birth = data.date_of_birth ?? "";
+    this.date_of_birth = data.date_of_birth?.toString() ?? "";
     this.about_me = data.about_me ?? "";
     this.rating = data.rating ?? 0;
     this.vote_count = data.vote_count ?? 0;

@@ -8,9 +8,9 @@
       </h1>
 
       <ul class="space-y-2">
-        <li v-for="protege in proteges" :key="protege.id" class="p-4 border border-gray-300 rounded-md shadow-sm">
-          <div class="text-lg font-medium">{{ protege.name }}</div>
-          <div class="text-sm text-gray-500">{{ protege.email }}</div>
+        <li v-for="protege in proteges" :key="protege.user?.user_id" class="p-4 border border-gray-300 rounded-md shadow-sm">
+          <div class="text-lg font-medium">{{ protege.user?.username }}</div>
+          <div class="text-sm text-gray-500">{{ protege.user?.email }}</div>
           <div class="text-sm text-gray-500">{{ protege.city }}</div>
         </li>
       </ul>
@@ -48,13 +48,14 @@ export default {
 
     const loadAllProteges = async () => {
       const allProteges = await userDataStore.getUsersByRole('elderly') as User[];
-      proteges.value = await Promise.all(
-        allProteges.map(async protege => {
-          return await userDataStore.getUserData(protege.user_id, 'elderly');
-        }) as Promise<ElderlyProfile>[]
-      );
+      for (const protege of allProteges) {
+        const elderlyData = await userDataStore.getUserData(protege.user_id, 'elderly') as ElderlyProfile;
+        if (elderlyData && elderlyData.user) {
+          proteges.value.push(elderlyData);
+        }
+      }
       protegeOptions.value = allProteges as User[];
-    }
+    };
 
     onMounted(async () => {
       if (isCaregiver.value) {

@@ -45,11 +45,16 @@ class AuthService {
   async register(user: User) {
     try {
       const response = await axios.post(API_URL + '/auth/register', user);
-      return response.data;
+      return response.data.data;
     } catch (error: any) {
       console.error('Error during registration:', error.response ? error.response.data : error.message);
       throw error.response ? error.response.data : error;
     }
+  }
+
+  async getUser(email: string) {
+    const response = await axios.get(API_URL + `/user/?identifier=${email}`);
+    return response.data.data;
   }
 
   async forgotPassword(email: string) {
