@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import {Note} from "@/types/note.model";
 import NoteDataService from "@/services/note.service";
 import {SendNoteParameters} from "@/types/send-note.parameters.model";
+import {useUserDataStore} from "@/stores/user-data.module";
 
 export const useNoteStore = defineStore('note', {
   state: () => ({
@@ -64,6 +65,13 @@ export const useNoteStore = defineStore('note', {
         return response;
       } catch (error: any) {
         this.errorMessage = error.response.data.message;
+      }
+    },
+    async initStore() {
+      const userDataStore = useUserDataStore();
+
+      if (userDataStore.getUserProfile?.user?.user_id) {
+        await this.getNotesByUser(userDataStore.getUserProfile.user.user_id);
       }
     }
   },

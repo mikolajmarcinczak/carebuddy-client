@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CaregiverProfile v-if="currentUser?.role === 'caregiver' && caregiverProfile" :userData="caregiverProfile" />
+    <CaregiverProfile v-if="caregiverProfile" :userData="caregiverProfile" />
     <ElderlyProfile v-else-if="elderlyProfile" :userData="elderlyProfile" />
     <div v-else class="mt-8 ml-16 text-primary-900">No profile data available</div>
   </div>

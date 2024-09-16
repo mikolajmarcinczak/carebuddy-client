@@ -1,6 +1,6 @@
 
 <template>
-    <header :class="{ 'scrolled-nav' : scrollNav }"> <!-- menu będzie się przemieszczać z ruchem strony w doł-->
+    <header :class="{ 'scrolled-nav' : scrollNav }">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <nav> 
             <div class="branding">

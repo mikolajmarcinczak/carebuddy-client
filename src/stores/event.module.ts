@@ -59,6 +59,9 @@ export const useEventStore = defineStore('calendar', {
           alert(`Notification:, ${event.title}`);
         }, timeUntilEvent)
       }
+    },
+    async initStore() {
+      await this.fetchEventsForCurrentUser();
     }
   },
   getters: {

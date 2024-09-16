@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<main class="mt-24">
 		<CaregiverList />
-	</div>
+	</main>
 </template>
 
 <script lang="ts">

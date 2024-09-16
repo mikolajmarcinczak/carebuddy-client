@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {MedicalTreatment} from "@/types/medical-treatment.model";
 import MedicalTreatmentDataService from "@/services/medical-treatment.service";
+import {useUserDataStore} from "@/stores/user-data.module";
 
 export const useMedicalTreatmentStore = defineStore('medical-treatment', {
   state: () => ({
@@ -63,6 +64,13 @@ export const useMedicalTreatmentStore = defineStore('medical-treatment', {
         return prescription;
       } catch (error: any) {
         this.errorMessage = error.response.data.message;
+      }
+    },
+    async initStore() {
+      const userDataStore = useUserDataStore();
+
+      if (userDataStore.getUserProfile?.user?.user_id) {
+        await this.getMedicamentsForUser(userDataStore.getUserProfile.user.user_id);
       }
     }
   },

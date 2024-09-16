@@ -7,9 +7,9 @@ export default {
 }
 </script>
 <template>
-  <main>
+  <section class="mt-24">
     <ProtegeList />
-  </main>
+  </section>
 </template>
 
 <style scoped>

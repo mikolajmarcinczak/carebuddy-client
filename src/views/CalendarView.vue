@@ -26,9 +26,9 @@ export default {
 </script>
 
 <template>
-  <main>
+  <section>
     <Calendar />
-  </main>
+  </section>
 </template>
 
 

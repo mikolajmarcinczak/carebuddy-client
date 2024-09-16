@@ -31,6 +31,11 @@ class UserAccessService {
     console.log(response.data.data);
     return response.data.data.map((user: any) => new User(user)) as User[];
   }
+
+  async getUserById(id: string) {
+    const response = await axios.get(`${API_URL}/user/?identifier=${id}`);
+    return new User(response.data.data);
+  }
 }
 
 export default new UserAccessService();

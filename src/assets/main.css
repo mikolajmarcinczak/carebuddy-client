@@ -11,6 +11,19 @@
   font-weight: normal;
 }
 
+main {
+  position: relative;
+  flex: 1;
+}
+
+footer {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  text-align: center;
+  flex-direction: row;
+  flex: 2;
+}
+
 a,
 .green {
   text-decoration: none;

@@ -11,7 +11,7 @@ class MedicamentDataService {
   }
 
   async getMedicamentDetails(medicamentId: string) {
-    const response = await axios.get(`${API_URL}/medicament/${medicamentId}`);
+    const response = await axios.get(`${API_URL}/medicament/single/${medicamentId}`);
     return new Medicament(response.data.data);
   }
 
@@ -28,6 +28,11 @@ class MedicamentDataService {
   async removeMedicament(medicamentId: string) {
     const response = await axios.delete(`${API_URL}/medicament/${medicamentId}`);
     return response.data.data;
+  }
+
+  async getAllMedicaments() {
+    const response = await axios.get(`${API_URL}/medicament/getAll`);
+    return response.data.data.map((medicament: any) => new Medicament(medicament));
   }
 }
 

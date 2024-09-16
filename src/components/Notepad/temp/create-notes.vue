@@ -4,25 +4,25 @@
 						        hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200
 						        dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600
 						        dark:hover:bg-primary-700">
-			<i class="fas fa-plus"></i>
+			<i class="fas fa-plus"></i> Nowa notatka
 		</button>
-		<div v-if="modalOpen" class="inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-			<div class="bg-white p-8 rounded-lg overflow-y-auto max-h-[80vh]">
-				<div>
+		<div v-if="modalOpen" class="inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 max-h-[80vh]">
+			<div class="bg-gray-800 text-white p-8 rounded-lg overflow-y-auto max-h-[80vh]">
+
 					<h2 class="text-lg font-bold mb-4">Dodaj notatkę</h2>
 					<form @submit.prevent="sendDataModel" class="space-y-4 max-w-md mx-auto mt-4 p-4 border rounded shadow-md">
 						<div>
-							<label for="title" class="block text-gray-700">Tytuł</label>
+							<label for="title" class="block font-bold text-gray-300">Tytuł</label>
 							<input type="text" id="title" v-model="titleText"
-                     class="w-full px-3 py-2 border rounded" required />
+                     class="w-full px-3 py-2 border rounded text-gray-800" required />
 						</div>
 						<div>
-							<label for="content" class="block text-gray-700">Treść notatki</label>
+							<label for="content" class="block text-gray-300">Treść notatki</label>
 							<textarea id="content" v-model="contentText"
-                        class="w-full px-3 py-2 border rounded" required></textarea>
+                        class="w-full px-3 py-2 border rounded text-gray-800" required></textarea>
 						</div>
             <div>
-              <label for="user_emails" class="block text-gray-700">Adresy email użytkowników</label>
+              <label for="user_emails" class="block text-gray-300">Oznacz użytkowników</label>
               <multiselect-search id="user_emails"
                                   v-model="selectedUsers"
                                   :options="userOptions"
@@ -46,7 +46,6 @@
             >Anuluj
 						</button>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>

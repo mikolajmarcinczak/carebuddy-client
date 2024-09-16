@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {Medicament} from "@/types/medicament.model";
 import MedicamentDataService from "@/services/medicament.service";
+import {useAuthStore} from "@/stores/auth.module";
 
 export const useMedicamentStore = defineStore('medicament', {
   state: () => ({
@@ -35,6 +36,15 @@ export const useMedicamentStore = defineStore('medicament', {
         this.errorMessage = error.response.data.message;
       }
     },
+    async getAllMedicaments() {
+      try {
+        const medicaments = await MedicamentDataService.getAllMedicaments();
+        this.medicaments = medicaments;
+        this.errorMessage = '';
+      } catch (error: any) {
+        this.errorMessage = error.response.data.message;
+      }
+    },
     async updateMedicament(medicamentId: string, medicamentData: Medicament) {
       try {
         const updatedMedicament = await MedicamentDataService.updateMedicament(medicamentId, medicamentData);
@@ -46,6 +56,9 @@ export const useMedicamentStore = defineStore('medicament', {
       } catch (error: any) {
         this.errorMessage = error.response.data.message;
       }
+    },
+    async initStore() {
+      await this.getAllMedicaments();
     }
   },
   getters: {

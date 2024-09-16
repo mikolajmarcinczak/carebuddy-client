@@ -1,6 +1,6 @@
 <template>
   <header> Ustawienia </header>
-    <div class="Settings"> 
+    <div class="settings mt-24">
         <p> Zmień hasło </p>
         <p> Zmień hasło </p>
         <p> Zmień hasło </p>
@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 body {
   background-color: white;
 }
@@ -23,7 +23,7 @@ header{
   top: 0;
   left: 0;
 }
-.Settings{
+.settings{
   width: 1140px;
   background-color: #C7D6D5;
   padding: 30px;

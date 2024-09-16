@@ -7,18 +7,21 @@
     <Navigation/>
     <router-view/>
   </main>
+  <footer-component/>
 </template>
 
 <script lang="ts">
 
 import { RouterView } from 'vue-router';
-import Navigation from "@/components/NavigationMenu.vue";
+import Navigation from "@/components/UI/NavigationMenu.vue";
 import TheWelcome from "@/components/TheWelcome.vue";
 import StoreInit from "@/components/UI/StoreInit.vue";
+import FooterComponent from "@/components/UI/FooterComponent.vue";
 
 export default {
   name: 'App',
   components: {
+    FooterComponent,
     StoreInit,
     Navigation,
     TheWelcome,
@@ -42,6 +45,7 @@ export default {
 body {
 	background-color: white;
 }
+
 </style>
 
 <!-- <style scoped>

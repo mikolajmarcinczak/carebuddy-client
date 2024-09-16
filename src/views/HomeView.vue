@@ -8,7 +8,7 @@ export default {
 </script>
 
 <template>
-  <main>
+  <section class="mt-24">
     <TheWelcome />
-  </main>
+  </section>
 </template>

@@ -1,39 +1,46 @@
 <template>
 	<div class="container mx-auto p-4">
-		<div class="bg-white p-6 rounded-lg shadow-lg">
-			<div class="text-lg font-bold">
-				{{ note.title }}
-			</div>
-			<div class="italic text-gray-600">
+		<div class="bg-gray-800 text-white p-6 rounded-lg shadow-lg mt-4">
+      <div>
+        <div class="text-lg font-bold">
+          {{ note.title }}
+        </div>
+        <div class="text-gray-500">
+          <span class="font-bold"> Modyfikowano: </span> {{ new Date(String(note.updated_at)).toDateString() }}
+        </div>
+      </div>
+      <div class="text-gray-500">
+        <span class="font-bold"> Użytkownicy: </span>
+        <ul>
+          <li>{{ note.user_id + ', '}}</li>
+          <li v-for="user in note.related_user_ids" :key="user">{{ user + ', ' }}</li>
+        </ul>
+      </div>
+      <div class="italic text-gray-300">
 				{{ note.content }}
-			</div>
-			<div class="text-gray-500">
-				{{ note.user_id + ', ' + note.related_user_ids }}
-			</div>
-			<div class="text-gray-500">
-				{{ note.updated_at }}
-			</div>
+      </div>
+
 			<div class="flex justify-between mt-4">
         <span class="cursor-pointer text-blue-500" @click="showEdit">
-          <i class="fas fa-edit"></i>
+          <i class="fas fa-edit"></i>Edytuj
         </span>
-				<span class="cursor-pointer text-red-500" @click="deleteNote">
-          <i class="fas fa-trash"></i>
+				<span class="cursor-pointer text-red-500" @click="deleteNote(note.id)">
+          <i class="fas fa-trash-o"></i> Usuń
         </span>
 			</div>
 		</div>
-		<div class="bg-white p-6 rounded-lg shadow-lg mt-4" v-show="showModelEdit">
+		<div class="bg-gray-800 text-white p-6 rounded-lg shadow-lg mt-4" v-show="showModelEdit">
 			<div class="space-y-4">
 				<div>
-					<label for="title" class="block text-gray-700">Tytuł</label>
-					<input type="text" id="title" v-model="noteTitle" class="w-full px-3 py-2 border rounded"/>
+					<label for="title" class="text-lg font-bold">Tytuł</label>
+					<input type="text" id="title" v-model="noteTitle" class="bg-white w-full p-2 border rounded"/>
 				</div>
 				<div>
-					<label for="content" class="block text-gray-700">Treść notatki</label>
-					<textarea id="content" v-model="noteContent" class="w-full px-3 py-2 border rounded"></textarea>
+					<label for="content" class="block text-gray-300">Treść notatki</label>
+					<textarea id="content" v-model="noteContent" class="bg-white w-full p-2 border rounded"></textarea>
 				</div>
 				<div>
-					<label for="user_emails" class="block text-gray-700">Adresy email użytkowników</label>
+					<label for="user_emails" class="block text-gray-300">Oznacz użytkowników</label>
 					<multiselect-search id="user_emails"
 							v-model="selectedUsers"
 							:options="userOptions"
@@ -41,7 +48,10 @@
 					></multiselect-search>
 				</div>
 				<div class="flex justify-end space-x-4">
-					<button class="bg-blue-500 text-white font-bold py-2 px-4 rounded" @click="saveEditedNote">Zapisz</button>
+					<button class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600
+                  hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200
+                  dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600
+                  dark:hover:bg-primary-700" @click="saveEditedNote">Zapisz</button>
 				</div>
 			</div>
 		</div>
@@ -69,7 +79,7 @@ export default {
 			required: true
 		}
 	},
-	setup(props) {
+	setup(props, { emit }) {
 		const userStore = useUserDataStore();
 		const noteStore = useNoteStore();
 		const showModelEdit = ref(false);
@@ -96,8 +106,8 @@ export default {
 			showModelEdit.value = false;
 		};
 
-		const deleteNote = async () => {
-			await noteStore.deleteNote(props.note.id);
+		const deleteNote = async (noteId: string) => {
+			emit("deleteNote", noteId);
 		};
 
 		const handleSelectedUsers = (users: User[]) => {

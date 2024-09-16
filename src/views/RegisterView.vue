@@ -8,7 +8,7 @@ export default {
 </script>
 
 <template>
-  <main>
+  <main class="mt-24">
     <Register />
   </main>
 </template>

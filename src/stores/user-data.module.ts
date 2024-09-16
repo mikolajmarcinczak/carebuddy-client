@@ -178,7 +178,15 @@ export const useUserDataStore = defineStore('user-data', {
         this.errorMessage = error.response.data.message;
         console.log(this.errorMessage);
       }
-
+    },
+    async getSimpleUserById(id: string) {
+      try {
+        const response = await UserAccessService.getUserById(id);
+        return response;
+      } catch (error: any) {
+        this.errorMessage = error.response.data.message;
+        console.log(this.errorMessage);
+      }
     },
     async initStore() {
       const authStore = useAuthStore();

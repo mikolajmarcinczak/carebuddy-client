@@ -24,7 +24,13 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('../views/ProfilView.vue'),
+      component: () => import('../views/ProfileView.vue'),
+    },
+    {
+      path: '/profile/:caregiverId',
+      name: 'dynamicProfile',
+      component: () => import('../views/DynamicProfileView.vue'),
+      props: true
     },
     {
       path: '/proteges',

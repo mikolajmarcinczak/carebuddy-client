@@ -26,9 +26,9 @@ export default {
 </script>
 
 <template>
-  <main>
+  <section class="mt-24">
    <NotesTool />
-  </main>
+  </section>
 </template>
 
 
