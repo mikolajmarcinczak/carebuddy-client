@@ -7,12 +7,13 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, onMounted} from 'vue';
 import { ElderlyProfile as ElderlyProfileType } from '@/types/elderly-profile.model';
 import { CaregiverProfile as CaregiverProfileType } from '@/types/caregiver-profile.model';
 import {useAuthStore} from "@/stores/auth.module";
 import CaregiverProfile from "@/components/Profile/Subcomponents/CaregiverProfile.vue";
 import ElderlyProfile from "@/components/Profile/Subcomponents/ElderlyProfile.vue";
+import {useUserDataStore} from "@/stores/user-data.module";
 
 export default defineComponent({
   name: 'Profile',

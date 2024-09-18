@@ -44,6 +44,7 @@ export const useNoteStore = defineStore('note', {
         if (index !== -1) {
           this.notes.splice(index, 1, updatedNote);
         }
+        this.notes[index] = updatedNote;
         this.errorMessage = '';
       } catch (error: any) {
         this.errorMessage = error.response.data.message;

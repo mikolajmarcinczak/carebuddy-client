@@ -67,7 +67,7 @@ export const useMedicalTreatmentStore = defineStore('medical-treatment', {
       }
     },
     async initStore() {
-      const userDataStore = useUserDataStore();
+      const userDataStore= useUserDataStore();
 
       if (userDataStore.getUserProfile?.user?.user_id) {
         await this.getMedicamentsForUser(userDataStore.getUserProfile.user.user_id);

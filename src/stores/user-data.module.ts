@@ -107,8 +107,10 @@ export const useUserDataStore = defineStore('user-data', {
 
       try {
         const proteges = await UserDataService.getProteges(caregiverId);
-        this.proteges = proteges;
-        this.errorMessage = '';
+        if (proteges) {
+          this.proteges = proteges;
+          this.errorMessage = '';
+        }
       } catch (error: any) {
         this.errorMessage = error.response.data.message;
       }
@@ -125,8 +127,10 @@ export const useUserDataStore = defineStore('user-data', {
 
       try {
         const caregivers = await UserDataService.getCaregivers(elderlyId);
-        this.caregivers = caregivers;
-        this.errorMessage = '';
+        if (caregivers) {
+          this.caregivers = caregivers;
+          this.errorMessage = '';
+        }
       } catch (error: any) {
         this.errorMessage = error.response.data.message;
       }
@@ -192,6 +196,11 @@ export const useUserDataStore = defineStore('user-data', {
       const authStore = useAuthStore();
       if (authStore.$state.user) {
         await this.fetchUserProfile();
+        if (authStore.$state.user.role === 'elderly') {
+          await this.fetchCaregivers();
+        } else if (authStore.$state.user.role === 'caregiver') {
+          await this.fetchProteges();
+        }
       }
     }
   },
@@ -201,6 +210,12 @@ export const useUserDataStore = defineStore('user-data', {
     },
     getErrorMessage(state) {
       return state.errorMessage;
+    },
+    getCaregivers(state) {
+      return state.caregivers;
+    },
+    getProteges(state) {
+      return state.proteges;
     }
   }
 });

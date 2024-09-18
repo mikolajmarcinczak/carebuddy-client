@@ -29,7 +29,7 @@
 								</div>
 
                 <div>
-                  <label for="search" class="block tet-sm font-medium text-gray-900">Wybierz użytkowników</label>
+                  <label for="search" class="block tet-sm font-medium dark:text-white">Wybierz użytkowników</label>
                   <MultiselectSearch :options="searchResults" v-model:selected-users="selectedUsers" />
                 </div>
 

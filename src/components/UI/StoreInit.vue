@@ -11,12 +11,12 @@ await authStore.initStore().then(async () => {
   const userDataStore = useUserDataStore();
   const noteStore = useNoteStore();
   const medicamentStore = useMedicamentStore();
-  const medicalTreatmentStore = useMedicalTreatmentStore();
+  //const medicalTreatmentStore = useMedicalTreatmentStore();
 
   await userDataStore.initStore();
   await noteStore.initStore();
   await medicamentStore.initStore();
-  await medicalTreatmentStore.initStore();
+  //await medicalTreatmentStore.initStore();
 });
 </script>
 

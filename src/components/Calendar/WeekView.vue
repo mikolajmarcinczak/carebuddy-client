@@ -13,8 +13,7 @@
 			<div v-for="(slot, index) in day.slots" :key="slot.time"
 					 class="border-b p-1 cursor-pointer flex flex-wrap items-center justify-start w-24 md:w-32"
 					 :class="{ 'overflow-y-auto': slot.events.length > 3 }"
-					 :style="{ height: `${slotHeights[index]}rem`, maxHeight: '12rem' }"
-					 @click="handleSlotClick(day.date, slot.time)">
+					 :style="{ height: `${slotHeights[index]}rem`, maxHeight: '12rem' }">
 				<div v-for="event in slot.events" :key="event.id"
 						 @click.stop="handleEventClick(event)"
 						 class="bg-blue-100 p-2 rounded mb-1 mr-1 flex-1 overflow-hidden text-ellipsis whitespace-nowrap w-1s2">
@@ -26,19 +25,33 @@
 			</div>
 		</div>
 	</div>
+	<EditEventForm :modalOpen="modalOpen" :event="selectedEvent" @close-modal="closeModal" @update-event="updateEvent" @close="closeModal" />
 </template>
 
 <script lang="ts">
 import {computed, ref} from "vue";
 import {useEventStore} from "@/stores/event.module";
 import {CalendarEvent} from "@/types/event.model";
+import EditEventForm from "@/components/Calendar/EditEventForm.vue";
 
 export default {
 	name: "WeekView",
+	components: { EditEventForm },
 	props: ['weekStart'],
 	setup(props) {
 		const store = useEventStore();
 		const slotHeights = ref<number[]>([]);
+
+		const selectedEvent = ref<CalendarEvent>({
+			id: '',
+			title: '',
+			location: '',
+			time: '',
+			description: '',
+			recurring: false,
+			user_ids: []
+		});
+		const modalOpen = ref(false);
 
 		const timeSlots = Array.from({ length: 48 }, (_, i) => `${String(Math.floor(i / 2)).padStart(2, '0')}:${i % 2 === 0 ? '00' : '30'}`);
 
@@ -84,6 +97,8 @@ export default {
 
 		const handleEventClick = (event: CalendarEvent) => {
 			console.log('Event clicked:', event);
+			modalOpen.value = true;
+			selectedEvent.value = event;
 		}
 
 		const eventsForDay = (day: string) => {
@@ -99,13 +114,35 @@ export default {
 			});
 		};
 
+		const updateEvent = (event: CalendarEvent) => {
+			event.time = new Date(event.time).toISOString();
+			store.updateEvent(event.id, event);
+			closeModal();
+		};
+
+		const closeModal = () => {
+			modalOpen.value = false;
+			selectedEvent.value = {
+				id: "",
+				recurring: false,
+				description: "",
+				location: "",
+				time: "",
+				title: "",
+				user_ids: []};
+		};
+
 		return {
 			days,
 			timeSlots,
 			slotHeights,
+			modalOpen,
+			selectedEvent,
 			eventsForDay,
 			handleSlotClick,
-			handleEventClick
+			handleEventClick,
+			updateEvent,
+			closeModal,
 		};
 	},
 	methods: {

@@ -24,16 +24,12 @@
 <script lang="ts">
 import { useAuthStore } from '@/stores/auth.module';
 import {computed, onMounted, ref} from "vue";
-import MultiselectSearch from "@/components/Search/MultiselectSearch.vue";
 import {ElderlyProfile} from "@/types/elderly-profile.model";
 import {useUserDataStore} from "@/stores/user-data.module";
 import {User} from "@/types/user.model";
 
 export default {
 	name: 'ProtegeList',
-  components: {
-    MultiselectSearch,
-  },
 	setup() {
 		const authStore = useAuthStore();
     const userDataStore = useUserDataStore();

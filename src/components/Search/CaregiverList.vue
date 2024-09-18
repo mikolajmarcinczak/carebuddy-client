@@ -14,15 +14,9 @@
                       focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
       </div>
       <ul class="space-y-2">
-        <li v-for="caregiver in filteredCaregivers" :key="caregiver.user?.user_id" class="p-4 border border-gray-300 rounded-md shadow-sm">
-          <img :src="caregiver.user?.image_url" alt="Profile Picture" class="w-12 h-12 rounded-full">
-          <div class="text-lg font-medium">{{ caregiver.user?.username }}</div>
-          <div class="text-sm text-gray-500">{{ caregiver.user?.email }}</div>
-          <div class="text-sm text-gray-500">{{ caregiver.city }}</div>
-          <button @click="viewProfile((caregiver.user as User).user_id)" class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700">
-            Zobacz profil
-          </button>
-        </li>
+				<li v-for="caregiver in filteredCaregivers" :key="caregiver.user?.user_id">
+					<SimpleUserProfile :user-data="caregiver" />
+				</li>
       </ul>
     </div>
 		<div v-else>
@@ -37,12 +31,12 @@ import {useAuthStore} from "@/stores/auth.module";
 import {useUserDataStore} from "@/stores/user-data.module";
 import {CaregiverProfile} from "@/types/caregiver-profile.model";
 import {User} from "@/types/user.model";
-import MultiselectSearch from "@/components/Search/MultiselectSearch.vue";
+import SimpleUserProfile from "@/components/Profile/SimpleUserProfile.vue";
 
 export default {
 	name: "CaregiverList",
   components: {
-    MultiselectSearch
+    SimpleUserProfile
   },
 	setup() {
     const authStore = useAuthStore();
@@ -87,12 +81,7 @@ export default {
 			filteredCaregivers,
       isProtege
 		}
-	},
-  methods: {
-    viewProfile(caregiverId: string) {
-      this.$router.push(`/profile/${caregiverId}`);
-    }
-  }
+	}
 }
 </script>
 

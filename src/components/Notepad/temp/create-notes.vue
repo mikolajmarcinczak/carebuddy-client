@@ -24,7 +24,7 @@
             <div>
               <label for="user_emails" class="block text-gray-300">Oznacz użytkowników</label>
               <multiselect-search id="user_emails"
-                                  v-model="selectedUsers"
+                                  v-model:selected-users="selectedUsers"
                                   :options="userOptions"
                                   @update:selected-users="handleSelectedUsers"
               ></multiselect-search>
@@ -71,7 +71,6 @@ export default {
 		const modalOpen = ref(false);
 		const noteStore = useNoteStore();
     const userDataStore = useUserDataStore();
-    const authStore = useAuthStore();
     const selectedUsers = ref<User[]>([]);
     const userOptions = ref<User[]>([]);
 

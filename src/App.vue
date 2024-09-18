@@ -1,12 +1,12 @@
 <template>
 
   <main>
-    <Suspense>
-      <StoreInit/>
-    </Suspense>
-    <Navigation/>
-    <router-view/>
-  </main>
+		<Navigation/>
+		<router-view/>
+		<Suspense>
+			<StoreInit/>
+		</Suspense>
+	</main>
   <footer-component/>
 </template>
 
