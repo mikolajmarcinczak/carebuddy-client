@@ -26,8 +26,7 @@
       </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="row-span-3"><Notes /></div>
-      <div class="row-span-3"><Notes /></div>
+      <notes-list :notes="notes" v-on:notesUpdated="fetchNotes"></notes-list>
     </div>
   </div>
 </template>
@@ -48,9 +47,13 @@ import {computed, getCurrentInstance, onMounted, ref} from "vue";
 import {useUserDataStore} from "@/stores/user-data.module";
 import {useAuthStore} from "@/stores/auth.module";
 import {useRouter} from "vue-router";
+import NotesList from "@/components/Notepad/temp/notes-list.vue";
+import {useNoteStore} from "@/stores/note.module";
+import {Note} from "@/types/note.model";
 
 export default {
 	components: {
+		NotesList,
     NotesBtn,
 		Profile,
 		Notes,
@@ -65,11 +68,14 @@ export default {
     const router = useRouter();
     const authStore = useAuthStore();
     const userDataStore = useUserDataStore();
+		const noteStore = useNoteStore();
     const editBtn = ref<InstanceType<typeof EditBtn> | null>(null);
 		const instance = getCurrentInstance();
     const currentUser = computed(() => authStore.$state.user || null);
     const disableClose = ref(false);
     const initialProfileData = ref({});
+
+		const notes = computed(() => noteStore.getNotes);
 
 		onMounted(async () => {
       try {
@@ -98,6 +104,10 @@ export default {
       }
 		});
 
+		const fetchNotes = async (updatedNotes: Note[]) => {
+			await noteStore.initStore();
+		}
+
     const userElderlyProfile = computed(() => {
       if (authStore.$state.user?.role === 'elderly') {
         return userDataStore.getUserProfile as ElderlyProfile;
@@ -117,13 +127,15 @@ export default {
     console.log(userDataStore.getUserProfile)
 
 		return {
+			notes,
       authStore,
       userCaregiverProfile,
       userElderlyProfile,
       currentUser,
       disableClose,
       initialProfileData,
-			editBtn
+			editBtn,
+			fetchNotes
 		};
 	},
 }
