@@ -21,6 +21,7 @@ export const useAuthStore = defineStore('auth',{
           role: user.role,
           username: user.username,
         };
+
         loginSuccess(this.$state, miniUser);
         return Promise.resolve(miniUser);
       } catch (error: any) {
@@ -70,6 +71,9 @@ export const useAuthStore = defineStore('auth',{
         this.$state.status.loggedIn = true;
       }
     }
+  },
+  getters: {
+    isAuthenticated: (state: any) => !!state.token,
   }
 });
 

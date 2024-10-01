@@ -154,8 +154,6 @@
 							</router-link>
 					</p>
 
-					<pre>{{ values }}</pre>
-
         </Form>
 
 				<div v-if="message" :class="successful ? 'p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 ' +

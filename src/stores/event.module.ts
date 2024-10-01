@@ -2,12 +2,14 @@ import EventDataService from "@/services/event.service"
 import {defineStore} from "pinia";
 import {CalendarEvent} from "@/types/event.model";
 import {useUserDataStore} from "@/stores/user-data.module";
+import {Alarm} from "@/types/alarm.model";
 
-const userDataStore= useUserDataStore();
+//const userDataStore= useUserDataStore();
 
 export const useEventStore = defineStore('calendar', {
   state: () => ({
     events : [] as Array<CalendarEvent>,
+    alarms: [] as Array<CalendarEvent>,
     currentWeek: new Date()
   }),
   actions: {
@@ -22,9 +24,11 @@ export const useEventStore = defineStore('calendar', {
     },
     async fetchEventsByUser(userId: string) {
       const events = await EventDataService.getEventsByUser(userId);
+      await this.fetchAlarmsForCurrentUser();
       return events;
     },
     async fetchEventsForCurrentUser() {
+      const userDataStore= useUserDataStore();
       const userId = userDataStore.userProfile?.user?.user_id;
       let events;
       if (userId !== undefined) {
@@ -49,6 +53,23 @@ export const useEventStore = defineStore('calendar', {
     async setCurrentWeek(date: Date) {
       this.currentWeek = date;
     },
+    async fetchAlarmsForCurrentUser() {
+      const userDataStore= useUserDataStore();
+      const events = this.events as Array<CalendarEvent>;
+      const userId = userDataStore.userProfile?.user?.user_id;
+      const alarms = await EventDataService.getAlarmsForUser(userId as string) as Array<Alarm>;
+      return alarms.map((alarm: any) => {
+        const event = events.find(event => event.id === alarm.event_id) as CalendarEvent;
+        return {
+          id: alarm.id,
+          user_id: alarm.user_id,
+          event_id: alarm.event_id,
+          trigger_time: alarm.trigger_time,
+          message: alarm.message,
+          event: event
+        };
+      });
+    },
     async setNotification(event: CalendarEvent) {
       console.log('Notification set for event:', event)
       const eventDate = new Date(event.time);
@@ -72,6 +93,9 @@ export const useEventStore = defineStore('calendar', {
         const eventDate = new Date(event.time);
         return event.recurring || (eventDate >= weekStart && eventDate < weekEnd);
       })
+    },
+    getAlarmsForCurrentUser(state) {
+      return state.alarms
     },
     getCurrentWeek(state) {
       return state.currentWeek;

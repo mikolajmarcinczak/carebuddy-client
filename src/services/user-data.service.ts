@@ -44,7 +44,7 @@ class UserDataService {
   }
 
   async assignCare(elderly: string, caregiver: string, documentUrl: string) {
-    return await axios.post(`${API_URL}/aoc-document/assign-care`, {elderly, caregiver, documentUrl});
+    return await axios.post(`${API_URL}/aoc-document/assign-care`, {data: {elderly, caregiver, documentUrl}});
   }
 
   async unassignCare(elderly: string, caregiver: string) {

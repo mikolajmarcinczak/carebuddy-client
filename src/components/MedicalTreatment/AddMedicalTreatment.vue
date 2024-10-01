@@ -20,7 +20,6 @@
               dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
               dark:focus:border-blue-500" required>
             </div>
-            <!-- Add other fields similarly -->
             <div class="flex justify-end mt-6">
               <button type="button" @click="addMedicament"
                       class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl
@@ -53,7 +52,6 @@
               dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
               dark:focus:border-blue-500" required>
             </div>
-            <!-- Add other fields similarly -->
             <div>
               <label for="medicaments" class="block mb-2 font-medium text-gray-900 dark:text-white">Leki</label>
               <MultiselectSearch :options="medicaments" v-model:selected-users="selectedMedicaments"/>
