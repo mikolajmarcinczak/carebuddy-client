@@ -10,7 +10,7 @@
             <li><router-link to="/profile" style="color: #fff"> Konto </router-link></li>
             <li><router-link to="/proteges" style="color: #fff"> Podopieczni </router-link></li>
             <li><router-link to="/caregivers" style="color: #fff"> Opiekunowie </router-link></li>
-            <li><router-link to="/settings" style="color: #fff"> Ustawienia </router-link></li>
+            <li><a style="color: #fff"> Ustawienia </a></li>
             <li><router-link :to="loggedIn ? '/logout' : '/login'" style="color: #fff"> {{ loggedIn ? 'Wyloguj' : 'Zaloguj'}} </router-link></li>
            </ul>
            <div class="icon">

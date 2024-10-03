@@ -8,6 +8,7 @@ import {Alarm} from "@/types/alarm.model";
 
 export const useEventStore = defineStore('calendar', {
   state: () => ({
+    loading: true,
     events : [] as Array<CalendarEvent>,
     alarms: [] as Array<CalendarEvent>,
     currentWeek: new Date()
@@ -83,6 +84,11 @@ export const useEventStore = defineStore('calendar', {
     },
     async initStore() {
       await this.fetchEventsForCurrentUser();
+      await this.fetchAlarmsForCurrentUser();
+
+      if (this.events && this.alarms) {
+        this.loading = false;
+      }
     }
   },
   getters: {

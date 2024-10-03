@@ -1,5 +1,5 @@
 <template>
-  <div>
+
     <button @click="openModal"
 						class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl
 						focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium
@@ -7,6 +7,7 @@
       Dodaj podopiecznego
     </button>
 
+	<div>
     <!-- Modal -->
     <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div class="bg-gray-800 p-8 rounded-lg overflow-y-auto max-h-[80vh]">

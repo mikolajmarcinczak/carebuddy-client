@@ -1,5 +1,8 @@
 <template>
   <div>
+		<div v-if="loading">
+			<p>Loading...</p>
+		</div>
     <CaregiverProfile v-if="caregiverProfile" :userData="caregiverProfile" />
     <ElderlyProfile v-else-if="elderlyProfile" :userData="elderlyProfile" />
     <div v-else class="mt-8 ml-16 text-primary-900">No profile data available</div>
@@ -7,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted} from 'vue';
+import {defineComponent, onMounted, ref} from 'vue';
 import { ElderlyProfile as ElderlyProfileType } from '@/types/elderly-profile.model';
 import { CaregiverProfile as CaregiverProfileType } from '@/types/caregiver-profile.model';
 import {useAuthStore} from "@/stores/auth.module";
@@ -46,9 +49,16 @@ export default defineComponent({
   },
   setup() {
     const authStore = useAuthStore();
+		const loading = ref(true);
+
+		onMounted(() => {
+			await authStore.fetchUser();
+			loading.value = false;
+		});
 
     return {
       authStore,
+			loading
     }
   }
 });

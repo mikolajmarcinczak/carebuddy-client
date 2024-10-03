@@ -9,6 +9,7 @@ let initialState = user
 export const useAuthStore = defineStore('auth',{
   state: () => ({
     ...initialState,
+    loading: true,
     errorMessage: '',
     token: initialState.user?.accessToken,
   }),
@@ -69,6 +70,11 @@ export const useAuthStore = defineStore('auth',{
     async initStore() {
       if (JSON.parse(sessionStorage.getItem('user') as string) !== null) {
         this.$state.status.loggedIn = true;
+
+        await this.fetchUser();
+        if (this.$state.user) {
+          this.$state.loading = false;
+        }
       }
     }
   },

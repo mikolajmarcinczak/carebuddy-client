@@ -1,6 +1,10 @@
 <template>
   <div class="w-full min-w-full container mx-auto bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
 
+		<div v-if="loading">
+			<p>Loading...</p>
+		</div>
+
     <div v-if="isProtege" class="p-6 space-y-4 md:space-y-6 sm:p-8">
 
       <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -41,6 +45,7 @@ export default {
 	setup() {
     const authStore = useAuthStore();
     const userDataStore = useUserDataStore();
+		const loading = ref(true);
 
     const isProtege = computed(() => authStore.$state.user?.role == 'elderly')
 
@@ -72,6 +77,7 @@ export default {
       if (isProtege.value) {
         await loadAllCaregivers();
       }
+			loading.value = false;
     });
 
 		return {

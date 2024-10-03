@@ -5,6 +5,7 @@ import {useAuthStore} from "@/stores/auth.module";
 
 export const useMedicamentStore = defineStore('medicament', {
   state: () => ({
+    loading: true,
     medicaments: [] as Array<Medicament>,
     errorMessage: ''
   }),
@@ -59,6 +60,10 @@ export const useMedicamentStore = defineStore('medicament', {
     },
     async initStore() {
       await this.getAllMedicaments();
+
+      if (this.medicaments.length > 0) {
+        this.$state.loading = false;
+      }
     }
   },
   getters: {

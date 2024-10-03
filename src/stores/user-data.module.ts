@@ -7,14 +7,15 @@ import UserAccessService from "@/services/user.service";
 
 export const useUserDataStore = defineStore('user-data', {
   state: () => ({
+    loading: true,
     userProfile: null as ElderlyProfile | CaregiverProfile | null,
-    errorMessage: '',
     proteges: [] as ElderlyProfile[],
-    caregivers: [] as CaregiverProfile[]
+    caregivers: [] as CaregiverProfile[],
+    errorMessage: ''
   }),
   actions: {
     async fetchUserProfile() {
-      const authStore= useAuthStore();
+      const authStore = useAuthStore();
       const user = JSON.parse(JSON.stringify(authStore.user));
       console.log(user);
       console.log(user.role);
@@ -31,8 +32,7 @@ export const useUserDataStore = defineStore('user-data', {
           this.userProfile = userData;
           console.log(userData);
           console.log(this.userProfile);
-        }
-        else if (String(user.role) === "caregiver") {
+        } else if (String(user.role) === "caregiver") {
           userData = await UserDataService.getCaregiverData(user.email);
           this.userProfile = userData;
           console.log(userData);
@@ -48,14 +48,13 @@ export const useUserDataStore = defineStore('user-data', {
       }
     },
     async addUserProfile(userProfile: ElderlyProfile | CaregiverProfile) {
-      const authStore= useAuthStore();
+      const authStore = useAuthStore();
       const user = JSON.parse(JSON.stringify(authStore.user));
 
       try {
         if (user.role === "elderly") {
           return await UserDataService.addElderlyData(userProfile as ElderlyProfile);
-        }
-        else if (user.role === "caregiver") {
+        } else if (user.role === "caregiver") {
           return await UserDataService.addCaregiverData(userProfile as CaregiverProfile);
         }
         await this.fetchUserProfile();
@@ -65,7 +64,7 @@ export const useUserDataStore = defineStore('user-data', {
       }
     },
     async updateUserProfile(userProfile: ElderlyProfile | CaregiverProfile) {
-      const authStore= useAuthStore();
+      const authStore = useAuthStore();
       const user = authStore.user;
 
       if (!user) {
@@ -76,8 +75,7 @@ export const useUserDataStore = defineStore('user-data', {
       try {
         if (user.role === "elderly") {
           return await UserDataService.updateElderlyData(user.email as string, userProfile as ElderlyProfile);
-        }
-        else if (user.role === "caregiver") {
+        } else if (user.role === "caregiver") {
           return await UserDataService.updateCaregiverData(user.email as string, userProfile as CaregiverProfile);
         }
         this.errorMessage = '';
@@ -117,7 +115,7 @@ export const useUserDataStore = defineStore('user-data', {
 
       return this.proteges;
     },
-    async fetchCaregivers(){
+    async fetchCaregivers() {
       const elderlyId = this.userProfile?.user?.user_id;
 
       if (!elderlyId) {
@@ -173,8 +171,7 @@ export const useUserDataStore = defineStore('user-data', {
         if (role === "elderly") {
           userData = await UserDataService.getElderlyData(identifier);
           return userData;
-        }
-        else if (role === "caregiver") {
+        } else if (role === "caregiver") {
           userData = await UserDataService.getCaregiverData(identifier);
           return userData;
         }
@@ -201,20 +198,23 @@ export const useUserDataStore = defineStore('user-data', {
         } else if (authStore.$state.user.role === 'caregiver') {
           await this.fetchProteges();
         }
+        if (this.userProfile && (this.caregivers || this.proteges)) {
+          this.loading = false;
+        }
       }
     }
   },
   getters: {
-    getUserProfile(state) {
+    getUserProfile(state: any) {
       return state.userProfile;
     },
-    getErrorMessage(state) {
+    getErrorMessage(state: any) {
       return state.errorMessage;
     },
-    getCaregivers(state) {
+    getCaregivers(state: any) {
       return state.caregivers;
     },
-    getProteges(state) {
+    getProteges(state: any) {
       return state.proteges;
     }
   }

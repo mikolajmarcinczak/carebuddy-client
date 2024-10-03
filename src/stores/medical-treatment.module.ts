@@ -7,6 +7,7 @@ import MedicamentService from "@/services/medicament.service";
 
 export const useMedicalTreatmentStore = defineStore('medical-treatment', {
   state: () => ({
+    loading: true,
     treatments: [] as Array<MedicalTreatment>,
     medicaments: [] as Array<Medicament>,
     errorMessage: ''
@@ -90,6 +91,10 @@ export const useMedicalTreatmentStore = defineStore('medical-treatment', {
 
       if (userDataStore.getUserProfile?.user?.user_id) {
         await this.getMedicamentsForUser(userDataStore.getUserProfile.user.user_id);
+
+        if (this.treatments.length > 0 && this.medicaments.length > 0) {
+          this.loading = false;
+        }
       }
     }
   },

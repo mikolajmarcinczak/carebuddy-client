@@ -6,6 +6,7 @@ import {useUserDataStore} from "@/stores/user-data.module";
 
 export const useNoteStore = defineStore('note', {
   state: () => ({
+    loading: true,
     notes: [] as Array<Note>,
     errorMessage: ''
   }),
@@ -71,8 +72,12 @@ export const useNoteStore = defineStore('note', {
     async initStore() {
       const userDataStore = useUserDataStore();
 
-      if (userDataStore.getUserProfile?.user?.user_id) {
+      if (userDataStore.get?.user?.user_id) {
         await this.getNotesByUser(userDataStore.getUserProfile.user.user_id);
+
+        if (this.notes) {
+          this.loading = false;
+        }
       }
     }
   },
