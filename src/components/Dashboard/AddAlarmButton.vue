@@ -8,9 +8,9 @@
 			<div class="bg-gray-800 p-8 rounded-lg overflow-y-auto max-h-[80vh]">
 				<h2 class="text-lg font-bold mb-4 text-white">Dodaj alarm</h2>
 				<form @submit.prevent="saveAlarm" class="mt-4 space-y-4 lg:mt-5 md:space-y-5">
-					<input v-model="title" placeholder="Tytuł alarmu" required class="bg-white w-full p-2 border rounded" />
-					<input v-model="content" placeholder="Treść alarmu" required class="bg-white w-full p-2 border rounded" />
-					<input v-model="time" type="datetime-local" required class="bg-white w-full p-2 border rounded" />
+					<input v-model="title" placeholder="Tytuł alarmu" required class="bg-white font-gray-800 w-full p-2 border rounded" />
+					<input v-model="content" placeholder="Treść alarmu" required class="bg-white font-gray-800 w-full p-2 border rounded" />
+					<input v-model="time" type="datetime-local" required class="bg-white font-gray-800 w-full p-2 border rounded" />
 					<div class="flex justify-end mt-6">
 						<button type="submit" class="w-full text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl
               focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium

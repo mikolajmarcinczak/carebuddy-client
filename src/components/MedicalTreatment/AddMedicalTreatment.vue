@@ -20,6 +20,42 @@
               focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
               dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
               dark:focus:border-blue-500" required>
+
+							<label for="active_substance" class="block mb-2 font-medium text-gray-900 dark:text-white">Substancja aktywna</label>
+							<input v-model="medicament.active_substance" type="text" id="active_substance" class="bg-white border border-gray-300 text-white sm:text-l rounded-lg
+              focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
+              dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
+              dark:focus:border-blue-500" required>
+
+							<label for="dosage" class="block mb-2 font-medium text-gray-900 dark:text-white">Dawkowanie (mg)</label>
+							<input v-model="medicament.dosage" type="text" id="dosage" class="bg-white border border-gray-300 text-white sm:text-l rounded-lg
+              focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
+              dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
+              dark:focus:border-blue-500" required>
+
+							<label for="manufacturer" class="block mb-2 font-medium text-gray-900 dark:text-white">Producent</label>
+							<input v-model="medicament.manufacturer" type="text" id="manufacturer" class="bg-white border border-gray-300 text-white sm:text-l rounded-lg
+              focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
+              dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
+              dark:focus:border-blue-500">
+
+							<label for="composition" class="block mb-2 font-medium text-gray-900 dark:text-white">Skład</label>
+							<input v-model="medicament.composition" type="text" id="composition" class="bg-white border border-gray-300 text-white sm:text-l rounded-lg
+              focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
+              dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
+              dark:focus:border-blue-500">
+
+							<label for="indications" class="block mb-2 font-medium text-gray-900 dark:text-white">Wskazania</label>
+							<input v-model="medicament.indications" type="text" id="indications" class="bg-white border border-gray-300 text-white sm:text-l rounded-lg
+              focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
+              dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
+              dark:focus:border-blue-500">
+
+							<label for="contraindications" class="block mb-2 font-medium text-gray-900 dark:text-white">Przeciwwskazania</label>
+							<input v-model="medicament.contraindications" type="text" id="contraindications" class="bg-white border border-gray-300 text-white sm:text-l rounded-lg
+              focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700
+              dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
+              dark:focus:border-blue-500">
             </div>
             <div class="flex justify-end mt-6">
               <button type="button" @click="addMedicament"
@@ -148,6 +184,7 @@ export default {
           contraindications: '',
           indications: '',
         };
+				await loadAllMedicaments();
       } catch (error) {
         console.error(error);
       }
@@ -174,8 +211,9 @@ export default {
       }
     }
 
-    const loadAllMedicaments = () => {
+    const loadAllMedicaments = async () => {
       try {
+				await medicamentStore.getAllMedicaments();
         medicaments.value = medicamentStore.getMedicaments;
       } catch (error) {
         console.error(error);
@@ -183,7 +221,7 @@ export default {
     }
 
     onMounted(async () => {
-      loadAllMedicaments();
+      await loadAllMedicaments();
 			do {
 				loading.value = !medicamentStore.$state.loading && !medicalTreatmentStore.$state.loading;
 			} while (loading.value);

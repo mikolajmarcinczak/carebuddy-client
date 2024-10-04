@@ -1,8 +1,16 @@
 <template>
-	<div>
+	<div class="flex flex-col items-center justify-center shadow-lg p-6 bg-gray-800 rounded-lg">
 		<h2 class="text-xl font-bold mb-4">Przyjmowane leki: </h2>
-		<ul>
-			<li v-for="medicament in medicaments" :key="medicament.id">{{ medicament.name }}</li>
+		<ul class="space-y-4">
+			<li v-if="medicaments.length === 0" class="text-center text-gray-400">
+				Brak przyjmowanych leków.
+			</li>
+			<li v-for="medicament in medicaments" :key="medicament.id">
+				<p class="text-lg font-medium">{{ medicament.name }}</p>
+				<p>{{ medicament.active_substance }}</p>
+				<p>{{ medicament.dosage }}</p>
+				<p>{{ medicament.manufacturer }}</p>
+			</li>
 		</ul>
 	</div>
 </template>

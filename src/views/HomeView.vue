@@ -1,13 +1,13 @@
 <template>
-	<div class="grid grid-cols-1 md:grid-cols-1 gap-4 mt-24">
+	<div v-if="!loading" class="grid grid-cols-1 md:grid-cols-1 gap-4 mt-24">
 		<div v-if="currentUser">
 			<div class="grid md:grid-cols-8 grid-rows-3">
-				<div class="col-span-2"><EventForm class="w-full"/></div>
-				<div class="col-span-2"><AddMedicalTreatment class="w-full"/></div>
-				<div class="col-span-4"><CalendarButton class="w-full"/></div>
+				<div class="col-span-2"><EventForm/></div>
+				<div class="col-span-2"><AddMedicalTreatment/></div>
+				<div class="col-span-4"><CalendarButton /></div>
 			</div>
-			<div v-if="currentUser.role === 'elderly'" class="grid grid-cols-1 grid-rows-12">
-				<div class="row-span-9"><ElderlyProfile :userData="currentUser" /></div>
+			<div v-if="currentUser.role === 'elderly'" class="grid grid-cols-1 grid-rows-10">
+				<div class="row-span-7"><ElderlyProfile :userData="userData as ProfileType" /></div>
 				<div class="row-span-1"><AddAlarmButton /></div>
 				<div class="row-span-1"><NotesTool /></div>
 				<div class="row-span-1"><MedicamentsList /></div>
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
+import {defineComponent, onMounted, ref} from 'vue';
 import { useAuthStore } from '@/stores/auth.module';
 import { useRouter } from 'vue-router';
 import EventForm from '@/components/Calendar/EventForm.vue';
@@ -36,6 +36,8 @@ import AddProtege from '@/components/Profile/ProfileButtons/AddProteges.vue';
 import UserElderlyList from '@/components/Profile/Subcomponents/UserProtegesList.vue';
 import NextAlarmsList from '@/components/Dashboard/NextAlarmsList.vue';
 import NotesTool from "@/components/Notepad/NotesTool.vue";
+import {useUserDataStore} from "@/stores/user-data.module";
+import { ElderlyProfile as ProfileType } from '@/types/elderly-profile.model';
 
 export default defineComponent({
 	name: 'HomeView',
@@ -53,17 +55,27 @@ export default defineComponent({
 	},
 	setup() {
 		const authStore = useAuthStore();
+		const userDataStore = useUserDataStore();
 		const router = useRouter();
+		const loading = ref(true);
 		const currentUser = authStore.$state.user;
+		const userData = ref<ProfileType | null>(null);
 
-		onMounted(() => {
+		onMounted(async () => {
+			await authStore.fetchUser();
+			await userDataStore.fetchUserProfile();
 			if (!currentUser) {
-				router.push('/about');
+				await router.push('/about');
+			} else {
+				userData.value = userDataStore.getUserProfile as ProfileType;
+				loading.value = false;
 			}
 		});
 
 		return {
-			currentUser
+			loading,
+			currentUser,
+			userData
 		};
 	}
 });

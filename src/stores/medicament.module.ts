@@ -1,7 +1,6 @@
 import {defineStore} from "pinia";
 import {Medicament} from "@/types/medicament.model";
 import MedicamentDataService from "@/services/medicament.service";
-import {useAuthStore} from "@/stores/auth.module";
 
 export const useMedicamentStore = defineStore('medicament', {
   state: () => ({

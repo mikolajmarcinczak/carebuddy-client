@@ -3,7 +3,7 @@
     <div class="flex items-center justify-center">
       <div class="n-1/3 mt-10 rounded-lg">
         <div class="flex items-center justify-center flex-col">
-          <ProfilePicture :initialImageUrl="userObject.user?.image_url || '/src/assets/logo.jpg'" @update:imageUrl="updateImageUrl"/>
+          <!--<ProfilePicture :initialImageUrl="userObject.user?.image_url || '/src/assets/logo.jpg'" @update:imageUrl="updateImageUrl"/>-->
           <h1 class="text-gray-200 font-semibold mt-5"> Imię i nazwisko: </h1><p class="text-slate-200"> {{userObject.user?.username}} </p>
 					<h2 class="text-gray-400 font-semibold mt-3"> Rola: </h2><p class="text-slate-400"> {{userObject.user?.role}} </p>
 					<h2 class="text-gray-200 font-semibold mt-3"> Adres e-mail: </h2><p class="text-slate-200"> {{ userObject.user?.email }} </p>
@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { ElderlyProfile } from "@/types/elderly-profile.model";
+import { ElderlyProfile as ElderlyProfileType } from "@/types/elderly-profile.model";
 import {useAuthStore} from "@/stores/auth.module";
 import ProfilePicture from "@/components/Profile/ProfileUI/ProfilePicture.vue";
 
@@ -33,7 +33,7 @@ export default {
   },
   props: {
     userData: {
-      type: Object as () => ElderlyProfile,
+      type: Object as () => ElderlyProfileType,
       required: true,
       default: null
     }
