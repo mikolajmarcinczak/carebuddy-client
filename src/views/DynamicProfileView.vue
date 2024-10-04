@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <Profile :elderly-data="userElderlyProfile" :caregiver-data="userCaregiverProfile"/>
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
     const userDataStore = useUserDataStore();
     const userElderlyProfile = ref<ElderlyProfile | undefined>(undefined);
     const userCaregiverProfile = ref<CaregiverProfile | undefined>(undefined);
+		const loading = ref(true);
 
     onMounted(async () => {
       const userId = route.params.caregiverId as string;
@@ -35,12 +36,14 @@ export default {
           userCaregiverProfile.value = userData as CaregiverProfile;
         }
         console.log(userData);
+				loading.value = false;
       }
     });
 
     return {
       userElderlyProfile,
-      userCaregiverProfile
+      userCaregiverProfile,
+			loading
     }
   }
 }

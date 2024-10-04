@@ -16,7 +16,6 @@ import { CaregiverProfile as CaregiverProfileType } from '@/types/caregiver-prof
 import {useAuthStore} from "@/stores/auth.module";
 import CaregiverProfile from "@/components/Profile/Subcomponents/CaregiverProfile.vue";
 import ElderlyProfile from "@/components/Profile/Subcomponents/ElderlyProfile.vue";
-import {useUserDataStore} from "@/stores/user-data.module";
 
 export default defineComponent({
   name: 'Profile',
@@ -51,7 +50,7 @@ export default defineComponent({
     const authStore = useAuthStore();
 		const loading = ref(true);
 
-		onMounted(() => {
+		onMounted(async () => {
 			await authStore.fetchUser();
 			loading.value = false;
 		});

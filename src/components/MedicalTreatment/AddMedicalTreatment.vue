@@ -8,7 +8,7 @@
     </button>
 
     <!-- Modal -->
-	<div>
+	<div v-if="!loading">
     <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div class="bg-gray-800 p-8 rounded-lg overflow-y-auto max-h-[80vh]">
         <div v-if="step === 1">
@@ -97,6 +97,7 @@ export default {
     const medicamentStore = useMedicamentStore();
 
     const modalOpen = ref(false);
+		const loading = ref(true);
     const step = ref(1);
     const medicament = ref<Medicament>({
       id: String(),
@@ -181,12 +182,16 @@ export default {
       }
     }
 
-    onMounted(() => {
+    onMounted(async () => {
       loadAllMedicaments();
+			do {
+				loading.value = !medicamentStore.$state.loading && !medicalTreatmentStore.$state.loading;
+			} while (loading.value);
     })
 
     return {
       modalOpen,
+			loading,
       step,
       medicament,
       medicalTreatment,

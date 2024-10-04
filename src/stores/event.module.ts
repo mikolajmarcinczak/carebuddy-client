@@ -10,7 +10,7 @@ export const useEventStore = defineStore('calendar', {
   state: () => ({
     loading: true,
     events : [] as Array<CalendarEvent>,
-    alarms: [] as Array<CalendarEvent>,
+    alarms: [] as Array<Alarm>,
     currentWeek: new Date()
   }),
   actions: {
@@ -59,17 +59,8 @@ export const useEventStore = defineStore('calendar', {
       const events = this.events as Array<CalendarEvent>;
       const userId = userDataStore.userProfile?.user?.user_id;
       const alarms = await EventDataService.getAlarmsForUser(userId as string) as Array<Alarm>;
-      return alarms.map((alarm: any) => {
-        const event = events.find(event => event.id === alarm.event_id) as CalendarEvent;
-        return {
-          id: alarm.id,
-          user_id: alarm.user_id,
-          event_id: alarm.event_id,
-          trigger_time: alarm.trigger_time,
-          message: alarm.message,
-          event: event
-        };
-      });
+      this.alarms = mapAlarmsToEvents(alarms, events);
+      return this.alarms;
     },
     async setNotification(event: CalendarEvent) {
       console.log('Notification set for event:', event)
@@ -108,3 +99,17 @@ export const useEventStore = defineStore('calendar', {
     }
   }
 })
+
+function mapAlarmsToEvents(alarms: Array<Alarm>, events: Array<CalendarEvent>) {
+  return alarms.map((alarm: any) => {
+    const event = events.find(event => event.id === alarm.event_id) as CalendarEvent;
+    return new Alarm({
+      id: alarm.id,
+      user_id: alarm.user_id,
+      event_id: alarm.event_id,
+      trigger_time: alarm.trigger_time,
+      message: alarm.message},
+      event
+    );
+  });
+}

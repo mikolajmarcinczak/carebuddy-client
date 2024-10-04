@@ -85,7 +85,8 @@ export default {
 			cityFilter,
 			selectedUsers,
 			filteredCaregivers,
-      isProtege
+      isProtege,
+			loading
 		}
 	}
 }

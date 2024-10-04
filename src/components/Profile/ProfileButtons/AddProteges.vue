@@ -7,7 +7,7 @@
       Dodaj podopiecznego
     </button>
 
-	<div>
+	<div v-if="!loading">
     <!-- Modal -->
     <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div class="bg-gray-800 p-8 rounded-lg overflow-y-auto max-h-[80vh]">
@@ -61,6 +61,7 @@ export default {
   components: {SingleselectSearch},
   setup() {
     const userDataStore = useUserDataStore();
+		const loading = ref(true);
     const modalOpen = ref(false);
     const documentUrl = ref('');
 
@@ -98,10 +99,19 @@ export default {
     }
 
     onMounted(async () => {
-      await loadAllUsers();
-    });
+			try {
+				await loadAllUsers();
+			}
+			catch (error) {
+				console.error(error);
+			}
+			finally {
+				loading.value = false;
+			}
+		});
 
     return {
+			loading,
       modalOpen,
       documentUrl,
       allUsers,

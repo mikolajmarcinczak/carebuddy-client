@@ -4,7 +4,7 @@
 						focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5
 						py-2.5 text-center me-2 mb-2">Dodaj wydarzenie</button>
 
-	<div>
+	<div v-if="!loading">
 			<div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
 
 				<div class="bg-gray-800 p-8 rounded-lg overflow-y-auto max-h-[80vh]">
@@ -81,6 +81,7 @@ export default {
   setup(_, { emit }) {
     const userDataStore = useUserDataStore();
     const searchQuery = ref('');
+		const loading = ref(true);
 
     const user_ids = ref<string[]>([]);
     const searchResults = ref<User[]>([]);
@@ -96,7 +97,15 @@ export default {
     };
 
     onMounted(async () => {
-      await loadAllUsers();
+			try {
+      	await loadAllUsers();
+			}
+			catch (error) {
+				console.error(error);
+			}
+			finally {
+				loading.value = false;
+			}
     });
 
     let instance = getCurrentInstance();
@@ -134,6 +143,7 @@ export default {
     }
 
     return {
+			loading,
       searchQuery,
       searchResults,
       selectedUsers,
