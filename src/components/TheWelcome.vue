@@ -25,7 +25,6 @@
       <div class="font-light text-gray-500 sm:text-lg dark:text-white">
         <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">To rozwiązanie realnie wspomoże Ciebie i Twoich bliskich.</h2>
         <p class="mb-4">Jesteśmy projektantami i programistami. Innowatorzy i osoby rozwiązujące problemy. Wystarczająco mały (zespół), aby był prosty i szybki, ale wystarczająco duży, aby zapewnić potrzebną pomoc.</p>
-        <p>Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum.</p>
       </div>
       <div class="grid grid-cols-2 gap-4 mt-8">
         <img class="w-full rounded-lg" src="https://images.unsplash.com/photo-1580869318757-a6c605b061ed?q=80&w=3265&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="office content 1">

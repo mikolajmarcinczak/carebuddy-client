@@ -33,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <section v-if="!loading" class="mt-24">
+  <section class="mt-24">
    <NotesTool />
   </section>
 </template>

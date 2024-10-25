@@ -5,9 +5,9 @@
 		<router-view/>
 		<Suspense>
 			<StoreInit/>
+			<footer-component/>
 		</Suspense>
 	</main>
-  <footer-component/>
 </template>
 
 <script lang="ts">

@@ -126,11 +126,13 @@ export const useUserDataStore = defineStore('user-data', {
       try {
         const caregivers = await UserDataService.getCaregivers(elderlyId);
         if (caregivers) {
+          console.log("store: ", caregivers)
           this.caregivers = caregivers;
           this.errorMessage = '';
         }
       } catch (error: any) {
         this.errorMessage = error.response.data.message;
+        console.log(this.errorMessage);
       }
 
       return this.caregivers;

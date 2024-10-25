@@ -20,6 +20,9 @@
 			</div>
 		</div>
 	</div>
+	<div v-else>
+		<AboutView />
+	</div>
 </template>
 
 <script lang="ts">
@@ -38,10 +41,12 @@ import NextAlarmsList from '@/components/Dashboard/NextAlarmsList.vue';
 import NotesTool from "@/components/Notepad/NotesTool.vue";
 import {useUserDataStore} from "@/stores/user-data.module";
 import { ElderlyProfile as ProfileType } from '@/types/elderly-profile.model';
+import AboutView from "@/views/AboutView.vue";
 
 export default defineComponent({
 	name: 'HomeView',
 	components: {
+		AboutView,
 		NotesTool,
 		EventForm,
 		AddMedicalTreatment,

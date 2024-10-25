@@ -67,7 +67,9 @@ class UserDataService {
     const response = await axios.get(`${API_URL}/aoc-document/caregivers/${elderly}`);
     return response.data.data.map((user: any) => {
       const userObj = new User(user);
-      return new CaregiverProfile(user.caregiveraccountinfo, userObj);
+      const profile = new CaregiverProfile(user.caregiveraccountinfo, userObj)
+      console.log("service: ", profile)
+      return profile;
     }) as CaregiverProfile[];
   }
 }

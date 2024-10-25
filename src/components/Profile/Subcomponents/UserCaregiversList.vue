@@ -16,7 +16,6 @@
 import {useUserDataStore} from "@/stores/user-data.module";
 import {CaregiverProfile} from "@/types/caregiver-profile.model";
 import {onMounted, ref} from "vue";
-import {User} from "@/types/user.model";
 import SimpleUserProfile from "@/components/Profile/SimpleUserProfile.vue";
 
 export default {
@@ -28,6 +27,7 @@ export default {
     const caregivers = ref<CaregiverProfile[]>([]);
 
     onMounted(async () => {
+			await userDataStore.fetchCaregivers();
 			const fetchedUsers = userDataStore.getCaregivers;
 			console.log('fetchedUsers: ', fetchedUsers);
       caregivers.value = fetchedUsers || [];
